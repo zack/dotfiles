@@ -13,7 +13,6 @@ compinit
 
 #aliases
 alias ls='pwd && ls --color'
-alias a11='cd ~/Dropbox/School/2013Spring/Fundies2/GitHub/pair33/assign11'
 
 #Color table from: http://www.understudy.net/custom.html
 fg_black=%{$'\e[0;30m'%}
