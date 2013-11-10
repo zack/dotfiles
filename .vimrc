@@ -57,3 +57,4 @@ syntax on
 :set viminfo='20,<1000,s10,h
 
 execute pathogen#infect()
+

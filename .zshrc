@@ -13,6 +13,8 @@ compinit
 
 #aliases
 alias ls='pwd && ls --color'
+alias sshccs='ssh zack@asterix.ccs.neu.edu'
+alias sftpgandi='sftp 28856@sftp.dc1.gpaas.net'
 
 #Color table from: http://www.understudy.net/custom.html
 fg_black=%{$'\e[0;30m'%}
