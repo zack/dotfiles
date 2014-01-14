@@ -50,3 +50,14 @@ highlight matchParen ctermbg=4
 :set viminfo='20,<1000,s10,h
 
 map <Leader>i mmgg=G`m<CR>
+
+"Switch between rel and abs line numbers with <C-n>
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
