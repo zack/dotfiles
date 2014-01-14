@@ -17,7 +17,6 @@ filetype plugin indent on
 
 set sm
 set ai
-set number
 set showcmd
 set smarttab
 set wildmenu
@@ -30,6 +29,7 @@ set incsearch
 set ignorecase
 set autoindent
 set nocompatible
+set relativenumber
 
 set mouse=a
 set backspace=2
