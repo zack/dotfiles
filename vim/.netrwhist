@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/zyoungren/dev/railstutorial/sample_app/app/views/layouts'
+let g:netrw_dirhist_2='/Users/zyoungren/dev/railstutorial/sample_app/app/controllers'
+let g:netrw_dirhist_3='/Users/zyoungren/dotfiles/vim'
+let g:netrw_dirhist_4='/Users/zyoungren/dotfiles/vim/autoload'

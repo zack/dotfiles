@@ -15,6 +15,9 @@ filetype on
 filetype plugin on
 filetype plugin indent on
 
+" For do/end matching
+runtime macros/matchit.vim
+
 set sm
 set ai
 set showcmd
@@ -60,4 +63,8 @@ function! NumberToggle()
   endif
 endfunc
 
+" For NumberToggle
 nnoremap <C-n> :call NumberToggle()<cr>
+
+" For Rainbow-End
+nnoremap <C-d> :call ToggleRainbow()<CR>
