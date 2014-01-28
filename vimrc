@@ -1,4 +1,10 @@
-execute pathogen#infect()
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'vim-scripts/rainbow-end'
+Bundle 'christoomey/vim-tmux-navigator'
 
 set t_Co=256
 syntax enable
