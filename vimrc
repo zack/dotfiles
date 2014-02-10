@@ -36,6 +36,8 @@ set smartcase
 set incsearch
 set ignorecase
 set autoindent
+set cursorline
+set cursorcolumn
 set nocompatible
 set laststatus=2
 set relativenumber
@@ -55,7 +57,9 @@ let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 let g:clipbrdDefaultReg = '+'
 
-highlight ColorColumn ctermbg=235
+highlight ColorColumn ctermbg=237
+highlight CursorLine ctermbg=235
+highlight CursorColumn ctermbg=235
 highlight matchParen ctermbg=4
 
 :set viminfo='20,<1000,s10,h
