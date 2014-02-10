@@ -5,6 +5,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/rainbow-end'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'kchmck/vim-coffee-script'
 
 set t_Co=256
 syntax enable
@@ -17,8 +18,6 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 "Set tab options for all filetypes
 autocmd FileType * set tabstop=2|set shiftwidth=2
 
-filetype on
-filetype plugin on
 filetype plugin indent on
 
 " For do/end matching
@@ -41,6 +40,7 @@ set nocompatible
 set laststatus=2
 set relativenumber
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 set mouse=a
 set backspace=2
