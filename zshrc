@@ -11,6 +11,13 @@ ZSH_THEME="robbyrussell"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gs="git st"
+# Never commit this file
+alias gcot="git checkout app/assets/javascripts/templates/templates.erb"
+# Start the rails app without stupid warnings
+alias rs="rails s 2>&1 | grep -v content-length"
+# Start the rails console
+alias rc="rails c"
+
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
