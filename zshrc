@@ -12,7 +12,7 @@ ZSH_THEME="robbyrussell"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gs="git st"
 # Never commit this file
-alias gcot="git checkout app/assets/javascripts/templates/templates.erb"
+alias gcot="git checkout app/assets/javascripts/templates/templates.js.erb"
 # Start the rails app without stupid warnings
 alias rs="rails s 2>&1 | grep -v content-length"
 # Start the rails console

@@ -3,10 +3,11 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/rainbow-end'
-Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'christoomey/vim-tmux-navigator'
 
 set t_Co=256
 syntax enable
@@ -85,3 +86,6 @@ nnoremap <C-d> :call ToggleRainbow()<CR>
 
 " Show full filename
 nnoremap <C-f> :echo expand('%F')<CR>
+
+" This unsets the 'last search pattern' register by hitting return
+nnoremap <silent> <leader>c :nohl<CR>
