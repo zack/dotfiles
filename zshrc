@@ -17,6 +17,8 @@ alias gcot="git checkout app/assets/javascripts/templates/templates.js.erb"
 alias rs="rails s 2>&1 | grep -v content-length"
 # Start the rails console
 alias rc="rails c"
+# Beacuse hotkey doesn't work in tmux
+alias cl="clear"
 
 
 # Set to this to use case-sensitive completion
