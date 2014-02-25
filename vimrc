@@ -43,7 +43,7 @@ set cursorline
 set cursorcolumn
 set nocompatible
 set laststatus=2
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%#error#%m%*%r%y%=%c,%l/%L\ %P
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 set mouse=a
