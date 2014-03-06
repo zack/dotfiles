@@ -17,6 +17,10 @@ alias gcot="git checkout app/assets/javascripts/templates/templates.js.erb"
 alias rs="rails s 2>&1 | grep -v content-length"
 # Start the rails console
 alias rc="rails c"
+# Start konacha:run with font warnings hidden
+alias kr="bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)"
+# Start konacha:serve
+alias ks="bundle exec rake konacha:serve"
 # Beacuse hotkey doesn't work in tmux
 alias cl="clear"
 # Show me just the directories
