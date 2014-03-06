@@ -19,6 +19,8 @@ alias rs="rails s 2>&1 | grep -v content-length"
 alias rc="rails c"
 # Beacuse hotkey doesn't work in tmux
 alias cl="clear"
+# Show me just the directories
+alias ld="ls -d */"
 
 
 # Set to this to use case-sensitive completion
