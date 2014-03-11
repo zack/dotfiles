@@ -19,6 +19,8 @@ alias rs="rails s 2>&1 | grep -v content-length"
 alias rc="rails c"
 # Start konacha:run with font warnings hidden
 alias kr="bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)"
+# Start rspec spec with font warnings hidden
+alias rss="bundle exec rspec spec  2> >(grep -v CoreText 1>&2)"
 # Start konacha:serve
 alias ks="bundle exec rake konacha:serve"
 # Beacuse hotkey doesn't work in tmux
