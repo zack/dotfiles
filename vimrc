@@ -4,6 +4,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'vim-scripts/rainbow-end'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdcommenter'
@@ -66,6 +67,7 @@ highlight ColorColumn ctermbg=235
 highlight CursorLine ctermbg=235
 highlight CursorColumn ctermbg=235
 highlight matchParen ctermbg=4
+highlight clear SignColumn
 
 :set viminfo='20,<1000,s10,h
 
