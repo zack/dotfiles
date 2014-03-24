@@ -17,6 +17,9 @@ colorscheme railscasts
 " Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+"JSON Highlighting
+autocmd BufNewFile,BufRead *.json set ft=javascript
+
 " Set tab options for all filetypes
 autocmd FileType * set tabstop=2|set shiftwidth=2
 
