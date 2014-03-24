@@ -27,6 +27,8 @@ alias ks="bundle exec rake konacha:serve"
 alias cl="clear"
 # Show me just the directories
 alias ld="ls -d */"
+# Open all uncommitted (git) files in vim
+alias vim-git='vi -p `git status --porcelain | cut -c4-`'
 
 
 # Set to this to use case-sensitive completion
