@@ -18,12 +18,13 @@
  pr = !hub pull-request
  rebase-origin = !git fetch origin && git rebase origin/master
  st = status
-	lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+ lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+ lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+ log-s = log --oneline
 [core]
  excludesfile = ~/.gitignore
  autocrlf = input
-	editor = vim
+ editor = vim
 [diff]
  tool = diffmerge
 [difftool "diffmerge"]
