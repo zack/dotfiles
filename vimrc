@@ -94,3 +94,13 @@ nnoremap <C-f> :echo expand('%F')<CR>
 
 " This unsets the 'last search pattern' register by hitting return
 nnoremap <silent> <leader>c :nohl<CR>
+
+" Because capslock is stupid, let's make ctrl+^ fake the capslock function
+" Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+
+" Kill the fake software capslock when leaving insert mode.
+autocmd InsertLeave * set iminsert=0
