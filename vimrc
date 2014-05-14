@@ -23,6 +23,7 @@ autocmd BufNewFile,BufRead *.json set ft=javascript
 
 " Set tab options for all filetypes
 autocmd FileType * set tabstop=2|set shiftwidth=2
+autocmd FileType python set tabstop=4|set shiftwidth=4
 
 filetype plugin indent on
 
