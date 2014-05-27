@@ -9,6 +9,7 @@ Bundle 'vim-scripts/rainbow-end'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'mustache/vim-mustache-handlebars'
 
 set t_Co=256
 syntax enable
