@@ -4,6 +4,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'groenewege/vim-less'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'vim-scripts/rainbow-end'
 Bundle 'kchmck/vim-coffee-script'
