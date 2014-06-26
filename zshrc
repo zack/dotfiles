@@ -1,3 +1,6 @@
+# Because why would we not want it?
+if [ "$TMUX" = "" ]; then tmux; fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
