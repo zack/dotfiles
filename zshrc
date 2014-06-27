@@ -33,7 +33,7 @@ alias ld="ls -d */"
 # Open all uncommitted (git) files in vim
 alias vim-git='vi -p `git status --porcelain | cut -c4-`'
 # Update local (constant contact update local -> ctul -> cthulhu)
-alias cthulhu="git checkout local; git fetch upstream; git reset --hard upstream/local"
+alias cthulhu="git checkout local && git fetch upstream && git reset --hard upstream/local"
 
 
 # Set to this to use case-sensitive completion

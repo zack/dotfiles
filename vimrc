@@ -3,6 +3,7 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-fugitive'
 Bundle 'groenewege/vim-less'
 Bundle 'airblade/vim-gitgutter'
@@ -60,15 +61,15 @@ set wildmode=list:longest,full
 set guifont=Consolas/12/-1/5/25/0/0/0/1/0
 set scrolloff=5 " Keep five lines below/above cursor
 
-let &colorcolumn=join(range(81,999), ',')
+let &colorcolumn=81
 let java_highlight_all=1
 let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 let g:clipbrdDefaultReg = '+'
 
-highlight ColorColumn ctermbg=235
-highlight CursorLine ctermbg=235
-highlight CursorColumn ctermbg=235
+highlight ColorColumn ctermbg=52
+highlight CursorLine ctermbg=239
+highlight CursorColumn ctermbg=239
 highlight matchParen ctermbg=4
 highlight clear SignColumn
 
@@ -97,6 +98,10 @@ nnoremap <C-f> :echo expand('%F')<CR>
 
 " This unsets the 'last search pattern' register by hitting return
 nnoremap <silent> <leader>c :nohl<CR>
+
+" Use j and k to navigate menus
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
 
 " Because capslock is stupid, let's make ctrl+^ fake the capslock function
 " Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
