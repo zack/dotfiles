@@ -1,5 +1,5 @@
 filetype off
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -12,6 +12,10 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'mustache/vim-mustache-handlebars'
+
+if $COLORTERM=='gnome-terminal'
+  set term=gnome-256color
+endif
 
 set t_Co=256
 syntax enable
