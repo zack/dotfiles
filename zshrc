@@ -32,8 +32,8 @@ alias cl="clear"
 alias ld="ls -d */"
 # Open all uncommitted (git) files in vim
 alias vim-git='vi -p `git status --porcelain | cut -c4-`'
-# Update local (constant contact update local -> ctul -> cthulhu)
-alias cthulhu="git checkout local && git fetch upstream && git reset --hard upstream/local"
+# Update local (constant contact update local [old name] -> ctul -> cthulhu)
+alias cthulhu="git checkout dev && git fetch upstream && git reset --hard upstream/development"
 
 
 # Set to this to use case-sensitive completion
@@ -76,7 +76,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/zyoungren/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/bin:/Users/zyoungren/.rvm/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/zyoungren/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/bin:/Users/zyoungren/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
