@@ -39,6 +39,7 @@ runtime macros/matchit.vim
 
 set sm
 set ai
+set paste
 set number
 set showcmd
 set smarttab
