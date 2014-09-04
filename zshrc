@@ -1,5 +1,5 @@
 # Because why would we not want it?
-if [ "$TMUX" = "" ]; then tmux; fi
+if [ "$TMUX" = "" ]; then tmux -2; fi
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -36,6 +36,7 @@ alias vim-git='vi -p `git status --porcelain | cut -c4-`'
 alias cthulhu="git checkout dev && git fetch upstream && git reset --hard upstream/development"
 # SSH into CCS
 alias ccs="ssh zack@asterix.ccs.neu.edu"
+alias tmux="tmux -2"
 
 
 # Set to this to use case-sensitive completion
