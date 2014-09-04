@@ -34,6 +34,8 @@ alias ld="ls -d */"
 alias vim-git='vi -p `git status --porcelain | cut -c4-`'
 # Update local (constant contact update local [old name] -> ctul -> cthulhu)
 alias cthulhu="git checkout dev && git fetch upstream && git reset --hard upstream/development"
+# SSH into CCS
+alias ccs="ssh zack@asterix.ccs.neu.edu"
 
 
 # Set to this to use case-sensitive completion
