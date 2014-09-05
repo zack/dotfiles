@@ -36,7 +36,10 @@ alias vim-git='vi -p `git status --porcelain | cut -c4-`'
 alias cthulhu="git checkout dev && git fetch upstream && git reset --hard upstream/development"
 # SSH into CCS
 alias ccs="ssh zack@asterix.ccs.neu.edu"
+# For 256color mode
 alias tmux="tmux -2"
+# Because I'm lazy
+alias ctct="cd ~/dev/work/contacts-core"
 
 
 # Set to this to use case-sensitive completion
