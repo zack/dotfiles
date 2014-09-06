@@ -66,7 +66,7 @@ set wildmode=list:longest,full
 set guifont=Consolas/12/-1/5/25/0/0/0/1/0
 set scrolloff=5 " Keep five lines below/above cursor
 
-let &colorcolumn=81
+let &colorcolumn=80
 let java_highlight_all=1
 let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
