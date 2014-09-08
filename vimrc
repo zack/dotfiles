@@ -117,3 +117,6 @@ endfor
 
 " Kill the fake software capslock when leaving insert mode.
 autocmd InsertLeave * set iminsert=0
+
+" Search and replace highlighted (visual block) text
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
