@@ -13,10 +13,6 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'mustache/vim-mustache-handlebars'
 
-if $COLORTERM=='gnome-terminal'
-  set term=gnome-256color
-endif
-
 set t_Co=256
 syntax enable
 let g:railscasts_termcolors=256
