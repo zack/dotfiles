@@ -31,6 +31,8 @@ alias vim-git='vi -p `git status --porcelain | cut -c4-`'
 alias cthulhu="git checkout dev && git fetch upstream && git reset --hard upstream/development"
 # SSH into CCS
 alias ccs="ssh zack@asterix.ccs.neu.edu"
+# SSH into CCS2
+alias ccs2="ssh zack@burninrubber.ccs.neu.edu"
 # For 256color mode
 alias tmux="tmux -2"
 # Because I'm lazy
