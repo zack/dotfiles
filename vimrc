@@ -6,6 +6,7 @@ call vundle#rc()
 
 " Vundle plugins
 Bundle 'gmarik/vundle'
+Plugin 'amdt/vim-niji'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-fugitive'
 Bundle 'groenewege/vim-less'
@@ -15,6 +16,9 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'mustache/vim-mustache-handlebars'
+
+" amdt/vim-niji customization
+let g:niji_matching_filetypes = ['racket']
 
 " Pathogen
 execute pathogen#infect()
