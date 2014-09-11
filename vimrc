@@ -1,7 +1,10 @@
 filetype off
+
+" Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
+" Vundle plugins
 Bundle 'gmarik/vundle'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-fugitive'
@@ -12,6 +15,9 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'mustache/vim-mustache-handlebars'
+
+" Pathogen
+execute pathogen#infect()
 
 set t_Co=256
 syntax enable
