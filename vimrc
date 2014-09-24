@@ -8,6 +8,7 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'amdt/vim-niji'
 Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-fugitive'
 Plugin 'groenewege/vim-less'
