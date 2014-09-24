@@ -5,18 +5,18 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " Vundle plugins
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 Plugin 'amdt/vim-niji'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ervandew/supertab'
-Bundle 'tpope/vim-fugitive'
-Bundle 'groenewege/vim-less'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'vim-scripts/rainbow-end'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'mustache/vim-mustache-handlebars'
+Plugin 'kien/ctrlp.vim'
+Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-fugitive'
+Plugin 'groenewege/vim-less'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-scripts/rainbow-end'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'mustache/vim-mustache-handlebars'
 
 " amdt/vim-niji customization
 let g:niji_matching_filetypes = ['racket']
