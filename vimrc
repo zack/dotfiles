@@ -7,6 +7,7 @@ call vundle#rc()
 " Vundle plugins
 Bundle 'gmarik/vundle'
 Plugin 'amdt/vim-niji'
+Bundle 'kien/ctrlp.vim'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-fugitive'
 Bundle 'groenewege/vim-less'
