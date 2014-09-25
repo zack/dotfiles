@@ -1,0 +1,12 @@
+New system checklist:
+
+1) Install tmux
+2) Install vim
+3) Install zsh
+4) Install oh-my-zsh
+5) clone this repo into ~/dotfiles
+6) install vundle
+7) install pathogen
+   a)  install vim-racket package
+8) ~/dotfiles/install_script
+9) vim bundle install
