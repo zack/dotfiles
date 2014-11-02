@@ -21,6 +21,7 @@
  lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
  log-s = log --oneline --no-merges
  files = diff-tree --no-commit-id --name-only -r
+ log-f = log --stat
 [core]
  excludesfile = ~/.gitignore
  autocrlf = input
