@@ -65,6 +65,7 @@ set cursorline
 set cursorcolumn
 set nocompatible
 set laststatus=2
+set nowrap lcs=extends:»
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%#error#%m%*%r%y%=%c,%l/%L\ %P
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
@@ -81,13 +82,15 @@ let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 let g:clipbrdDefaultReg = '+'
 
-highlight ColorColumn ctermbg=52
-highlight CursorLine ctermbg=239
-highlight CursorColumn ctermbg=239
-highlight matchParen ctermbg=4
-highlight clear SignColumn
 
-:set viminfo='20,<1000,s10,h
+hi clear SignColumn
+hi matchParen ctermbg=4
+hi CursorLine ctermbg=239
+hi ColorColumn ctermbg=52
+hi CursorColumn ctermbg=239
+hi NonText ctermfg=red guifg=red
+
+set viminfo='20,<1000,s10,h
 
 " \i to indent whole file
 map <Leader>i mmgg=G`m<CR>

@@ -33,6 +33,8 @@ alias cthulhu="git checkout dev && git fetch upstream && git reset --hard upstre
 alias ccs="ssh zack@asterix.ccs.neu.edu"
 # SSH into CCS2
 alias ccs2="ssh zack@burninrubber.ccs.neu.edu"
+# SSH into CCS3 for systems and networks
+alias ccs3="ssh zack@cs3600tcp.ccs.neu.edu"
 # For 256color mode
 alias tmux="tmux -2"
 # Because I'm lazy
