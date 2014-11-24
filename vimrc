@@ -50,6 +50,7 @@ set sm
 set ai
 set paste
 set number
+set nowrap
 set showcmd
 set smarttab
 set wildmenu
@@ -66,8 +67,7 @@ set cursorcolumn
 set nocompatible
 set textwidth=79
 set laststatus=2
-set nowrap lcs=extends:»
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%#error#%m%*%r%y%=%c,%l/%L\ %P
+set lcs=trail:·,tab:»·,eol:$,extends:»
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 set mouse=a
@@ -89,7 +89,6 @@ hi matchParen ctermbg=4
 hi CursorLine ctermbg=239
 hi ColorColumn ctermbg=52
 hi CursorColumn ctermbg=239
-hi NonText ctermfg=red guifg=red
 
 set viminfo='20,<1000,s10,h
 
