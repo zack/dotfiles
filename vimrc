@@ -64,6 +64,7 @@ set autoindent
 set cursorline
 set cursorcolumn
 set nocompatible
+set textwidth=79
 set laststatus=2
 set nowrap lcs=extends:»
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%#error#%m%*%r%y%=%c,%l/%L\ %P
