@@ -1,3 +1,13 @@
+# Antigen
+source /home/zack/dotfiles/antigen/antigen.zsh
+
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen theme robbyrussell
+antigen apply
+
 # Because why would we not want it?
 if [ "$TMUX" = "" ]; then tmux -2; fi
 
