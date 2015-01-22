@@ -8,5 +8,6 @@ New system checklist:
 6) install vundle
 7) install pathogen
    a)  install vim-racket package
-8) ~/dotfiles/install_script
-9) vim bundle install
+8) Install antigen
+9) ~/dotfiles/install_script
+10) vim bundle install
