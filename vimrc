@@ -46,6 +46,7 @@ filetype plugin indent on
 " For do/end matching
 runtime macros/matchit.vim
 
+" Set
 set sm
 set ai
 set paste
@@ -65,25 +66,37 @@ set autoindent
 set cursorline
 set cursorcolumn
 set nocompatible
-set textwidth=79
-set laststatus=2
-set lcs=trail:·,tab:»·,eol:$,extends:»
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+" Set =
 set mouse=a
 set backspace=2
+set laststatus=2
+set textwidth=79
 set grepprg=grep\ -nH\ $*
 set wildmode=list:longest,full
+set lcs=trail:·,tab:»·,eol:$,extends:»
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 set guifont=Consolas/12/-1/5/25/0/0/0/1/0
 set scrolloff=5 " Keep five lines below/above cursor
 
+" Let
 let &colorcolumn=80
 let java_highlight_all=1
 let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 let g:clipbrdDefaultReg = '+'
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+source ~/.syntastic.conf
 
+" Colors
 hi clear SignColumn
 hi matchParen ctermbg=4
 hi CursorLine ctermbg=239
