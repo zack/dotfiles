@@ -1,5 +1,5 @@
 # Antigen
-source /home/zack/dotfiles/antigen/antigen.zsh
+source /Users/zyoungren/dotfiles/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle git
@@ -61,3 +61,4 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/zyoungren/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/bin:/Users/zyoungren/.rvm/bin"
+export PATH="$HOME/.rbenv/bin:$PATH"
