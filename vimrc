@@ -49,7 +49,6 @@ runtime macros/matchit.vim
 set sm
 set ai
 set paste
-set number
 set nowrap
 set showcmd
 set smarttab
@@ -65,6 +64,7 @@ set autoindent
 set cursorline
 set cursorcolumn
 set nocompatible
+set relativenumber
 
 " Set =
 set mouse=a
