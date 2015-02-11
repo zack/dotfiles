@@ -27,7 +27,7 @@ execute pathogen#infect()
 
 set t_Co=256
 syntax enable
-let g:railscasts_termcolors=256
+let g:railscasts_termcolors = 256
 colorscheme railscasts
 
 " Remove any trailing whitespace that is in the file
@@ -48,8 +48,8 @@ runtime macros/matchit.vim
 " Set
 set sm
 set ai
-set paste
 set nowrap
+set number
 set showcmd
 set smarttab
 set wildmenu
@@ -64,7 +64,6 @@ set autoindent
 set cursorline
 set cursorcolumn
 set nocompatible
-set relativenumber
 
 " Set =
 set mouse=a
@@ -144,3 +143,15 @@ autocmd InsertLeave * set iminsert=0
 
 " Search and replace highlighted (visual block) text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" Airline settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts=1
+
+" For buffers
+set hidden
+
+" Moving between buffers like tabs
+nnoremap gb :bn<CR>
+nnoremap Gb :bp<CR>
