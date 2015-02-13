@@ -43,7 +43,7 @@ alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
 #eval "$(rbenv init -)"
 
 # oh-my-zsh stuff i'm trying to get rid of
-source $ZSH/oh-my-zsh.sh
-ZSH_THEME="robbyrussell-ssh"
-ZSH=$HOME/.oh-my-zsh
-plugins=(git)
+#source $ZSH/oh-my-zsh.sh
+#ZSH_THEME="robbyrussell-ssh"
+#ZSH=$HOME/.oh-my-zsh
+#plugins=(git)
