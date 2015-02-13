@@ -7,6 +7,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme zack/zsh-themes robbyrussell-ssh
 antigen apply
 
+# vi mode
+bindkey -v
+
 # Tmux for new zsh instance
 if [ "$TMUX" = "" ]; then tmux -2; fi
 
