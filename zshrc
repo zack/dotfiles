@@ -7,8 +7,7 @@ antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen theme zack/zsh-themes robbyrussell-ssh
-antigen theme robbyrussell
+antigen theme zack/zsh-themes robbyrussell-ssh
 antigen apply
 
 # Tmux for new zsh instance
