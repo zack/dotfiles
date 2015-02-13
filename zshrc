@@ -40,9 +40,3 @@ alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
 #export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/zyoungren/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/bin:/Users/zyoungren/.rvm/bin"
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #eval "$(rbenv init -)"
-
-# oh-my-zsh stuff i'm trying to get rid of
-#source $ZSH/oh-my-zsh.sh
-#ZSH_THEME="robbyrussell-ssh"
-#ZSH=$HOME/.oh-my-zsh
-#plugins=(git)
