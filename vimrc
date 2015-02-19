@@ -55,6 +55,7 @@ set showcmd
 set hlsearch
 set nohidden
 set smarttab
+set undofile
 set wildmenu
 set expandtab
 set incsearch
