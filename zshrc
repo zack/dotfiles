@@ -10,6 +10,7 @@ antigen apply
 # vi mode and settings
 bindkey -v
 export KEYTIMEOUT=1
+bindkey '^R' history-incremental-search-backward
 
 # Tmux for new zsh instance
 if [ "$TMUX" = "" ]; then tmux -2; fi
