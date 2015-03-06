@@ -7,8 +7,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme zack/zsh-themes robbyrussell-ssh
 antigen apply
 
-# vi mode
+# vi mode and settings
 bindkey -v
+export KEYTIMEOUT=1
 
 # Tmux for new zsh instance
 if [ "$TMUX" = "" ]; then tmux -2; fi
@@ -35,8 +36,9 @@ alias kr='bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)'
 alias ks='bundle exec rake konacha:serve'
 alias rss='bundle exec rspec spec 2> >(grep -v CoreText 1>&2)'
 alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
+alias tc='bundle exec rake tmp:clear'
 
 # Work Stuff
-#export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/zyoungren/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/bin:/Users/zyoungren/.rvm/bin"
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/zyoungren/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/bin:/Users/zyoungren/.rvm/bin"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
