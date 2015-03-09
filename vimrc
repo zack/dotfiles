@@ -132,6 +132,10 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"| " Menu navigation
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>| " Search and replace text
 
 " Airline settings
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#tab_nr_type = 1
+
+" CtrlP settings
+let g:ctrlp_open_multiple_files = '1i'
