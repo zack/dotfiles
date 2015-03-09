@@ -93,6 +93,7 @@ let g:syntastic_check_on_wq              = 0
 let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_mode_map                 = { 'mode': 'passive' }
 source ~/.syntastic.conf
 
 " Colors
@@ -117,7 +118,7 @@ nnoremap <Leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
 nnoremap gb :bn<CR>| " Next buffer
 nnoremap Gb :bp<CR>| " Previous buffer
 nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
-nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
+"nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
 nnoremap <Leader>i mmgg=G`m<CR>| " \i will set indent on the whole file
 nnoremap <C-f> :echo expand('%F')<CR>| " Show the full file name and path
 nnoremap <C-n> :call NumberToggle()<CR>| " Toggle absolute vs relative numbers
