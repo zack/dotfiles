@@ -112,7 +112,8 @@ function! NumberToggle()
 endfunc
 
 " Normal mode, non-recursive key mappings
-noremap <Leader>r ggg?G``
+nnoremap <Leader>r ggg?G``
+nnoremap <Leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
 nnoremap gb :bn<CR>| " Next buffer
 nnoremap Gb :bp<CR>| " Previous buffer
 nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
