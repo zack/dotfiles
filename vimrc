@@ -68,7 +68,6 @@ set nocompatible
 
 " Because consistency
 set lcs          =trail:·,tab:»·,eol:$,extends:»
-set mouse        =a
 set grepprg      =grep\ -nH\ $*
 set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
 set viminfo      ='20,<1000,s10,h
@@ -115,8 +114,8 @@ endfunc
 " Normal mode, non-recursive key mappings
 nnoremap <Leader>r ggg?G``
 nnoremap <Leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
-nnoremap gb :bn<CR>| " Next buffer
-nnoremap Gb :bp<CR>| " Previous buffer
+nnoremap <C-]> :bn<CR>| " Next buffer
+nnoremap <C-[> :bp<CR>| " Previous buffer
 nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
 "nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
 nnoremap <Leader>i mmgg=G`m<CR>| " \i will set indent on the whole file
