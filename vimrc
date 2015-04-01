@@ -78,7 +78,7 @@ set textwidth    =79
 set laststatus   =2
 
 " Lets
-let &colorcolumn             =80
+let &colorcolumn             ="80,100"
 let java_highlight_all       =1
 let java_highlight_functions ="style"
 let java_allow_cpp_keywords  =1
