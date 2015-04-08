@@ -25,6 +25,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mustache/vim-mustache-handlebars'
 
@@ -119,6 +120,7 @@ nnoremap <Leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
 nnoremap <C-]> :bn<CR>| " Next buffer
 nnoremap <C-[> :bp<CR>| " Previous buffer
 nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
+nnoremap <C-c> :RainbowParenthesesToggle<CR>| " Toggle rainbowparentheses
 "nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
 nnoremap <Leader>i mmgg=G`m<CR>| " \i will set indent on the whole file
 nnoremap <C-f> :echo expand('%:p')<CR>| " Show the full file name and path
