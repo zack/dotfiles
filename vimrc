@@ -119,7 +119,7 @@ nnoremap <C-[> :bp<CR>| " Previous buffer
 nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
 "nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
 nnoremap <Leader>i mmgg=G`m<CR>| " \i will set indent on the whole file
-nnoremap <C-f> :echo expand('%F')<CR>| " Show the full file name and path
+nnoremap <C-f> :echo expand('%:p')<CR>| " Show the full file name and path
 nnoremap <C-n> :call NumberToggle()<CR>| " Toggle absolute vs relative numbers
 nnoremap <silent> <leader>c :nohl<CR>| " Unset 'last search' register on return
 
