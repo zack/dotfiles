@@ -40,6 +40,4 @@ alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
 alias tc='bundle exec rake tmp:clear'
 
 # Work Stuff
-#export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/zyoungren/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/zyoungren/.rvm/bin:/Users/zyoungren/.rvm/bin"
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
