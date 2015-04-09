@@ -13,7 +13,6 @@ syntax enable
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 Plugin 'gmarik/vundle'
-Plugin 'amdt/vim-niji'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
