@@ -1,5 +1,8 @@
+secrets
+vim/bundle/
+
 DS_Store
 .DS_Store
-**/.netrwhist
-vim/bundle/
+
 .*.un~
+**/.netrwhist
