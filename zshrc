@@ -1,5 +1,7 @@
-# Source secres
-source ~/dotfiles/secrets/secrets.config
+# Source secrets
+if [[ -f /dotfiles/secrets/secrets.config ]]; then
+  source ~/dotfiles/secrets/secrets.config
+fi
 
 # Antigen
 source ~/dotfiles/antigen/antigen.zsh
