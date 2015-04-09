@@ -115,16 +115,19 @@ function! NumberToggle()
 endfunc
 
 " Normal mode, non-recursive key mappings
-nnoremap <Leader>r ggg?G``
-nnoremap <Leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
-nnoremap <C-]> :bn<CR>| " Next buffer
-nnoremap <C-[> :bp<CR>| " Previous buffer
-nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
+nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
 nnoremap <C-c> :RainbowParenthesesToggle<CR>| " Toggle rainbowparentheses
-"nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
-nnoremap <Leader>i mmgg=G`m<CR>| " \i will set indent on the whole file
+nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
 nnoremap <C-f> :echo expand('%:p')<CR>| " Show the full file name and path
 nnoremap <C-n> :call NumberToggle()<CR>| " Toggle absolute vs relative numbers
+nnoremap <C-[> :tabp<CR>| " Previous tab
+nnoremap <C-]> :tabn<CR>| " Next tab
+nnoremap tn :tabedit<CR>| " New tab
+nnoremap tx :tabclose<CR>| " Close tab
+nnoremap <leader>i mmgg=G`m<CR>| " Set indent on file
+nnoremap <leader>l :ls<CR>:b<space>|" Stop cycling when you can fly
+nnoremap <leader>r ggg?G``
+nnoremap <leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
 nnoremap <silent> <leader>c :nohl<CR>| " Unset 'last search' register on return
 
 " Insert mode, non-recursive key mappings
@@ -136,7 +139,6 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>| " Search and replace text
 
 " Airline settings
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 1
 
