@@ -1,3 +1,6 @@
+# Source secres
+source ~/dotfiles/secrets/secrets.config
+
 # Antigen
 source ~/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
