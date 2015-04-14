@@ -124,6 +124,7 @@ nnoremap <C-]> :tabn<CR>| " Next tab
 nnoremap tn :tabedit<CR>| " New tab
 nnoremap tx :tabclose<CR>| " Close tab
 nnoremap <leader>i mmgg=G`m<CR>| " Set indent on file
+nnoremap <leader>j :%!python -m json.tool<CR>| " Format JSON
 nnoremap <leader>l :ls<CR>:b<space>|" Stop cycling when you can fly
 nnoremap <leader>r ggg?G``
 nnoremap <leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
