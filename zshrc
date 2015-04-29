@@ -46,6 +46,7 @@ alias ks='bundle exec rake konacha:serve'
 alias rss='bundle exec rspec spec 2> >(grep -v CoreText 1>&2)'
 alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
 alias tc='bundle exec rake tmp:clear'
+alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
 
 # Work Stuff
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
