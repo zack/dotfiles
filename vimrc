@@ -12,6 +12,8 @@ syntax enable
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
+
+" Plugin
 Plugin 'gmarik/vundle'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
@@ -27,6 +29,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mustache/vim-mustache-handlebars'
+
+" Bundle
+Bundle 'scrooloose/nerdtree'
 
 " Ensure proper color settings for the terminal
 set t_Co=256
@@ -126,6 +131,7 @@ nnoremap tx :tabclose<CR>| " Close tab
 nnoremap <leader>i mmgg=G`m<CR>| " Set indent on file
 nnoremap <leader>j :%!python -m json.tool<CR>| " Format JSON
 nnoremap <leader>l :ls<CR>:b<space>|" Stop cycling when you can fly
+nnoremap <leader>n :NERDTree<CR>| "Open NERDTree
 nnoremap <leader>r ggg?G``
 nnoremap <leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
 nnoremap <silent> <leader>c :nohl<CR>| " Unset 'last search' register on return
