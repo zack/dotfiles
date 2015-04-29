@@ -26,6 +26,9 @@ COMPLETION_WAITING_DOTS="true"
 # general aliases
 alias ld='ls -d */'
 alias tmux='tmux -2'
+alias killswp='rm **/.*.swp; rm **/.*.swo'
+alias cm='cmatrix'
+alias noun='ack -v .un~'
 
 # ccs machines
 alias ccs='ssh zack@asterix.ccs.neu.edu'
