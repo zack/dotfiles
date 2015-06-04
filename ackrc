@@ -1,2 +1,4 @@
 --type-set=haml=.haml
+--type-set=coffee=.coffee
+--type-set=yml=.yml
 --type-set=scss=.scss

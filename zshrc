@@ -48,5 +48,19 @@ alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
 alias tc='bundle exec rake tmp:clear'
 alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
 
+
+# Hit Ctrl-Z again to go back in
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 # Work Stuff
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
