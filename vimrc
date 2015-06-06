@@ -15,8 +15,10 @@ call vundle#rc()
 
 " Plugin
 Plugin 'gmarik/vundle'
+Plugin 'benmills/vimux'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
+Plugin 'skalnik/vim-vroom'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
@@ -145,7 +147,7 @@ nnoremap <C-n> :call NumberToggle()<CR>| " Toggle absolute vs relative numbers
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>| " Search and replace text
 nnoremap <C-[> :tabp<CR>| " Previous tab
 nnoremap <C-]> :tabn<CR>| " Next tab
-nnoremap <leader>hh ^|" Beginning of line
+nnoremap <leader>h ^|" Beginning of line
 nnoremap <leader>i mmgg=G`m<CR>| " Set indent on file
 nnoremap <leader>j :%!python -m json.tool<CR>| " Format JSON
 nnoremap <leader>l $|" End of line
@@ -154,7 +156,7 @@ nnoremap <Leader>o :CtrlP<CR>| " Access CtrlP
 nnoremap <leader>` ggg?G``
 nnoremap <leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
 nnoremap <leader>w :w<CR>| " Save a file
-nnoremap <silent> <leader>c :nohl<CR>| " Unset 'last search' register on return
+nnoremap <silent> <leader>\ :nohl<CR>| " Unset 'last search' register on return
 
 " Start copy and paste to system clipboard using p and y
 vmap <Leader>y "+y
@@ -180,6 +182,12 @@ let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_section_z=''
+
+" Vim-Vroom settings
+let g:vroom_use_vimux=1 " Use vimux, obviously
+
+"Vim-Gitgutter settingsh
+let g:gitgutter_map_keys = 0 " Don't map my keys!
 
 " CtrlP settings
 let g:ctrlp_open_multiple_files = '1i'
