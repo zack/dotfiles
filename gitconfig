@@ -23,7 +23,8 @@
   log-s = log --oneline --no-merges
   files = diff-tree --no-commit-id --name-only -r
   log-f = log --stat
-  cpr = !sh -c 'git checkout -b pr-$1 refs/pull/upstream/$1' -
+  cpr = !git fetch upstream && sh -c 'git checkout -b pr-$1 refs/pull/upstream/$1' -
+  dpr = !git branch -D `git branch | grep -e '^  pr-\\d\\{4\\}$'`
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
