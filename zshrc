@@ -29,6 +29,7 @@ alias tmux='tmux -2'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias cm='cmatrix'
 alias noun='ack -v .un~'
+alias ip="ifconfig | grep Bcast | cut -d':' -f 2 | cut -d' ' -f 1"
 
 # ccs machines
 alias ccs='ssh zack@asterix.ccs.neu.edu'
@@ -41,6 +42,8 @@ alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
 # work related aliases
 alias rc='rails c'
 alias rs='rails s 2>&1 | grep -v content-length'
+alias rssl='Rails_env=production_local_d1 bundle exec script/secure_rails s \
+  2>&1 | grep -v content-length'
 alias kr='bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)'
 alias ks='bundle exec rake konacha:serve'
 alias rss='bundle exec rspec spec 2> >(grep -v CoreText 1>&2)'
@@ -62,5 +65,7 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-# Work Stuff
-#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+ip(){
+  print -P "\033[1;31mExt IP:\033[0m `dig +short myip.opendns.com @resolver1.opendns.com`"
+  print -P "\033[1;36mLcl IP:\033[0m `ipconfig getifaddr en0`"
+}
