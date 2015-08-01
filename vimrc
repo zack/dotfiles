@@ -60,7 +60,7 @@ set ai
 set sm
 set hidden
 set nowrap
-set number
+set number " hybrid mode!
 set showcmd
 set hlsearch
 set nohidden
@@ -75,6 +75,7 @@ set cursorline
 set ignorecase
 set cursorcolumn
 set nocompatible
+set relativenumber " hybrid mode!
 
 " Because consistency
 set lcs          =trail:·,tab:»·,eol:$,extends:»
