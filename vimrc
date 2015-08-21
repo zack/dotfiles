@@ -25,6 +25,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fireplace'
 Plugin 'groenewege/vim-less'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'whatyouhide/vim-gotham'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'scrooloose/nerdcommenter'
@@ -37,9 +38,10 @@ Plugin 'mustache/vim-mustache-handlebars'
 Bundle 'scrooloose/nerdtree'
 
 " Ensure proper color settings for the terminal
-set t_Co=256
-let g:railscasts_termcolors = 256
-colorscheme railscasts
+"set t_Co=256
+"let g:railscasts_termcolors = 256
+"colorscheme railscasts
+colorscheme gotham
 
 " Special Syntax Highlighting
 let g:niji_matching_filetypes = ['racket'] " Racket
