@@ -112,9 +112,9 @@ source ~/.syntastic.conf
 " Colors
 hi clear SignColumn
 hi matchParen ctermbg=4
-hi CursorLine ctermbg=239
 hi ColorColumn ctermbg=52
-hi CursorColumn ctermbg=239
+hi CursorLine ctermbg=235
+hi CursorColumn ctermbg=235
 
 " Switch between rel and abs line numbers. Key mapping below
 function! NumberToggle()
@@ -182,7 +182,7 @@ endfunction
 vmap <silent> <expr> p <sid>Repl()
 
 " Airline settings
-let g:airline_theme='powerlineish'
+let g:airline_theme='dark'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_section_z=''
