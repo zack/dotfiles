@@ -34,9 +34,6 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mustache/vim-mustache-handlebars'
 
-" Bundle
-Bundle 'scrooloose/nerdtree'
-
 " Ensure proper color settings for the terminal
 "set t_Co=256
 "let g:railscasts_termcolors = 256
@@ -62,7 +59,7 @@ set ai
 set sm
 set hidden
 set nowrap
-set number " hybrid mode!
+set number
 set showcmd
 set hlsearch
 set nohidden
@@ -77,7 +74,7 @@ set cursorline
 set ignorecase
 set cursorcolumn
 set nocompatible
-set relativenumber " hybrid mode!
+set relativenumber
 
 " Because consistency
 set lcs          =trail:·,tab:»·,eol:$,extends:»
@@ -129,38 +126,62 @@ endfunc
 let mapleader = "\<Space>"
 
 " Keybindings
-map q: :q| " Nobody uses you and you have no friends
+"
+" Nobody uses you and you have no friends
+map q: :q
 
-nmap <Leader><Leader> V
+" v to expand region
+vmap v <Plug>(expand_region_expand)
+" Ctrl-V to collapse region
+vmap <C-v> <Plug>(expand_region_shrink)
 
-vmap v <Plug>(expand_region_expand)| " v to expand region
-vmap <C-v> <Plug>(expand_region_shrink)| " Ctrl-V to collapse region
+" Menu navigation
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
+" Menu navigation
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
 
-inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"| " Menu navigation
-inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"| " Menu navigation
-
-nnoremap tn :tabedit<CR>| " New tab
-nnoremap tx :tabclose<CR>| " Close tab
-nnoremap <BS> gg| " Backspace to go to beginning of file
-nnoremap <CR> G| " Use <Enter> instead of G
-nnoremap <C-b> :CtrlPBuffer<CR>| " Open CtrlP directly to buffers
-nnoremap <C-c> :RainbowParenthesesToggle<CR>| " Toggle rainbowparentheses
-nnoremap <C-d> :call ToggleRainbow()<CR>| " Toggle rainbowend
-nnoremap <C-f> :echo expand('%:p')<CR>| " Show the full file name and path
-nnoremap <C-n> :call NumberToggle()<CR>| " Toggle absolute vs relative numbers
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>| " Search and replace text
-nnoremap <C-[> :tabp<CR>| " Previous tab
-nnoremap <C-]> :tabn<CR>| " Next tab
-nnoremap <leader>h ^|" Beginning of line
-nnoremap <leader>i mmgg=G`m<CR>| " Set indent on file
-nnoremap <leader>j :%!python -m json.tool<CR>| " Format JSON
-nnoremap <leader>l $|" End of line
-nnoremap <leader>n :NERDTree<CR>| "Open NERDTree
-nnoremap <Leader>o :CtrlP<CR>| " Access CtrlP
-nnoremap <leader>` ggg?G``
-nnoremap <leader>s :SyntasticToggleMode<CR>| " Toggle syntastic
-nnoremap <leader>w :w<CR>| " Save a file
-nnoremap <silent> <leader>\ :nohl<CR>| " Unset 'last search' register on return
+" Select the whole line
+nnoremap <Leader><Leader> V
+" New tab
+nnoremap tn :tabedit<CR>
+" Close tab
+nnoremap tx :tabclose<CR>
+" Backspace to go to beginning of file
+nnoremap <BS> gg
+" Use <Enter> instead of G
+nnoremap <CR> G
+" Open CtrlP directly to buffers
+nnoremap <C-b> :CtrlPBuffer<CR>
+" Toggle rainbowparentheses
+nnoremap <C-c> :RainbowParenthesesToggle<CR>
+" Toggle rainbowend
+nnoremap <C-d> :call ToggleRainbow()<CR>
+" Show the full file name and path
+nnoremap <C-f> :echo expand('%:p')<CR>
+" Toggle absolute vs relative numbers
+nnoremap <C-n> :call NumberToggle()<CR>
+" Search and replace text
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+" Previous tab
+nnoremap <C-[> :tabp<CR>
+" Next tab
+nnoremap <C-]> :tabn<CR>
+" Beginning of line
+nnoremap <leader>h ^
+" Set indent on file
+nnoremap <leader>i mmgg=G`m<CR>
+" Format JSON
+nnoremap <leader>j :%!python -m json.tool<CR>
+" End of line
+nnoremap <leader>l $
+" Access CtrlP
+nnoremap <Leader>o :CtrlP<CR>
+" Toggle syntastic
+nnoremap <leader>s :SyntasticToggleMode<CR>
+" Save a file
+nnoremap <leader>w :w<CR>
+" Unset 'last search' register on return
+nnoremap <silent> <leader>\ :nohl<CR>
 
 " Start copy and paste to system clipboard using p and y
 vmap <Leader>y "+y
