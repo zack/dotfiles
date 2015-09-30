@@ -30,7 +30,7 @@ alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias cm='cmatrix'
 alias noun='ack -v .un~'
 alias ip="ifconfig | grep Bcast | cut -d':' -f 2 | cut -d' ' -f 1"
-alias ack='ag' # until I stop forgetting I switched
+alias ack='echo "no more ack"'
 
 # ccs machines
 alias ccs='ssh zack@asterix.ccs.neu.edu'
