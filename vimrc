@@ -14,6 +14,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " Plugin
+Plugin 'rking/ag.vim'
 Plugin 'gmarik/vundle'
 Plugin 'benmills/vimux'
 Plugin 'kien/ctrlp.vim'
@@ -126,7 +127,7 @@ endfunc
 let mapleader = "\<Space>"
 
 " Keybindings
-"
+
 " Nobody uses you and you have no friends
 map q: :q
 
@@ -219,11 +220,15 @@ let g:ctrlp_open_multiple_files = '1i'
 let g:ctrlp_use_caching = 0
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
-
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
   let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
     \ }
+endif
+
+" Use ag with ack.vim if available
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
