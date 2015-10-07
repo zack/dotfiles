@@ -75,6 +75,7 @@ set cursorline
 set ignorecase
 set cursorcolumn
 set nocompatible
+set nofoldenable
 set relativenumber
 
 " Because consistency
@@ -84,9 +85,12 @@ set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
 set viminfo      ='20,<1000,s10,h
 set wildmode     =list:longest,full
 set backspace    =2
+set foldlevel    =2
 set scrolloff    =5
 set textwidth    =79
+set foldmethod   =indent
 set laststatus   =2
+set foldnestmax  =10
 
 " Lets
 let &colorcolumn             ="80,100"
@@ -149,8 +153,6 @@ nnoremap tn :tabedit<CR>
 nnoremap tx :tabclose<CR>
 " Backspace to go to beginning of file
 nnoremap <BS> gg
-" Use <Enter> instead of G
-nnoremap <CR> G
 " Open CtrlP directly to buffers
 nnoremap <C-b> :CtrlPBuffer<CR>
 " Toggle rainbowparentheses
