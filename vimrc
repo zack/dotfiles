@@ -71,8 +71,10 @@ set expandtab
 set incsearch
 set smartcase
 set autoindent
+set splitbelow
 set cursorline
 set ignorecase
+set splitright
 set cursorcolumn
 set nocompatible
 set nofoldenable
