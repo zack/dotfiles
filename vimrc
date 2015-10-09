@@ -173,8 +173,6 @@ nnoremap <C-]> :tabn<CR>
 nnoremap <leader>h ^
 " Set indent on file
 nnoremap <leader>i mmgg=G`m<CR>
-" Format JSON
-nnoremap <leader>j :%!python -m json.tool<CR>
 " End of line
 nnoremap <leader>l $
 " Access CtrlP
