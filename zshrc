@@ -43,7 +43,8 @@ alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
 # work related aliases
 alias rc='rails c'
 alias rs='rails s 2>&1 | grep -v content-length'
-alias rssl='RAILS_ENV=production_local_d1 bundle exec bin/secure_rails s \
+alias rssl='bundle exec bin/secure_rails s 2>&1 | grep -v content-length'
+alias rssld='RAILS_ENV=production_local_d1 bundle exec bin/secure_rails s \
   2>&1 | grep -v content-length'
 alias kr='bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)'
 alias ks='bundle exec rake konacha:serve'
