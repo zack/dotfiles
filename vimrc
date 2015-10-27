@@ -16,6 +16,7 @@ call vundle#rc()
 " Plugin
 Plugin 'rking/ag.vim'
 Plugin 'gmarik/vundle'
+Plugin 'sjl/gundo.vim'
 Plugin 'benmills/vimux'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
@@ -181,6 +182,8 @@ nnoremap <leader>l $
 nnoremap <Leader>o :CtrlP<CR>
 " Toggle syntastic
 nnoremap <leader>s :SyntasticToggleMode<CR>
+" Toggle Gundo Tree
+nnoremap <leader>u :GundoToggle<CR>
 " Save a file
 nnoremap <leader>w :w<CR>
 " Unset 'last search' register on return
