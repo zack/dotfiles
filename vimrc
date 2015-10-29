@@ -176,8 +176,6 @@ nnoremap <C-]> :tabn<CR>
 nnoremap <leader>h ^
 " Set indent on file
 nnoremap <leader>i mmgg=G`m<CR>
-" End of line
-nnoremap <leader>l $
 " Access CtrlP
 nnoremap <Leader>o :CtrlP<CR>
 " Toggle syntastic
@@ -188,6 +186,15 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>w :w<CR>
 " Unset 'last search' register on return
 nnoremap <silent> <leader>\ :nohl<CR>
+" Resize vim splits
+nnoremap <leader>h :vertical resize +10<CR>
+nnoremap <leader>H :vertical resize +1<CR>
+nnoremap <leader>j :resize -10<CR>
+nnoremap <leader>J :resize -1<CR>
+nnoremap <leader>k :resize +10<CR>
+nnoremap <leader>K :resize +1<CR>
+nnoremap <leader>l :vertical resize -10<CR>
+nnoremap <leader>L :vertical resize -1<CR>
 
 " Start copy and paste to system clipboard using p and y
 vmap <Leader>y "+y
