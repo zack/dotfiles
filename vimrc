@@ -82,18 +82,21 @@ set nofoldenable
 set relativenumber
 
 " Because consistency
-set lcs          =trail:·,tab:»·,eol:$,extends:»
-set grepprg      =grep\ -nH\ $*
-set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
-set viminfo      ='20,<1000,s10,h
-set wildmode     =list:longest,full
 set backspace    =2
 set foldlevel    =2
+set foldmethod   =indent
+set foldnestmax  =10
+set grepprg      =grep\ -nH\ $*
+set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
+set laststatus   =2
+set lcs          =trail:·,tab:»·,eol:$,extends:»
 set scrolloff    =5
 set textwidth    =79
-set foldmethod   =indent
-set laststatus   =2
-set foldnestmax  =10
+set undodir      =$HOME/.vim/undo
+set undolevels   =1000
+set undoreload   =10000
+set viminfo      ='20,<1000,s10,h
+set wildmode     =list:longest,full
 
 " Lets
 let &colorcolumn             ="80,100"
@@ -124,7 +127,7 @@ hi CursorColumn ctermbg=235
 " Switch between rel and abs line numbers. Key mapping below
 function! NumberToggle()
   if(&relativenumber == 1)
-    set number
+    set norelativenumber
   else
     set relativenumber
   endif
@@ -186,6 +189,7 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>w :w<CR>
 " Unset 'last search' register on return
 nnoremap <silent> <leader>\ :nohl<CR>
+
 " Resize vim splits
 nnoremap <leader>h :vertical resize +10<CR>
 nnoremap <leader>H :vertical resize +1<CR>
