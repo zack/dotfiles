@@ -1,8 +1,10 @@
 secrets
 vim/bundle/
+vim/undo/
 
 DS_Store
 .DS_Store
 
 .*.un~
 **/.netrwhist
+
