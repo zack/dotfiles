@@ -27,6 +27,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fireplace'
 Plugin 'groenewege/vim-less'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'elixir-lang/vim-elixir'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'kchmck/vim-coffee-script'
@@ -234,6 +235,11 @@ let g:gitgutter_map_keys = 0 " Don't map my keys!
 " CtrlP settings
 let g:ctrlp_open_multiple_files = '1i'
 let g:ctrlp_use_caching = 0
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](_build|deps)$',
+  \ }
+
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'

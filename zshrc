@@ -52,7 +52,7 @@ alias rss='bundle exec rspec spec 2> >(grep -v CoreText 1>&2)'
 alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
 alias tc='bundle exec rake tmp:clear'
 alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
-
+alias vol100='while true; do osascript -e "set volume input volume 100"; sleep 1; done'
 
 # Hit Ctrl-Z again to go back in
 fancy-ctrl-z () {
