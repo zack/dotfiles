@@ -222,9 +222,10 @@ vmap <silent> <expr> p <sid>Repl()
 
 " Airline settings
 let g:airline_theme='dark'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_section_z=''
+let g:airline_powerline_fonts=1
+let g:airline_detect_paste=1
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#hunks#enabled=0
 
 " Vim-Vroom settings
 let g:vroom_use_vimux=1 " Use vimux, obviously
