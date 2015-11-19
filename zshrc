@@ -20,6 +20,9 @@ bindkey '^R' history-incremental-search-backward
 # Tmux for new zsh instance
 if [ "$TMUX" = "" ]; then tmux -2; fi
 
+# Don't rename TMUX windows on command execution
+DISABLE_AUTO_TITLE=true
+
 # Display red dots while waiting for autocompletion
 COMPLETION_WAITING_DOTS="true"
 
