@@ -27,7 +27,7 @@
   cpr = !git fetch upstream && sh -c 'git checkout -b pr-$1 refs/pull/upstream/$1' -
   dpr = !git checkout development && git branch -D `git branch | grep -e '^  pr-\\d\\{4\\}$'`
 [core]
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore_global
   autocrlf = input
   editor = vim
 [diff]
