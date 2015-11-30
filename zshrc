@@ -43,9 +43,16 @@ alias ccs2='ssh zack@burninrubber.ccs.neu.edu'
 alias gs='git st'
 alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
 
-# work related aliases
+# rails aliases
 alias rc='rails c'
 alias rs='rails s 2>&1 | grep -v content-length'
+alias tc='bundle exec rake tmp:clear'
+
+# work aliases
+alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
+alias vol100='while true; do osascript -e "set volume input volume 100"; sleep 1; done'
+
+# contacts
 alias rssl='bundle exec bin/secure_rails s 2>&1 | grep -v content-length'
 alias rssld='RAILS_ENV=production_local_d1 bundle exec bin/secure_rails s \
   2>&1 | grep -v content-length'
@@ -53,9 +60,10 @@ alias kr='bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)'
 alias ks='bundle exec rake konacha:serve'
 alias rss='bundle exec rspec spec 2> >(grep -v CoreText 1>&2)'
 alias gcot='git checkout app/assets/javascripts/templates/templates.js.erb'
-alias tc='bundle exec rake tmp:clear'
-alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
-alias vol100='while true; do osascript -e "set volume input volume 100"; sleep 1; done'
+
+# galileo
+alias grs='SERVICES_ENV=local rails s'
+alias grss='SERVICES_ENV=local rspec spec'
 
 # Hit Ctrl-Z again to go back in
 fancy-ctrl-z () {
