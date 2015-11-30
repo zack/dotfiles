@@ -63,7 +63,6 @@ set sm
 set hidden
 set nowrap
 set number
-set showcmd
 set hlsearch
 set nohidden
 set smarttab
@@ -258,3 +257,6 @@ endif
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
+
+" At the bottom because something above is breaking it
+set showcmd
