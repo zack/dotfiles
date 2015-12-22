@@ -51,6 +51,11 @@ alias tc='bundle exec rake tmp:clear'
 # work aliases
 alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
 alias vol100='while true; do osascript -e "set volume input volume 100"; sleep 1; done'
+alias galileo='cd ~/dev/ctct/galileo'
+alias devportal='cd ~/dev/ctct/galileo/auth-devportal'
+alias platform='cd ~/dev/ctct/galileo/auth-platform'
+alias devportalw='cd ~/dev/ctct/galileo/auth-devportal/auth-devportal-webapp'
+alias platformw='cd ~/dev/ctct/galileo/auth-platform/auth-platform-webapp'
 
 # contacts
 alias rssl='bundle exec bin/secure_rails s 2>&1 | grep -v content-length'
@@ -82,3 +87,5 @@ ip(){
   print -P "\033[1;31mExt IP:\033[0m `dig +short myip.opendns.com @resolver1.opendns.com`"
   print -P "\033[1;36mLcl IP:\033[0m `ipconfig getifaddr en0`"
 }
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

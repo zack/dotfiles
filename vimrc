@@ -125,10 +125,20 @@ hi CursorLine ctermbg=235
 hi CursorColumn ctermbg=235
 
 " Switch between rel and abs line numbers. Key mapping below
-function! NumberToggle()
+function! RelNumberToggle()
   if(&relativenumber == 1)
     set norelativenumber
   else
+    set relativenumber
+  endif
+endfunc
+
+function! AllNumberToggle()
+  if(&number == 1 || &relativenumber == 1)
+    set nonumber
+    set norelativenumber
+  else
+    set number
     set relativenumber
   endif
 endfunc
@@ -168,7 +178,9 @@ nnoremap <C-d> :call ToggleRainbow()<CR>
 " Show the full file name and path
 nnoremap <C-f> :echo expand('%:p')<CR>
 " Toggle absolute vs relative numbers
-nnoremap <C-n> :call NumberToggle()<CR>
+nnoremap <C-n> :call RelNumberToggle()<CR>
+" Toggle all number display
+nnoremap <Leader>n :call AllNumberToggle()<CR>
 " Search and replace text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " Previous tab
