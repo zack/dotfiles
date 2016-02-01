@@ -1,6 +1,7 @@
 [user]
   name = Zack Youngren
   email = zack@youngren.io
+          signingkey = 724218E4
 [push]
   default = current
 [color]
@@ -11,7 +12,7 @@
   ca = commit --amend
   ci = commit -v
   co = checkout
-  up = !git checkout master && git fetch upstream && git reset --hard upstream/master
+  up = !git checkout development && git fetch upstream && git reset --hard upstream/development
   rb = !git fetch upstream && git rebase upstream/master
   create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git remote prune origin && git branch -D $1' -
@@ -24,7 +25,7 @@
   log-s = log --oneline --no-merges
   files = diff-tree --no-commit-id --name-only -r
   log-f = log --stat
-  cpr = !git fetch upstream && sh -c 'git checkout -b pr-$1 refs/pull/upstream/$1' -
+  cpr = "!f() { git fetch -fu upstream refs/pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
   dpr = !git checkout development && git branch -D `git branch | grep -e '^  pr-\\d\\{4\\}$'`
 [core]
   excludesfile = ~/.gitignore_global
