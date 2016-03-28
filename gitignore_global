@@ -52,3 +52,11 @@ secrets
 #######
 vim/bundle/
 vim/undo/
+
+# NOHUP #
+#########
+nohup.out
+
+# AG #
+######
+.agignore

@@ -32,8 +32,9 @@ alias tmux='tmux -2'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias cm='cmatrix'
 alias noun='ack -v .un~'
-alias ip="ifconfig | grep Bcast | cut -d':' -f 2 | cut -d' ' -f 1"
+#alias ip="ifconfig | grep Bcast | cut -d':' -f 2 | cut -d' ' -f 1"
 alias ack='echo "no more ack"'
+#alias sshvm="ssh zack@`VBoxManage guestproperty get 'Ubuntu64' '/VirtualBox/GuestInfo/Net/1/V4/IP' | awk '{ print $2 }'`"
 
 # ccs machines
 alias ccs='ssh zack@asterix.ccs.neu.edu'
@@ -58,9 +59,8 @@ alias devportalw='cd ~/dev/ctct/galileo/auth-devportal/auth-devportal-webapp'
 alias platformw='cd ~/dev/ctct/galileo/auth-platform/auth-platform-webapp'
 
 # contacts
-alias rssl='bundle exec bin/secure_rails s 2>&1 | grep -v content-length'
-alias rssld='RAILS_ENV=production_local_d1 bundle exec bin/secure_rails s \
-  2>&1 | grep -v content-length'
+alias rssl='bundle exec bin/secure_rails s'
+alias rssld='RAILS_ENV=production_local_d1 bundle exec bin/secure_rails s'
 alias kr='bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)'
 alias ks='bundle exec rake konacha:serve'
 alias rss='bundle exec rspec spec 2> >(grep -v CoreText 1>&2)'
@@ -89,3 +89,5 @@ ip(){
 }
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/apache-maven/3.3.9/bin:$PATH" # Add maven to path
+export JAVA_HOME=`/usr/libexec/java_home`
