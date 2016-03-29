@@ -53,6 +53,7 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 " Tab options
 autocmd FileType * set tabstop=2|set shiftwidth=2
 autocmd FileType python set tabstop=4|set shiftwidth=4
+autocmd FileType html set tabstop=4|set shiftwidth=4
 
 " Do/end matching
 runtime macros/matchit.vim
@@ -151,6 +152,10 @@ let mapleader = "\<Space>"
 
 " Nobody uses you and you have no friends
 map q: :q
+" Replace double quotes with single quotes
+map <leader>' cs"'<ESC>
+" Replace single quotes with double quotes
+map <leader>" cs'"<ESC>
 
 " v to expand region
 vmap v <Plug>(expand_region_expand)
@@ -163,7 +168,7 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
 
 " Select the whole line
-nnoremap <Leader><Leader> V
+nnoremap <leader><leader> V
 " New tab
 nnoremap tn :tabedit<CR>
 " Close tab
@@ -181,19 +186,17 @@ nnoremap <C-f> :echo expand('%:p')<CR>
 " Toggle absolute vs relative numbers
 nnoremap <C-n> :call RelNumberToggle()<CR>
 " Toggle all number display
-nnoremap <Leader>n :call AllNumberToggle()<CR>
+nnoremap <leader>n :call AllNumberToggle()<CR>
 " Search and replace text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " Previous tab
 nnoremap <C-[> :tabp<CR>
 " Next tab
 nnoremap <C-]> :tabn<CR>
-" Beginning of line
-nnoremap <leader>h ^
 " Set indent on file
 nnoremap <leader>i mmgg=G`m<CR>
 " Access CtrlP
-nnoremap <Leader>o :CtrlP<CR>
+nnoremap <leader>o :CtrlP<CR>
 " Toggle syntastic
 nnoremap <leader>s :SyntasticToggleMode<CR>
 " Toggle Gundo Tree
@@ -214,12 +217,12 @@ nnoremap <leader>l :vertical resize -10<CR>
 nnoremap <leader>L :vertical resize -1<CR>
 
 " Start copy and paste to system clipboard using p and y
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
 
 " Start putting doesn't replace paste buffer
 function! RestoreRegister()
