@@ -26,6 +26,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fireplace'
 Plugin 'groenewege/vim-less'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'whatyouhide/vim-gotham'
@@ -92,6 +94,7 @@ set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
 set laststatus   =2
 set lcs          =trail:·,tab:»·,eol:$,extends:»
 set scrolloff    =5
+set sidescroll   =1
 set textwidth    =79
 set undodir      =$HOME/.vim/undo
 set undolevels   =1000
@@ -112,11 +115,13 @@ let NERDSpaceDelims          =1
 set statusline+=%*
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
-let g:syntastic_check_on_wq              = 0
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_wq              = 0
+let g:syntastic_check_on_open            = 1
+let g:syntastic_loc_list_height          = 5
 let g:syntastic_mode_map                 = { 'mode': 'passive' }
+let g:syntastic_javascript_checkers      = ['eslint']
 source ~/.syntastic.conf
 
 " Colors
@@ -250,6 +255,7 @@ let g:vroom_use_vimux=1 " Use vimux, obviously
 
 "Vim-Gitgutter settingsh
 let g:gitgutter_map_keys = 0 " Don't map my keys!
+let g:gitgutter_max_signs = 10000
 
 " CtrlP settings
 let g:ctrlp_open_multiple_files = '1i'
