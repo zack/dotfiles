@@ -1,5 +1,5 @@
 # Source secrets
-if [[ -f /dotfiles/secrets/secrets.config ]]; then
+if [[ -f ~/dotfiles/secrets/secrets.config ]]; then
   source ~/dotfiles/secrets/secrets.config
 fi
 
@@ -88,6 +88,7 @@ ip(){
   print -P "\033[1;36mLcl IP:\033[0m `ipconfig getifaddr en0`"
 }
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="/usr/local/apache-maven/3.3.9/bin:$PATH" # Add maven to path
-export JAVA_HOME=`/usr/libexec/java_home`
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export PATH="/usr/local/apache-maven/3.3.9/bin:$PATH" # Add maven to path
+# export JAVA_HOME=`/usr/libexec/java_home`
+export PATH="./bin:$PATH" # binstubs
