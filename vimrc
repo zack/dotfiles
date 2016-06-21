@@ -14,30 +14,30 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " Plugin
-Plugin 'rking/ag.vim'
-Plugin 'gmarik/vundle'
-Plugin 'sjl/gundo.vim'
-Plugin 'benmills/vimux'
-Plugin 'kien/ctrlp.vim'
-Plugin 'bling/vim-airline'
-Plugin 'skalnik/vim-vroom'
-Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-fireplace'
-Plugin 'groenewege/vim-less'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'vim-scripts/rainbow-end'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'terryma/vim-expand-region'
-Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'benmills/vimux'
+Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'ervandew/supertab'
+Plugin 'gmarik/vundle'
+Plugin 'groenewege/vim-less'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'skalnik/vim-vroom'
+Plugin 'terryma/vim-expand-region'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/rainbow-end'
+Plugin 'whatyouhide/vim-gotham'
 
 " Ensure proper color settings for the terminal
 "set t_Co=256
@@ -54,35 +54,36 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Tab options
 autocmd FileType * set tabstop=2|set shiftwidth=2
-autocmd FileType python set tabstop=4|set shiftwidth=4
 autocmd FileType html set tabstop=4|set shiftwidth=4
+autocmd FileType python set tabstop=4|set shiftwidth=4
 
 " Do/end matching
 runtime macros/matchit.vim
 
 " Sets
 set ai
-set sm
-set hidden
-set nowrap
-set number
-set hlsearch
-set nohidden
-set smarttab
-set undofile
-set wildmenu
-set expandtab
-set incsearch
-set smartcase
 set autoindent
-set splitbelow
-set cursorline
-set ignorecase
-set splitright
 set cursorcolumn
+set cursorline
+set expandtab
+set hidden
+set hlsearch
+set ignorecase
+set incsearch
+set list
 set nocompatible
 set nofoldenable
+set nohidden
+set nowrap
+set number
 set relativenumber
+set sm
+set smartcase
+set smarttab
+set splitbelow
+set splitright
+set undofile
+set wildmenu
 
 " Because consistency
 set backspace    =2
@@ -104,14 +105,30 @@ set wildmode     =list:longest,full
 
 " Lets
 let &colorcolumn             ="80,100"
-let java_highlight_all       =1
-let java_highlight_functions ="style"
-let java_allow_cpp_keywords  =1
 let g:clipbrdDefaultReg      ='+'
-let NERDTreeHijackNetrw      =1
+let mapleader = "\<Space>"
+
+" Airline
+let g:airline#extensions#branch#enabled =1
+let g:airline#extensions#hunks#enabled  =0
+let g:airline_detect_paste              =1
+let g:airline_left_sep                  =''
+let g:airline_powerline_fonts           =1
+let g:airline_right_sep                 =''
+let g:airline_section_z                 =''
+let g:airline_theme                     ='dark'
+
+" CtrlP settings
+let g:ctrlp_open_multiple_files = '1i'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](_build|deps)$',
+  \ }
+
+" NerdCommenter
 let NERDSpaceDelims          =1
 
-" Syntastic settings
+" Syntastic
 set statusline+=%*
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -124,12 +141,19 @@ let g:syntastic_mode_map                 = { 'mode': 'passive' }
 let g:syntastic_javascript_checkers      = ['eslint']
 source ~/.syntastic.conf
 
+"Vim-Gitgutter settingsh
+let g:gitgutter_map_keys = 0 " Don't map my keys!
+let g:gitgutter_max_signs = 10000
+
+" Vim-Vroom settings
+let g:vroom_use_vimux=1 " Use vimux, obviously
+
 " Colors
 hi clear SignColumn
-hi matchParen ctermbg=4
 hi ColorColumn ctermbg=52
-hi CursorLine ctermbg=235
 hi CursorColumn ctermbg=235
+hi CursorLine ctermbg=235
+hi matchParen ctermbg=4
 
 " Switch between rel and abs line numbers. Key mapping below
 function! RelNumberToggle()
@@ -149,9 +173,6 @@ function! AllNumberToggle()
     set relativenumber
   endif
 endfunc
-
-" Better leader key
-let mapleader = "\<Space>"
 
 " Keybindings
 
@@ -222,12 +243,12 @@ nnoremap <leader>l :vertical resize -10<CR>
 nnoremap <leader>L :vertical resize -1<CR>
 
 " Start copy and paste to system clipboard using p and y
-vmap <leader>y "+y
 vmap <leader>d "+d
 nmap <leader>p "+p
 nmap <leader>P "+P
 vmap <leader>p "+p
 vmap <leader>P "+P
+vmap <leader>y "+y
 
 " Start putting doesn't replace paste buffer
 function! RestoreRegister()
@@ -239,31 +260,6 @@ function! s:Repl()
   return "p@=RestoreRegister()\<cr>"
 endfunction
 vmap <silent> <expr> p <sid>Repl()
-
-" Airline settings
-let g:airline_theme='dark'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_section_z=''
-let g:airline_powerline_fonts=1
-let g:airline_detect_paste=1
-let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#hunks#enabled=0
-
-" Vim-Vroom settings
-let g:vroom_use_vimux=1 " Use vimux, obviously
-
-"Vim-Gitgutter settingsh
-let g:gitgutter_map_keys = 0 " Don't map my keys!
-let g:gitgutter_max_signs = 10000
-
-" CtrlP settings
-let g:ctrlp_open_multiple_files = '1i'
-let g:ctrlp_use_caching = 0
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_build|deps)$',
-  \ }
 
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
