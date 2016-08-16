@@ -59,6 +59,9 @@ autocmd FileType python set tabstop=4|set shiftwidth=4
 " Do/end matching
 runtime macros/matchit.vim
 
+" Man pages
+runtime ftplugin/man.vim
+
 " Sets
 set ai
 set autoindent
