@@ -31,7 +31,6 @@ Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
-Plugin 'skalnik/vim-vroom'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
@@ -145,9 +144,6 @@ source ~/.syntastic.conf
 let g:gitgutter_map_keys = 0 " Don't map my keys!
 let g:gitgutter_max_signs = 10000
 
-" Vim-Vroom settings
-let g:vroom_use_vimux=1 " Use vimux, obviously
-
 " Colors
 hi clear SignColumn
 hi ColorColumn ctermbg=52
@@ -182,6 +178,8 @@ map q: :q
 map <leader>' cs"'<ESC>
 " Replace single quotes with double quotes
 map <leader>" cs'"<ESC>
+" Redraw
+map <leader>r :redraw!<CR>
 
 " v to expand region
 vmap v <Plug>(expand_region_expand)
