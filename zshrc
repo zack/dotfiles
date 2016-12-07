@@ -38,6 +38,7 @@ alias noun='ack -v .un~'
 alias ack='echo "no more ack"'
 #alias sshvm="ssh zack@`VBoxManage guestproperty get 'Ubuntu64' '/VirtualBox/GuestInfo/Net/1/V4/IP' | awk '{ print $2 }'`"
 alias clojure='java -cp ~/clojure/clojure-1.8.0.jar clojure.main'
+alias ag='ag --path-to-agignore ~/.agignore'
 
 # ccs machines
 alias ccs='ssh zack@asterix.ccs.neu.edu'
@@ -82,6 +83,7 @@ alias fixbtaudio='
 # contacts
 alias rssl='bundle exec bin/secure_rails s'
 alias rssld='RAILS_ENV=production_local_d1 bundle exec bin/secure_rails s'
+alias rssll='bundle exec bin/rails_l1 s'
 alias kr='bundle exec rake konacha:run 2> >(grep -v CoreText 1>&2)'
 alias ks='bundle exec rake konacha:serve'
 alias rss='bundle exec rspec spec 2> >(grep -v CoreText 1>&2)'
@@ -130,3 +132,7 @@ man() {
 # if [ -d "$GHC_DOT_APP" ]; then
   # export PATH="${HOME}/.local/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
 # fi
+#
+
+zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
+

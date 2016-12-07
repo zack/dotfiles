@@ -2,6 +2,9 @@
 filetype off
 filetype plugin indent off
 
+" Encoding for powerline fonts
+set encoding=utf8
+
 " Pathogen
 execute pathogen#infect()
 
@@ -38,6 +41,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'whatyouhide/vim-gotham'
 
+
 " Ensure proper color settings for the terminal
 "set t_Co=256
 "let g:railscasts_termcolors = 256
@@ -52,9 +56,10 @@ autocmd BufNewFile,BufRead *.json set ft=javascript " JSON using JS rules
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Tab options
-autocmd FileType * set tabstop=2|set shiftwidth=2
-autocmd FileType html set tabstop=4|set shiftwidth=4
-autocmd FileType python set tabstop=4|set shiftwidth=4
+autocmd FileType * set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType html set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType cpp set tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
 
 " Do/end matching
 runtime macros/matchit.vim
@@ -67,14 +72,13 @@ set ai
 set autoindent
 set cursorcolumn
 set cursorline
-set expandtab
+" set expandtab
 set hidden
 set hlsearch
 set ignorecase
 set incsearch
 set list
 set nocompatible
-set nofoldenable
 set nohidden
 set nowrap
 set number
@@ -89,9 +93,6 @@ set wildmenu
 
 " Because consistency
 set backspace    =2
-set foldlevel    =2
-set foldmethod   =indent
-set foldnestmax  =10
 set grepprg      =grep\ -nH\ $*
 set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
 set laststatus   =2
@@ -105,20 +106,26 @@ set undoreload   =10000
 set viminfo      ='20,<1000,s10,h
 set wildmode     =list:longest,full
 
+" Autocommands
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 " Lets
 let &colorcolumn             ="80,100"
 let g:clipbrdDefaultReg      ='+'
 let mapleader = "\<Space>"
 
 " Airline
-let g:airline#extensions#branch#enabled =1
-let g:airline#extensions#hunks#enabled  =0
-let g:airline_detect_paste              =1
-let g:airline_left_sep                  =''
-let g:airline_powerline_fonts           =1
-let g:airline_right_sep                 =''
-let g:airline_section_z                 =''
-let g:airline_theme                     ='dark'
+let g:airline#extensions#branch#enabled   =1
+let g:airline#extensions#hunks#enabled    =1
+let g:airline#extensions#syntastic#enabled=1
+let g:airline_detect_paste                =1
+let g:airline_left_sep                    =''
+let g:airline_powerline_fonts             =1
+let g:airline_right_sep                   =''
+let g:airline_theme                       ='dark'
 
 " CtrlP settings
 let g:ctrlp_open_multiple_files = '1i'
