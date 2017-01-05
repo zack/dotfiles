@@ -23,6 +23,7 @@ Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'elmcast/elm-vim'
 Plugin 'ervandew/supertab'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
@@ -41,11 +42,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'whatyouhide/vim-gotham'
 
-
 " Ensure proper color settings for the terminal
-"set t_Co=256
-"let g:railscasts_termcolors = 256
-"colorscheme railscasts
 colorscheme gotham
 
 " Special Syntax Highlighting
@@ -57,9 +54,10 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Tab options
 autocmd FileType * set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType cpp set tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
+autocmd FileType elm set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType html set tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
-autocmd FileType cpp set tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
 
 " Do/end matching
 runtime macros/matchit.vim
@@ -134,20 +132,25 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](_build|deps)$',
   \ }
 
+" Elm-Vim settings
+let g:elm_format_autosave = 1
+let g:elm_setup_keybindings = 1
+
 " NerdCommenter
 let NERDSpaceDelims          =1
 
 " Syntastic
+let g:elm_syntastic_show_warnings = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
+let g:syntastic_javascript_checkers      = ['eslint']
+let g:syntastic_loc_list_height          = 5
+let g:syntastic_mode_map                 = { 'mode': 'passive' }
 set statusline+=%*
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_wq              = 0
-let g:syntastic_check_on_open            = 1
-let g:syntastic_loc_list_height          = 5
-let g:syntastic_mode_map                 = { 'mode': 'passive' }
-let g:syntastic_javascript_checkers      = ['eslint']
 source ~/.syntastic.conf
 
 "Vim-Gitgutter settingsh
@@ -189,7 +192,7 @@ map <leader>' cs"'<ESC>
 " Replace single quotes with double quotes
 map <leader>" cs'"<ESC>
 " Redraw
-map <leader>r :redraw!<CR>
+map <leader>R :redraw!<CR>
 
 " v to expand region
 vmap v <Plug>(expand_region_expand)
