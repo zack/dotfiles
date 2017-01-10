@@ -1,20 +1,15 @@
-" Turn all of this off for pathogen. Just to be safe.
 filetype off
-filetype plugin indent off
 
-" Encoding for powerline fonts
-set encoding=utf8
+" Vundle
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
 
 " Pathogen
 execute pathogen#infect()
 
-" Turn that back on
 filetype plugin indent on
-syntax enable
 
-" Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+syntax enable
 
 " Plugin
 Plugin 'airblade/vim-gitgutter'
@@ -33,13 +28,13 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/rainbow-end'
+Plugin 'w0rp/ale'
 Plugin 'whatyouhide/vim-gotham'
 
 " Ensure proper color settings for the terminal
@@ -70,7 +65,6 @@ set ai
 set autoindent
 set cursorcolumn
 set cursorline
-" set expandtab
 set hidden
 set hlsearch
 set ignorecase
@@ -91,6 +85,7 @@ set wildmenu
 
 " Because consistency
 set backspace    =2
+set encoding     =utf8
 set grepprg      =grep\ -nH\ $*
 set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
 set laststatus   =2
@@ -118,7 +113,7 @@ let mapleader = "\<Space>"
 " Airline
 let g:airline#extensions#branch#enabled   =1
 let g:airline#extensions#hunks#enabled    =1
-let g:airline#extensions#syntastic#enabled=1
+" let g:airline#extensions#syntastic#enabled=1
 let g:airline_detect_paste                =1
 let g:airline_left_sep                    =''
 let g:airline_powerline_fonts             =1
@@ -140,18 +135,18 @@ let g:elm_setup_keybindings = 1
 let NERDSpaceDelims          =1
 
 " Syntastic
-let g:elm_syntastic_show_warnings = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
-let g:syntastic_javascript_checkers      = ['eslint']
-let g:syntastic_loc_list_height          = 5
-let g:syntastic_mode_map                 = { 'mode': 'passive' }
+" let g:elm_syntastic_show_warnings = 1
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list            = 1
+" let g:syntastic_check_on_open            = 1
+" let g:syntastic_check_on_wq              = 0
+" let g:syntastic_javascript_checkers      = ['eslint']
+" let g:syntastic_loc_list_height          = 5
+" let g:syntastic_mode_map                 = { 'mode': 'passive' }
 set statusline+=%*
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-source ~/.syntastic.conf
+" set statusline+=%{SyntasticStatuslineFlag()}
+" source ~/.syntastic.conf
 
 "Vim-Gitgutter settingsh
 let g:gitgutter_map_keys = 0 " Don't map my keys!
