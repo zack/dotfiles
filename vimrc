@@ -113,7 +113,6 @@ let mapleader = "\<Space>"
 " Airline
 let g:airline#extensions#branch#enabled   =1
 let g:airline#extensions#hunks#enabled    =1
-" let g:airline#extensions#syntastic#enabled=1
 let g:airline_detect_paste                =1
 let g:airline_left_sep                    =''
 let g:airline_powerline_fonts             =1
@@ -134,19 +133,8 @@ let g:elm_setup_keybindings = 1
 " NerdCommenter
 let NERDSpaceDelims          =1
 
-" Syntastic
-" let g:elm_syntastic_show_warnings = 1
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list            = 1
-" let g:syntastic_check_on_open            = 1
-" let g:syntastic_check_on_wq              = 0
-" let g:syntastic_javascript_checkers      = ['eslint']
-" let g:syntastic_loc_list_height          = 5
-" let g:syntastic_mode_map                 = { 'mode': 'passive' }
 set statusline+=%*
 set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" source ~/.syntastic.conf
 
 "Vim-Gitgutter settingsh
 let g:gitgutter_map_keys = 0 " Don't map my keys!
@@ -229,8 +217,6 @@ nnoremap <C-]> :tabn<CR>
 nnoremap <leader>i mmgg=G`m<CR>
 " Access CtrlP
 nnoremap <leader>o :CtrlP<CR>
-" Toggle syntastic
-nnoremap <leader>s :SyntasticToggleMode<CR>
 " Toggle Gundo Tree
 nnoremap <leader>u :GundoToggle<CR>
 " Save a file
