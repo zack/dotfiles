@@ -38,7 +38,7 @@ alias noun='ack -v .un~'
 alias ack='echo "no more ack"'
 #alias sshvm="ssh zack@`VBoxManage guestproperty get 'Ubuntu64' '/VirtualBox/GuestInfo/Net/1/V4/IP' | awk '{ print $2 }'`"
 alias clojure='java -cp ~/clojure/clojure-1.8.0.jar clojure.main'
-alias ag='ag --path-to-ignore ~/.agignore'
+alias ag='ag --path-to-agignore ~/.agignore'
 
 # ccs machines
 alias ccs='ssh zack@asterix.ccs.neu.edu'
