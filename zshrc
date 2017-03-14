@@ -136,3 +136,6 @@ man() {
 #
 
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
+
+# added by travis gem
+[ -f /Users/zack/.travis/travis.sh ] && source /Users/zack/.travis/travis.sh
