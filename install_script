@@ -1,4 +1,5 @@
-# This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
+# This script creates symlinks from the home directory
+# to any desired dotfiles in ~/dotfiles
 ############################
 
 ########## Variables
@@ -26,3 +27,11 @@ mv ~/.$file ~/dotfiles_old/
 echo "Creating symlink to $file in home directory."
 ln -s $dir/$file ~/.$file
 done
+echo "...done"
+
+# some custom stuff for fish shell
+echo "Setting up fish configs"
+mkdir -p ~/.config/fish/functions
+ln -s $dir/fish_config/config.fish ~/.config/fish/config.fish
+ln -s $dir/fish_config/key_bindings.fish ~/.config/fish/functions/config_user_key_bindings.fish
+echo "...done!"

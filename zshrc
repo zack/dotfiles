@@ -11,7 +11,7 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen theme zack/zsh-themes robbyrussell-ssh
+# antigen theme zack/zsh-themes robbyrussell-ssh
 antigen apply
 
 # vi mode and settings
@@ -29,16 +29,17 @@ DISABLE_AUTO_TITLE=true
 COMPLETION_WAITING_DOTS="true"
 
 # general aliases
-alias ld='ls -d */'
-alias tmux='tmux -2'
-alias killswp='rm **/.*.swp; rm **/.*.swo'
-alias cm='cmatrix'
-alias noun='ack -v .un~'
-#alias ip="ifconfig | grep Bcast | cut -d':' -f 2 | cut -d' ' -f 1"
 alias ack='echo "no more ack"'
-#alias sshvm="ssh zack@`VBoxManage guestproperty get 'Ubuntu64' '/VirtualBox/GuestInfo/Net/1/V4/IP' | awk '{ print $2 }'`"
+alias ag='ag -p ~/.agignore'
 alias clojure='java -cp ~/clojure/clojure-1.8.0.jar clojure.main'
-alias ag='ag --path-to-agignore ~/.agignore'
+alias cm='cmatrix'
+#alias ip="ifconfig | grep Bcast | cut -d':' -f 2 | cut -d' ' -f 1"
+alias killswp='rm **/.*.swp; rm **/.*.swo'
+alias ld='ls -d */'
+alias noun='ack -v .un~'
+alias nvminit='export NVM_DIR="/Users/mk/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
+#alias sshvm="ssh zack@`VBoxManage guestproperty get 'Ubuntu64' '/VirtualBox/GuestInfo/Net/1/V4/IP' | awk '{ print $2 }'`"
+alias tmux='tmux -2'
 
 # ccs machines
 alias ccs='ssh zack@asterix.ccs.neu.edu'
@@ -54,8 +55,8 @@ alias rs='rails s 2>&1 | grep -v content-length'
 alias tc='bundle exec rake tmp:clear'
 
 # work aliases
-alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
 alias copyoverride='pbcopy < ~/override.txt'
+alias ctct='toilet -f calgphy2 "Constant Contact" -w 1000 -F border | lolcat'
 alias devportal='cd ~/dev/ctct/galileo/auth-devportal'
 alias devportalw='cd ~/dev/ctct/galileo/auth-devportal/auth-devportal-webapp'
 alias galileo='cd ~/dev/ctct/galileo'
@@ -135,4 +136,3 @@ man() {
 #
 
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
-
