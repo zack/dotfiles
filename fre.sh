@@ -6,8 +6,8 @@ case $OUTPUT in
 *       ) git clone https://github.com/zack/dotfiles.git ~/dotfiles ;;
 esac
 
-git clone https://github.com/zsh-users/antigen.git ~/dotfiles/antigen
 git clone https://github.com/gmarik/Vundle.vim.git ~/dotfiles/vim/bundle/Vundle.vim
-git clone https://github.com/guns/vim-clojure-static ~/dotfiles/vim/bundle/vim-clojure-static
+curl
+https://raw.githubusercontent.com/zack/zsh-themes/master/robbyrussell-ssh.zsh-theme >> ~/.oh-my-zsh/themes/robbyrussel-zack.zsh-theme
 sh ~/dotfiles/install_script
 vim - +PluginInstall +qal

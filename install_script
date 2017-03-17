@@ -6,7 +6,9 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="ackrc antigen agignore bash_profile tmux vimrc vim zshrc oh-my-zsh tmux.conf syntastic.conf gitconfig gitignore_global"    # list of files/folders to symlink in homedir
+
+# list of files/folders to symlink in homedir
+files="ackrc antigen agignore tmux vimrc vim zshrc tmux.conf syntastic.conf gitconfig gitignore_global"
 
 ##########
 
@@ -28,10 +30,3 @@ echo "Creating symlink to $file in home directory."
 ln -s $dir/$file ~/.$file
 done
 echo "...done"
-
-# some custom stuff for fish shell
-echo "Setting up fish configs"
-mkdir -p ~/.config/fish/functions
-ln -s $dir/fish_config/config.fish ~/.config/fish/config.fish
-ln -s $dir/fish_config/key_bindings.fish ~/.config/fish/functions/config_user_key_bindings.fish
-echo "...done!"
