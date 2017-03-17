@@ -6,7 +6,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="ackrc antigen agignore bashrc tmux vimrc vim zshrc oh-my-zsh tmux.conf syntastic.conf gitconfig gitignore_global"    # list of files/folders to symlink in homedir
+files="ackrc antigen agignore bash_profile tmux vimrc vim zshrc oh-my-zsh tmux.conf syntastic.conf gitconfig gitignore_global"    # list of files/folders to symlink in homedir
 
 ##########
 

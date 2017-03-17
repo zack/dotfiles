@@ -1,5 +1,4 @@
 set PATH $PATH /usr/local/bin
-set PATH $PATH $HOME/.rvm/bin
 
 export LESS=-r
 
