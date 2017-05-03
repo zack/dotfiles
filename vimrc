@@ -1,15 +1,9 @@
+set nocompatible
 filetype off
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
-
-" Pathogen
-execute pathogen#infect()
-
-filetype plugin indent on
-
-syntax enable
 
 " Plugin
 Plugin 'airblade/vim-gitgutter'
@@ -18,7 +12,7 @@ Plugin 'bling/vim-airline'
 Plugin 'chrisbra/csv.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'editorconfig-vim'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'elmcast/elm-vim'
 Plugin 'ervandew/supertab'
@@ -39,6 +33,10 @@ Plugin 'w0rp/ale'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'zack/rainbow_parentheses.vim'
 
+syntax enable
+
+filetype plugin indent on
+
 " Ensure proper color settings for the terminal
 colorscheme gotham
 
@@ -50,11 +48,11 @@ autocmd BufNewFile,BufRead *.json set ft=javascript " JSON using JS rules
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Tab options
-autocmd FileType * set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType cpp set tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
-autocmd FileType elm set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
-autocmd FileType html set tabstop=4|set shiftwidth=4|set expandtab
-autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType * setlocal tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType cpp setlocal tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
+autocmd FileType elm setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
+autocmd FileType html setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
+autocmd FileType python setlocal tabstop=4|set shiftwidth=4|set expandtab
 
 " Do/end matching
 runtime macros/matchit.vim
@@ -72,7 +70,6 @@ set hlsearch
 set ignorecase
 set incsearch
 set list
-set nocompatible
 set nohidden
 set nowrap
 set number
@@ -125,8 +122,11 @@ let g:airline_theme                       ='dark'
 let g:ctrlp_open_multiple_files = '1i'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_build|deps)$',
-  \ }
+      \ 'dir':  '\v[\/](_build|deps)$',
+      \ }
+
+" Editorconfig settings
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " Elm-Vim settings
 let g:elm_format_autosave = 1
@@ -218,6 +218,10 @@ nnoremap <C-n> :call RelNumberToggle()<CR>
 nnoremap <leader>n :call AllNumberToggle()<CR>
 " Search and replace text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+" Search and prepend text
+vnoremap <C-e> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left><left><left>
+" Search and postpend text
+vnoremap <C-t> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left>
 " Previous tab
 nnoremap <C-[> :tabp<CR>
 " Next tab
@@ -263,13 +267,13 @@ endfunction
 vmap <silent> <expr> p <sid>Repl()
 
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
   let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
+        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+        \ }
 endif
 
 " Use ag with ack.vim if available

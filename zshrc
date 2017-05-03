@@ -1,6 +1,10 @@
 ### PATH MODIFICATION
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$MAVEN_HOME/bin"
+
+### Use RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 ### ALWAYS IN TMUX
 if [ "$TMUX" = "" ]; then tmux -2; fi
