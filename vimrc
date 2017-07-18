@@ -222,10 +222,6 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 vnoremap <C-e> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left><left><left>
 " Search and postpend text
 vnoremap <C-t> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left>
-" Previous tab
-nnoremap <C-[> :tabp<CR>
-" Next tab
-nnoremap <C-]> :tabn<CR>
 " Set indent on file
 nnoremap <leader>i mmgg=G`m<CR>
 " Access CtrlP
