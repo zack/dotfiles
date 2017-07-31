@@ -122,6 +122,7 @@ let g:airline_theme                       ='dark'
 
 " CtrlP settings
 let g:ctrlp_open_multiple_files = '1i'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](_build|deps)$',
@@ -280,6 +281,12 @@ endif
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
+
+" ctrlp ignore directories
+if exists("g:ctrlp_user_command")
+  unlet g:ctrlp_user_command
+endif
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor,*/node_modules
 
 " At the bottom because something above is breaking it
 set showcmd
