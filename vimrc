@@ -47,6 +47,9 @@ autocmd BufNewFile,BufRead *.json set ft=javascript " JSON using JS rules
 " Autotrim whitespace
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+" Delete comment character when joining commented lines
+set formatoptions+=j
+
 " Tab options
 autocmd FileType * setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType cpp setlocal tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
@@ -73,7 +76,6 @@ set list
 set nohidden
 set nowrap
 set number
-set relativenumber
 set sm
 set smartcase
 set smarttab
@@ -226,6 +228,8 @@ vnoremap <C-t> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left>
 nnoremap <leader>i mmgg=G`m<CR>
 " Access CtrlP
 nnoremap <leader>o :CtrlP<CR>
+" Sort
+vnoremap <leader>s :sort<CR>
 " Toggle Gundo Tree
 nnoremap <leader>u :GundoToggle<CR>
 " Save a file
@@ -279,3 +283,7 @@ endif
 
 " At the bottom because something above is breaking it
 set showcmd
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}

@@ -31,7 +31,9 @@
   autocrlf = input
   editor = vim
   excludesfile = ~/.gitignore_global
-  pager = less -r
+  pager = diff-so-fancy | less --tabs=4
+[pager]
+  log = less
 [diff]
   tool = diffmerge
 [difftool "diffmerge"]

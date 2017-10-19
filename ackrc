@@ -3,3 +3,4 @@
 --type-set=yml=.yml
 --type-set=scss=.scss
 --type-set=erb=.erb
+--type-set=jsx=.jsx
