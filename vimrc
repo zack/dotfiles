@@ -23,6 +23,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'junegunn/fzf.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
+Plugin 'luochen1990/rainbow'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -34,7 +35,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'w0rp/ale'
 Plugin 'whatyouhide/vim-gotham'
-Plugin 'zack/rainbow_parentheses.vim'
 
 syntax enable
 
@@ -103,12 +103,6 @@ set undoreload   =10000
 set viminfo      ='20,<1000,s10,h
 set wildmode     =list:longest,full
 
-" Autocommands
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
 " Lets
 let &colorcolumn             ="80,100"
 let g:clipbrdDefaultReg      ='+'
@@ -131,6 +125,9 @@ let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](_build|deps)$',
       \ }
 
+" Rainbow parens
+let g:rainbow_active = 1
+"
 " Editorconfig settings
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
@@ -212,8 +209,6 @@ nnoremap tx :tabclose<CR>
 nnoremap <BS> gg
 " Open CtrlP directly to buffers
 nnoremap <C-b> :CtrlPBuffer<CR>
-" Toggle rainbowparentheses
-nnoremap <C-c> :RainbowParenthesesToggle<CR>
 " Toggle rainbowend
 nnoremap <C-d> :call ToggleRainbow()<CR>
 " Show the full file name and path
