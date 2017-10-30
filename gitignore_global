@@ -60,3 +60,5 @@ nohup.out
 # AG #
 ######
 .agignore
+
+*.kdbx

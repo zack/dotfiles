@@ -5,6 +5,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
+set rtp+=~/.fzf
+
 " Plugin
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
@@ -18,6 +20,7 @@ Plugin 'elmcast/elm-vim'
 Plugin 'ervandew/supertab'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
+Plugin 'junegunn/fzf.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mustache/vim-mustache-handlebars'
@@ -294,3 +297,10 @@ set showcmd
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
+
+let g:rg_command = '
+  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+  \ -g "!{.git,node_modules,vendor}/*" '
+
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)

@@ -20,9 +20,14 @@ ZSH_THEME="robbyrussel-zack"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh # use oh-my-zsh
 
+# USE VI MODE
+set -o vi
+
 ### BINDKEYS
-bindkey -v # vi mode
 bindkey '^R' history-incremental-search-backward
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ### GENERAL CONFIGURATION
 COMPLETION_WAITING_DOTS="true"
@@ -76,6 +81,16 @@ zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-nopr
 # For travis-ci plugin
 [ -f /Users/zack/.travis/travis.sh ] && source /Users/zack/.travis/travis.sh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Use rg (https://github.com/BurntSushi/ripgrep) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+# - rg only lists files, so we use with-dir script to augment the output
+_fzf_compgen_path() {
+  rg --files "$1" | with-dir "$1"
+}
+
+# Use rg to generate the list for directory completion
+_fzf_compgen_dir() {
+  rg --files "$1" | only-dir "$1"
+}
