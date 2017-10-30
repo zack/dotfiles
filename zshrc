@@ -38,6 +38,7 @@ DISABLE_AUTO_TITLE=true
 alias ack='echo "no more ack"'
 alias ag='ag -p ~/.agignore'
 alias cm='cmatrix'
+alias ff='vim $(fzf-tmux)'
 alias gs='git status'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias ld='ls -d */'
@@ -57,9 +58,9 @@ alias tc='bundle exec rake tmp:clear'
 # work aliases
 alias alleyoop='ssh zack@alleyooplabs.com'
 alias bombsync='rsync -ahvz --delete --exclude-from=/home/zack/bombsync_exclusions.txt\
-                --progress -e ssh ~/dev/bombfell/ zack@alleyooplabs.com:~/dev/bombfell/'
+  --progress -e ssh ~/dev/bombfell/ zack@alleyooplabs.com:~/dev/bombfell/'
 alias bombsync2='rsync -ahvz --delete --exclude-from=/home/zack/bombsync_exclusions.txt\
-                --progress -e ssh ~/dev/bombfell2/ zack@alleyooplabs.com:~/dev/bombfell/'
+  --progress -e ssh ~/dev/bombfell2/ zack@alleyooplabs.com:~/dev/bombfell/'
 
 ### FUNCTIONS
 # colorize man pages
@@ -93,4 +94,11 @@ _fzf_compgen_path() {
 # Use rg to generate the list for directory completion
 _fzf_compgen_dir() {
   rg --files "$1" | only-dir "$1"
+}
+
+fgb() {
+  local branches branch
+  branches=$(git branch -vv) &&
+    branch=$(echo "$branches" | fzf-tmux +m) &&
+    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }

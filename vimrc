@@ -188,6 +188,8 @@ map <leader>' cs"'<ESC>
 map <leader>" cs'"<ESC>
 " Redraw
 map <leader>R :redraw!<CR>
+" Ripgrep
+map <C-r> :Rg<CR>
 
 " v to expand region
 vmap v <Plug>(expand_region_expand)
@@ -212,7 +214,7 @@ nnoremap <C-b> :CtrlPBuffer<CR>
 " Toggle rainbowend
 nnoremap <C-d> :call ToggleRainbow()<CR>
 " Show the full file name and path
-nnoremap <C-f> :echo expand('%:p')<CR>
+nnoremap <C-f> :Files<CR>
 " Toggle absolute vs relative numbers
 nnoremap <C-n> :call RelNumberToggle()<CR>
 " Toggle all number display
@@ -265,9 +267,9 @@ function! s:Repl()
 endfunction
 vmap <silent> <expr> p <sid>Repl()
 
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
   let g:ctrlp_prompt_mappings = {
@@ -284,7 +286,7 @@ endif
 if exists("g:ctrlp_user_command")
   unlet g:ctrlp_user_command
 endif
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor,*/node_modules
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor,*/node_modules,*.swp
 
 " At the bottom because something above is breaking it
 set showcmd
@@ -298,4 +300,25 @@ let g:rg_command = '
   \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
   \ -g "!{.git,node_modules,vendor}/*" '
 
-command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Rg call fzf#vim#grep('
+  \rg --column
+    \ --fixed-strings
+    \ --follow
+    \ --glob "!.git/*" --color "always"
+    \ --hidden
+    \ --ignore-case
+    \ --line-number
+    \ --no-heading
+    \ --no-ignore
+  \ '
+  \.shellescape(<q-args>), 1, <bang>0)
