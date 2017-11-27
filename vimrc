@@ -25,6 +25,8 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
 Plugin 'luochen1990/rainbow'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'sjl/gundo.vim'
@@ -108,6 +110,9 @@ let &colorcolumn             ="80,100"
 let g:clipbrdDefaultReg      ='+'
 let mapleader = "\<Space>"
 
+" Vim-JSX
+let g:jsx_ext_required = 0
+
 " Airline
 let g:airline#extensions#branch#enabled   =1
 let g:airline#extensions#hunks#enabled    =1
@@ -117,7 +122,7 @@ let g:airline_powerline_fonts             =1
 let g:airline_right_sep                   =''
 let g:airline_theme                       ='dark'
 
-" CtrlP settings
+" CtrlP
 let g:ctrlp_open_multiple_files = '1i'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
