@@ -42,7 +42,7 @@ alias ff='vim $(fzf-tmux)'
 alias gs='git status'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias ld='ls -d */'
-alias tmux='tmux -2'
+# alias tmux='tmux -2'
 alias installdeb='sudo dpkg -i'
 alias vvim='vim -u NONE' # vanilla vim
 
@@ -102,3 +102,7 @@ fgb() {
     branch=$(echo "$branches" | fzf-tmux +m) &&
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

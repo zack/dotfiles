@@ -42,6 +42,11 @@ syntax enable
 
 filetype plugin indent on
 
+augroup FiletypeGroup
+  autocmd!
+  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+augroup END
+
 " Ensure proper color settings for the terminal
 colorscheme gotham
 
@@ -114,8 +119,8 @@ let mapleader = "\<Space>"
 let g:jsx_ext_required = 0
 
 " Airline
-let g:airline#extensions#branch#enabled   =1
-let g:airline#extensions#hunks#enabled    =1
+let g:airline#extensions#branch#enabled   =0
+let g:airline#extensions#hunks#enabled    =0
 let g:airline_detect_paste                =1
 let g:airline_left_sep                    =''
 let g:airline_powerline_fonts             =1
@@ -191,10 +196,10 @@ map q: :q
 map <leader>' cs"'<ESC>
 " Replace single quotes with double quotes
 map <leader>" cs'"<ESC>
+" Ripgrep
+map <leader>r :Rg<CR>
 " Redraw
 map <leader>R :redraw!<CR>
-" Ripgrep
-map <C-r> :Rg<CR>
 
 " v to expand region
 vmap v <Plug>(expand_region_expand)
@@ -298,6 +303,7 @@ set showcmd
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'jsx': ['eslint'],
 \}
 
 let g:rg_command = '
