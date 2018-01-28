@@ -12,6 +12,12 @@ export KEYTIMEOUT=1 # disable wait when switching modes
 export EDITOR=vim
 export LESS='-iRS#3NM~g'
 
+### SOURCE SECRETS
+if [ -s ~/dotfiles/secrets/secrets.config ];
+then
+  source ~/dotfiles/secrets/secrets.config;
+fi
+
 ### OH-MY-ZSH
 ZSH_THEME="robbyrussel-zack"
 plugins=(git)
@@ -35,7 +41,7 @@ DISABLE_AUTO_TITLE=true
 alias ack='echo "no more ack"'
 alias ag='ag -p ~/.agignore'
 alias cm='cmatrix'
-alias ff='vim $(fzf-tmux)'
+alias ff='vim $(fzf-tmux -m)'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias ld='ls -d */'
 alias pipes='pipes.sh -f35 -r0'
