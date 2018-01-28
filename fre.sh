@@ -1,3 +1,14 @@
+# make sure to have intalled:
+# * zsh
+# * vim
+# * tmux
+
+# should also probably install:
+# * fzf
+# * ag
+# * ripgrep
+# * diff-so-fancy
+
 OUTPUT=$(ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1)
 
 case $OUTPUT in
@@ -11,3 +22,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 curl https://raw.githubusercontent.com/zack/zsh-themes/master/robbyrussell-ssh.zsh-theme >> ~/.oh-my-zsh/themes/robbyrussel-zack.zsh-theme
 sh ~/dotfiles/install_script
 vim - +PluginInstall +qal
+
+sudo cp ~/dotfiles/with-dir /usr/bin/with-dir
+sudo cp ~/dotfiles/only-dir /usr/bin/only-dir
+sudo chmod +x /usr/bin/with-dir
+sudo chmox +x /usr/bin/only-dir
