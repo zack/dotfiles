@@ -211,6 +211,11 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
 " Menu navigation
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
 
+" ALE jump to next error
+nnoremap <silent> <leader>aj :ALENext<cr>
+" ALE jump to previous error
+nnoremap <silent> <leader>ak :ALEPrevious<cr>
+
 " Select the whole line
 nnoremap <leader><leader> V
 " New tab
@@ -333,3 +338,8 @@ command! -bang -nargs=* Rg call fzf#vim#grep('
     \ --no-ignore
   \ '
   \.shellescape(<q-args>), 1, <bang>0)
+
+" augroup vimrc
+  " au BufReadPre * setlocal foldmethod=indent
+  " au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+" augroup END
