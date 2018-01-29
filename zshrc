@@ -13,9 +13,9 @@ export EDITOR=vim
 export LESS='-iRS#3NM~g'
 
 ### SOURCE SECRETS
-if [ -s ~/dotfiles/secrets/secrets.config ];
+if [ -s ~/secrets/secrets.config ];
 then
-  source ~/dotfiles/secrets/secrets.config;
+  source ~/secrets/secrets.config;
 fi
 
 ### OH-MY-ZSH
