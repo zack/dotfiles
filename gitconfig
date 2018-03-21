@@ -19,6 +19,7 @@
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git remote prune origin && git branch -D $1' -
   dpr = !git checkout master && git branch -D `git branch | grep -e '^  pr-\\d\\{2,5\\}$'`
   files = diff-tree --no-commit-id --name-only -r
+  fix = !git diff --name-only | uniq | xargs $EDITOR
   lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
   log-f = log --stat
   log-s = log --oneline --no-merges

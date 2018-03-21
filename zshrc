@@ -43,15 +43,18 @@ alias ag='ag -p ~/.agignore'
 alias cm='cmatrix'
 alias ff='vim $(fzf-tmux -m)'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
+alias l1='ls -1'
 alias ld='ls -d */'
 alias pipes='pipes.sh -f35 -r0'
 # alias tmux='tmux -2'
 alias installdeb='sudo dpkg -i'
 alias vvim='vim -u NONE' # vanilla vim
+alias z='zeus'
 
 # git aliases
 alias gs='git st'
 alias vgit='vim -p `git status --porcelain | cut -c5-`' # Open dirty files
+alias gb='git --no-pager branch'
 
 # rails aliases
 alias rc='rails c'
