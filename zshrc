@@ -49,11 +49,12 @@ alias pipes='pipes.sh -f35 -r0'
 # alias tmux='tmux -2'
 alias installdeb='sudo dpkg -i'
 alias vvim='vim -u NONE' # vanilla vim
+alias when='TZ=America/New_York date -d @\'
 alias z='zeus'
 
 # git aliases
 alias gs='git st'
-alias vgit='vim -p `git status --porcelain | cut -c5-`' # Open dirty files
+alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
 alias gb='git --no-pager branch'
 
 # rails aliases
