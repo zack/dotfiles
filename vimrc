@@ -184,7 +184,7 @@ function! AllNumberToggle()
     set norelativenumber
   else
     set number
-    set relativenumber
+    set norelativenumber
   endif
 endfunc
 
