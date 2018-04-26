@@ -234,6 +234,8 @@ nnoremap <C-f> :Files<CR>
 nnoremap <C-n> :call RelNumberToggle()<CR>
 " Toggle all number display
 nnoremap <leader>n :call AllNumberToggle()<CR>
+" Toggle paste
+nnoremap <leader>p :set invpaste<CR>
 " Search and replace text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " Search and prepend text
@@ -262,14 +264,6 @@ nnoremap <leader>k :resize +10<CR>
 nnoremap <leader>K :resize +1<CR>
 nnoremap <leader>l :vertical resize -10<CR>
 nnoremap <leader>L :vertical resize -1<CR>
-
-" Start copy and paste to system clipboard using p and y
-vmap <leader>d "+d
-nmap <leader>p "+p
-nmap <leader>P "+P
-vmap <leader>p "+p
-vmap <leader>P "+P
-vmap <leader>y "+y
 
 " Start putting doesn't replace paste buffer
 function! RestoreRegister()
