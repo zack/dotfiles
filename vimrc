@@ -49,7 +49,7 @@ augroup FiletypeGroup
 augroup END
 
 " Ensure proper color settings for the terminal
-colorscheme gotham256
+colorscheme true-monochrome
 
 " Special Syntax Highlighting
 let g:niji_matching_filetypes = ['racket'] " Racket

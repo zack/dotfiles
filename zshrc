@@ -41,12 +41,12 @@ DISABLE_AUTO_TITLE=true
 alias ag='ag -p ~/.agignore'
 alias cm='cmatrix'
 alias ff='vim $(fzf-tmux -m)'
+alias installdeb='sudo dpkg -i'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias l1='ls -1'
 alias ld='ls -d */'
 alias pipes='pipes.sh -f35 -r0'
-# alias tmux='tmux -2'
-alias installdeb='sudo dpkg -i'
+alias rg='rg -S --type-add "jsx:*.jsx"'
 alias view='vim -R'
 alias vview='vim -R -u NONE'
 alias vvim='vim -u NONE' # vanilla vim
@@ -65,10 +65,8 @@ alias tc='bundle exec rake tmp:clear'
 
 # work aliases
 alias alleyoop='ssh zack@alleyooplabs.com'
-alias bombsync='rsync -ahvz --delete --exclude-from=/home/zack/bombsync_exclusions.txt\
+alias bombsync='date && rsync -ahvz --delete --exclude-from=/home/zack/bombsync_exclusions.txt\
   --progress -e ssh ~/dev/bombfell/ zack@alleyooplabs.com:~/dev/bombfell/'
-alias bombsync2='rsync -ahvz --delete --exclude-from=/home/zack/bombsync_exclusions.txt\
-  --progress -e ssh ~/dev/bombfell2/ zack@alleyooplabs.com:~/dev/bombfell/'
 
 ### FUNCTIONS
 # colorize man pages
