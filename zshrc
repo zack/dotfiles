@@ -38,7 +38,6 @@ DISABLE_AUTO_TITLE=true
 
 ### ALIASES
 # general aliases
-# alias ack='echo "no more ack"'
 alias ag='ag -p ~/.agignore'
 alias cm='cmatrix'
 alias ff='vim $(fzf-tmux -m)'

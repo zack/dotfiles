@@ -13,6 +13,7 @@ Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'chrisbra/csv.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'dahu/vim-lotr'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'elixir-lang/vim-elixir'
@@ -216,8 +217,8 @@ nnoremap <silent> <leader>aj :ALENext<cr>
 " ALE jump to previous error
 nnoremap <silent> <leader>ak :ALEPrevious<cr>
 
-" Select the whole line
-nnoremap <leader><leader> V
+" Go back to the most recently open file
+nnoremap <leader><leader> <C-^>
 " New tab
 nnoremap tn :tabedit<CR>
 " Close tab
@@ -264,6 +265,11 @@ nnoremap <leader>k :resize +10<CR>
 nnoremap <leader>K :resize +1<CR>
 nnoremap <leader>l :vertical resize -10<CR>
 nnoremap <leader>L :vertical resize -1<CR>
+
+" Start copy and paste to system clipboard using leader
+vmap <leader>d "+d
+nmap <leader>p "+p
+vmap <leader>y "+y
 
 " Start putting doesn't replace paste buffer
 function! RestoreRegister()
