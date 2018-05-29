@@ -35,6 +35,7 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'w0rp/ale'
 Plugin 'whatyouhide/vim-gotham'
@@ -126,7 +127,7 @@ let g:airline_detect_paste                =1
 let g:airline_left_sep                    =''
 let g:airline_powerline_fonts             =1
 let g:airline_right_sep                   =''
-let g:airline_theme                       ='dark'
+let g:airline_theme                       ='minimalist'
 
 " CtrlP
 let g:ctrlp_open_multiple_files = '1i'
@@ -165,10 +166,12 @@ let g:gitgutter_max_signs = 10000
 
 " Colors
 hi clear SignColumn
-hi ColorColumn ctermbg=52
+hi ColorColumn ctermbg=235
+hi CursorLineNr cterm=bold ctermfg=15
 hi CursorColumn ctermbg=235
 hi CursorLine ctermbg=235
-hi matchParen ctermbg=4
+hi GitGutterChange ctermfg=190 ctermbg=0
+hi GitGutterChangeDelete ctermfg=190 ctermbg=0
 
 " Switch between rel and abs line numbers. Key mapping below
 function! RelNumberToggle()
