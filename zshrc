@@ -64,11 +64,6 @@ alias rc='rails c'
 alias rs='rails s 2>&1 | grep -v content-length'
 alias tc='bundle exec rake tmp:clear'
 
-# work aliases
-alias alleyoop='ssh zack@alleyooplabs.com'
-alias bombsync='date && rsync -ahvz --delete --exclude-from=/home/zack/bombsync_exclusions.txt\
-  --progress -e ssh ~/dev/bombfell/ zack@alleyooplabs.com:~/dev/bombfell/'
-
 ### FUNCTIONS
 # colorize man pages
 man() {
@@ -113,3 +108,6 @@ fgb() {
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Pull in etsy zshrc
+source ~/dotfiles/zshrc_etsy
