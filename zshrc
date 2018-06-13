@@ -1,4 +1,5 @@
 ### PATH MODIFICATION
+export PATH="$PATH:~/bins"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$MAVEN_HOME/bin"

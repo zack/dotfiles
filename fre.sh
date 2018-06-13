@@ -28,7 +28,7 @@ sh ~/dotfiles/install_script
 vim - +PluginInstall +qal
 
 # for fzf
-sudo cp ~/dotfiles/with-dir /usr/bin/with-dir
-sudo cp ~/dotfiles/only-dir /usr/bin/only-dir
+sudo cp ~/dotfiles/with-dir /usr/local/bin/with-dir
+sudo cp ~/dotfiles/only-dir /usr/local/bin/only-dir
 sudo chmod +x /usr/bin/with-dir
-sudo chmox +x /usr/bin/only-dir
+sudo chmod +x /usr/bin/only-dir
