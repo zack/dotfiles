@@ -109,5 +109,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Pull in etsy zshrc
-source ~/dotfiles/zshrc_etsy
+# Pull in work dotfiles
+source ~/dotfiles/work_dotfiles/zshrc_etsy
+for file in ~/dotfiles/work_dotfiles/zshrc_*; do
+  source "$file"
+done
+
+fortune | cowsay | lolcat

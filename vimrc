@@ -346,3 +346,7 @@ command! -bang -nargs=* Rg call fzf#vim#grep('
   " au BufReadPre * setlocal foldmethod=indent
   " au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 " augroup END
+
+for f in split(glob('~/dotfiles/work_dotfiles/vimrc_*'), '\n')
+    exe 'source' f
+endfor
