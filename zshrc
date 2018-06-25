@@ -48,6 +48,7 @@ alias l1='ls -1'
 alias ld='ls -d */'
 alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
+alias ssh='mosh'
 alias view='vim -R'
 alias vview='vim -R -u NONE'
 alias vvim='vim -u NONE' # vanilla vim

@@ -23,7 +23,6 @@ Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
 Plugin 'junegunn/fzf.vim'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
 Plugin 'luochen1990/rainbow'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'mxw/vim-jsx'
@@ -117,6 +116,11 @@ let &colorcolumn             ="80,100"
 let g:clipbrdDefaultReg      ='+'
 let mapleader = "\<Space>"
 
+" FZF
+let g:fzf_action = {
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 " Vim-JSX
 let g:jsx_ext_required = 0
 
@@ -128,14 +132,6 @@ let g:airline_left_sep                    =''
 let g:airline_powerline_fonts             =1
 let g:airline_right_sep                   =''
 let g:airline_theme                       ='minimalist'
-
-" CtrlP
-let g:ctrlp_open_multiple_files = '1i'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](_build|deps)$',
-      \ }
 
 " Rainbow parens
 let g:rainbow_active = 1
@@ -228,8 +224,10 @@ nnoremap tn :tabedit<CR>
 nnoremap tx :tabclose<CR>
 " Backspace to go to beginning of file
 nnoremap <BS> gg
-" Open CtrlP directly to buffers
-nnoremap <C-b> :CtrlPBuffer<CR>
+" Open FZF
+nnoremap <C-p> :Files<CR>
+" Open FZF in buffers mode
+nnoremap <C-b> :Buffers<CR>
 " Toggle rainbowend
 nnoremap <C-d> :call ToggleRainbow()<CR>
 " Show the full file name and path
@@ -240,6 +238,8 @@ nnoremap <C-n> :call RelNumberToggle()<CR>
 nnoremap <leader>n :call AllNumberToggle()<CR>
 " Toggle paste
 nnoremap <leader>p :set invpaste<CR>
+" Open FZF in git diff mode
+nnoremap <Leader>g :GFiles?<CR>
 " Search and replace text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " Search and prepend text
@@ -248,8 +248,6 @@ vnoremap <C-e> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left><left><left>
 vnoremap <C-t> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left>
 " Set indent on file
 nnoremap <leader>i mmgg=G`m<CR>
-" Access CtrlP
-nnoremap <leader>o :CtrlP<CR>
 " Sort
 vnoremap <leader>s :sort<CR>
 " Toggle Gundo Tree
@@ -285,25 +283,11 @@ function! s:Repl()
 endfunction
 vmap <silent> <expr> p <sid>Repl()
 
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-        \ }
-endif
-
 " Use ag with ack.vim if available
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
-" ctrlp ignore directories
-if exists("g:ctrlp_user_command")
-  unlet g:ctrlp_user_command
-endif
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor,*/node_modules,*.swp
 
 " At the bottom because something above is breaking it
