@@ -1,20 +1,29 @@
 set nocompatible
 filetype off
 
-" Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+" Minpac Initialization
+packadd minpac
+call minpac#init()
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+" Specify minpac Plugins
+call minpac#add('atelierbram/Base2Tone-vim')
+call minpac#add('vim-jp/syntax-vim-ex')
+" Load all minpack plugins
+packloadall
 
+" Get fzf up in here
 set rtp+=~/.fzf
 
-" Plugin
+" Vundle Plugin
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#rc()
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
-Plugin 'chrisbra/csv.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'dahu/vim-lotr'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'elmcast/elm-vim'
@@ -22,37 +31,31 @@ Plugin 'ervandew/supertab'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
 Plugin 'junegunn/fzf.vim'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'luochen1990/rainbow'
-Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-expand-region'
-Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'w0rp/ale'
-Plugin 'whatyouhide/vim-gotham'
+call vundle#end()
 
 syntax enable
-
 filetype plugin indent on
+
+" Colorscheme from minpac plugin
+colorscheme Base2Tone_SeaDark
 
 augroup FiletypeGroup
   autocmd!
   au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END
 
-" Ensure proper color settings for the terminal
-colorscheme gotham256
-
 " Special Syntax Highlighting
-let g:niji_matching_filetypes = ['racket'] " Racket
 autocmd BufNewFile,BufRead *.json set ft=javascript " JSON using JS rules
 
 " Autotrim whitespace
@@ -66,6 +69,7 @@ autocmd FileType * setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType cpp setlocal tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
 autocmd FileType elm setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType html setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
+autocmd FileType php setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType python setlocal tabstop=4|set shiftwidth=4|set expandtab
 
 " Do/end matching
@@ -125,19 +129,25 @@ let g:fzf_action = {
 let g:jsx_ext_required = 0
 
 " Airline
-let g:airline#extensions#branch#enabled   =0
-let g:airline#extensions#hunks#enabled    =0
-let g:airline_detect_paste                =1
-let g:airline_left_sep                    =''
-let g:airline_powerline_fonts             =1
-let g:airline_right_sep                   =''
-let g:airline_theme                       ='minimalist'
+" Airline Extension
+let g:airline_extensions                = [ 'ale', 'branch' ]
+" Airline Section Overrides
+"   Don't show tagbar, filetype, or virtualenv
+let g:airline_section_x = ''
+"   Don't show fileencoding or fileformat
+let g:airline_section_y = ''
+"   Don't show Percentage or Line Number
+let g:airline_section_z = '%c'
+" Airline config
+let g:airline_detect_paste              = 1
+let g:airline_highlighting_cache        = 1
+let g:airline_left_sep                  = ''
+let g:airline_powerline_fonts           = 1
+let g:airline_right_sep                 = ''
+let g:airline_theme                     = 'Base2Tone_SeaDark'
 
 " Rainbow parens
 let g:rainbow_active = 1
-"
-" Editorconfig settings
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " Elm-Vim settings
 let g:elm_format_autosave = 1
@@ -156,18 +166,23 @@ let NERDSpaceDelims =1
 set statusline+=%*
 set statusline+=%#warningmsg#
 
-"Vim-Gitgutter settingsh
+"Vim-Gitgutter settings
 let g:gitgutter_map_keys = 0 " Don't map my keys!
 let g:gitgutter_max_signs = 10000
 
 " Colors
 hi clear SignColumn
-hi ColorColumn ctermbg=235
-hi CursorLineNr cterm=bold ctermfg=15
-hi CursorColumn ctermbg=235
-hi CursorLine ctermbg=235
-hi GitGutterChange ctermfg=190 ctermbg=0
-hi GitGutterChangeDelete ctermfg=190 ctermbg=0
+hi ColorColumn ctermbg=52
+hi CursorColumn ctermbg=236
+hi CursorLine ctermbg=236
+hi LineNr ctermbg=16
+hi CursorLineNr cterm=bold ctermfg=15 ctermbg=16
+hi GitGutterAdd ctermfg=48 ctermbg=16
+hi GitGutterChange ctermfg=190 ctermbg=16
+hi GitGutterChangeDelete ctermfg=172 ctermbg=16
+hi GitGutterDelete ctermfg=196 ctermbg=16
+hi Normal ctermbg=16
+hi SignColumn ctermbg=16
 
 " Switch between rel and abs line numbers. Key mapping below
 function! RelNumberToggle()
@@ -294,8 +309,9 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor,*/node_
 set showcmd
 
 let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'jsx': ['eslint'],
+\   'bash': ['shellcheck'],
+\   'zsh': ['shellcheck'],
+\   'sh': ['shellcheck']
 \}
 
 let g:rg_command = '

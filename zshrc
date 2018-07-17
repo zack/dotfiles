@@ -24,6 +24,9 @@ ZSH_THEME="robbyrussel-zack"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh # use oh-my-zsh
 
+# ZSH SYNTAX HIGHLIGHTING
+source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # USE VI MODE
 set -o vi
 
@@ -117,3 +120,4 @@ for file in ~/dotfiles/work_dotfiles/zshrc_*; do
 done
 
 fortune | cowsay | lolcat
+
