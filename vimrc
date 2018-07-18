@@ -81,8 +81,6 @@ runtime ftplugin/man.vim
 " Sets
 set ai
 set autoindent
-set cursorcolumn
-set cursorline
 set hidden
 set hlsearch
 set ignorecase
@@ -173,8 +171,6 @@ let g:gitgutter_max_signs = 10000
 " Colors
 hi clear SignColumn
 hi ColorColumn ctermbg=52
-hi CursorColumn ctermbg=236
-hi CursorLine ctermbg=236
 hi LineNr ctermbg=16
 hi CursorLineNr cterm=bold ctermfg=15 ctermbg=16
 hi GitGutterAdd ctermfg=48 ctermbg=16
