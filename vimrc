@@ -31,6 +31,7 @@ Plugin 'ervandew/supertab'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
 Plugin 'junegunn/fzf.vim'
+Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'luochen1990/rainbow'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
@@ -81,6 +82,8 @@ runtime ftplugin/man.vim
 " Sets
 set ai
 set autoindent
+set cursorcolumn
+set cursorline
 set hidden
 set hlsearch
 set ignorecase
@@ -123,6 +126,9 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+" Gutentags
+let g:gutentags_cache_dir = '~/.vim/gutentags'
+
 " Vim-JSX
 let g:jsx_ext_required = 0
 
@@ -162,6 +168,7 @@ au FileType elm nmap <leader>w <Plug>(elm-browse-docs)
 let NERDSpaceDelims =1
 
 set statusline+=%*
+set statusline+=%{gutentags#statusline()}
 set statusline+=%#warningmsg#
 
 "Vim-Gitgutter settings
@@ -239,6 +246,8 @@ nnoremap <BS> gg
 nnoremap <C-p> :Files<CR>
 " Open FZF in buffers mode
 nnoremap <C-b> :Buffers<CR>
+" Open FZF in history mode
+nnoremap <C-h> :History<CR>
 " Toggle rainbowend
 nnoremap <C-d> :call ToggleRainbow()<CR>
 " Show the full file name and path
@@ -251,11 +260,13 @@ nnoremap <leader>n :call AllNumberToggle()<CR>
 nnoremap <leader>p :set invpaste<CR>
 " Open FZF in git diff mode
 nnoremap <Leader>g :GFiles?<CR>
-" Search and replace text
+" Ag highlighted text
+vnoremap <leader>A :call fzf#vim#grep('ag --nogroup --color "<C-r>h"', 1)<CR>
+" Search and replace highlighted text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
-" Search and prepend text
+" Search and prepend highlighted text
 vnoremap <C-e> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left><left><left>
-" Search and postpend text
+" Search and postpend highlighted text
 vnoremap <C-t> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left>
 " Set indent on file
 nnoremap <leader>i mmgg=G`m<CR>

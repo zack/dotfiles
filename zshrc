@@ -1,6 +1,7 @@
 ### PATH MODIFICATION
 export PATH="$PATH:~/bins"
 export PATH="$PATH:/usr/local/bin/"
+export PATH="$PATH:$HOME/etsy_bins"
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$MAVEN_HOME/bin"
 
@@ -10,7 +11,7 @@ if [ "$TMUX" = "" ]; then tmux -2; fi
 ### MISC EXPORTS
 export ZSH=$HOME/.oh-my-zsh # using oh-my-zsh
 export KEYTIMEOUT=1 # disable wait when switching modes
-export EDITOR=vim
+export EDITOR=nvim
 export LESS='-iRS#3NM~g'
 
 ### SOURCE SECRETS
@@ -44,12 +45,13 @@ DISABLE_AUTO_TITLE=true
 # general aliases
 alias ag='ag -p ~/.agignore'
 alias cm='cmatrix'
-alias ff='vim $(fzf-tmux -m)'
+alias ff='nvim $(fzf-tmux -m)'
 alias installdeb='sudo dpkg -i'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias l1='ls -1'
 alias ld='ls -d */'
-alias pipes='pipes.sh -f35 -r0'
+alias wtr='curl http://wttr.in/11217'
+# alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
 alias ssh='mosh'
 alias view='vim -R'
@@ -62,6 +64,7 @@ alias z='zeus'
 alias gs='git st'
 alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
 alias gb='git --no-pager branch'
+alias gist='gist -c -p'
 
 # rails aliases
 alias rc='rails c'
@@ -114,7 +117,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Pull in work dotfiles
-source ~/dotfiles/work_dotfiles/zshrc_etsy
 for file in ~/dotfiles/work_dotfiles/zshrc_*; do
   source "$file"
 done
