@@ -29,6 +29,7 @@
   rebase-origin = !git fetch origin && git rebase origin/master
   st = status
   up = !git checkout master && git fetch upstream && git reset --hard upstream/master
+  reup = !git fetch upstream && git rebase upstream/master
 [core]
   autocrlf = input
   editor = vim
