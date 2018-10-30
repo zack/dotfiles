@@ -18,10 +18,12 @@ set rtp+=~/.fzf
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
+Plugin 'blueyed/smarty.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'dahu/vim-lotr'
 Plugin 'editorconfig/editorconfig-vim'
@@ -30,6 +32,7 @@ Plugin 'elmcast/elm-vim'
 Plugin 'ervandew/supertab'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
+Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'luochen1990/rainbow'
@@ -43,6 +46,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/rainbow-end'
 Plugin 'w0rp/ale'
+
 call vundle#end()
 
 syntax enable
@@ -54,6 +58,8 @@ colorscheme Base2Tone_SeaDark
 augroup FiletypeGroup
   autocmd!
   au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  au BufNewFile,BufRead *.hbs set filetype=html.handlebars syntax=mustache
+  au BufNewFile,BufRead *.tpl set filetype=html.handlebars syntax=mustache
 augroup END
 
 " Special Syntax Highlighting
@@ -70,6 +76,7 @@ autocmd FileType * setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType cpp setlocal tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
 autocmd FileType elm setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType html setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
+autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType php setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType python setlocal tabstop=4|set shiftwidth=4|set expandtab
 
@@ -91,7 +98,6 @@ set incsearch
 set list
 set nohidden
 set nowrap
-set number
 set sm
 set smartcase
 set smarttab
@@ -134,14 +140,14 @@ let g:jsx_ext_required = 0
 
 " Airline
 " Airline Extension
-let g:airline_extensions                = [ 'ale', 'branch' ]
+let g:airline_extensions = [ 'ale', 'branch' ]
 " Airline Section Overrides
 "   Don't show tagbar, filetype, or virtualenv
 let g:airline_section_x = ''
 "   Don't show fileencoding or fileformat
 let g:airline_section_y = ''
-"   Don't show Percentage or Line Number
-let g:airline_section_z = '%c'
+"   [Current LineNumber]/[Total LineCount]:ColumnNumber
+let g:airline_section_z = '%l/%L:%c'
 " Airline config
 let g:airline_detect_paste              = 1
 let g:airline_highlighting_cache        = 1
@@ -247,7 +253,7 @@ nnoremap <C-p> :Files<CR>
 " Open FZF in buffers mode
 nnoremap <C-b> :Buffers<CR>
 " Open FZF in history mode
-nnoremap <C-h> :History<CR>
+nnoremap <C-y> :History<CR>
 " Toggle rainbowend
 nnoremap <C-d> :call ToggleRainbow()<CR>
 " Show the full file name and path
