@@ -39,6 +39,7 @@ Plugin 'luochen1990/rainbow'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-expand-region'
@@ -79,6 +80,7 @@ autocmd FileType html setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=
 autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType php setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType python setlocal tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType rust setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 
 " Do/end matching
 runtime macros/matchit.vim
@@ -158,6 +160,9 @@ let g:airline_theme                     = 'Base2Tone_SeaDark'
 
 " Rainbow parens
 let g:rainbow_active = 1
+
+" Rust
+let g:rustfmt_autosave = 1
 
 " Elm-Vim settings
 let g:elm_format_autosave = 1
@@ -322,9 +327,23 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor,*/node_
 set showcmd
 
 let g:ale_linters = {
-\   'bash': ['shellcheck'],
-\   'zsh': ['shellcheck'],
-\   'sh': ['shellcheck']
+\    'bash': ['shellcheck'],
+\    'javascript': ['eslint'],
+\    'jsx': ['eslint'],
+\    'php': ['phpcs'],
+\    'rs': ['rls'],
+\    'sh': ['shellcheck'],
+\    'zsh': ['shellcheck']
+\}
+
+let g:ale_fixers = {
+\    'javascript': ['prettier']
+\}
+
+" disable linting on minified stuff
+let g:ale_pattern_options = {
+\    '\.min\.js$': { 'ale_linters': [], 'ale_fixers': [] },
+\    '\.min\.css$': { 'ale_linters': [], 'ale_fixers': [] }
 \}
 
 let g:rg_command = '

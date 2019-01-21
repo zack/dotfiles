@@ -45,6 +45,7 @@ DISABLE_AUTO_TITLE=true
 # general aliases
 alias ag='ag -p ~/.agignore'
 alias cm='cmatrix'
+alias cr='cargo run'
 alias ff='nvim $(fzf-tmux -m)'
 alias installdeb='sudo dpkg -i'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
