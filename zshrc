@@ -122,5 +122,6 @@ for file in ~/dotfiles/work_dotfiles/zshrc_*; do
   source "$file"
 done
 
+# Start the day off right
 fortune | cowsay | lolcat
 

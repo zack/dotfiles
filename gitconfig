@@ -30,13 +30,17 @@
   st = status
   up = !git checkout master && git fetch upstream && git reset --hard upstream/master
   reup = !git fetch upstream && git rebase upstream/master
+  nn = !git config remote.upstream.url > /dev/null\
+       && git checkout master && git fetch upstream && git reset --hard origin/master\
+       || git checkout master && git fetch origin && git reset --hard origin/master
 [core]
   autocrlf = input
   editor = vim
   excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4
 [pager]
-  log = less
+  log = diff-so-fancy | less --tabs=4
+  diff = diff-so-fancy | less --tabs=4
 [diff]
   tool = diffmerge
 [difftool "diffmerge"]
