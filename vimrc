@@ -41,7 +41,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'sjl/gundo.vim'
+Plugin 'simnalamburt/vim-mundo'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -98,6 +98,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set list
+set nobackup
 set nohidden
 set nowrap
 set number
@@ -106,11 +107,21 @@ set smartcase
 set smarttab
 set splitbelow
 set splitright
+set swapfile
+set undofile
 set undofile
 set wildmenu
+set writebackup
+
+" patch required to honor double slash at end
+if has("patch-8.1.0251")
+  set backupdir ^=~/.vim/backup//
+end
 
 " Because consistency
 set backspace    =2
+set backupcopy   =auto
+set directory   ^=~/.vim/swap//
 set encoding     =utf8
 set grepprg      =grep\ -nH\ $*
 set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
@@ -120,6 +131,7 @@ set scrolloff    =5
 set sidescroll   =1
 set textwidth    =79
 set undodir      =$HOME/.vim/undo
+set undodir     ^=~/.vim/undo//
 set undolevels   =1000
 set undoreload   =10000
 set viminfo      ='20,<1000,s10,h
