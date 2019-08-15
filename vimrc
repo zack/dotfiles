@@ -100,6 +100,7 @@ set incsearch
 set list
 set nohidden
 set nowrap
+set number
 set sm
 set smartcase
 set smarttab
