@@ -1,7 +1,6 @@
 [user]
   name = Zack Youngren
   email = zack@youngren.io
-          signingkey = 724218E4
 [push]
   default = current
 [color]
@@ -50,6 +49,10 @@
   cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
   trustExitCode = true
 [pull]
-	rebase = true
+  rebase = true
 [rebase]
-	autoStash = true
+  autoStash = true
+[include]
+  path = ~/dotfiles/work_dotfiles/gitconfig_etsy.inc
+[include]
+  path = ~/dotfiles/work_dotfiles/gitconfig_etsy2.inc
