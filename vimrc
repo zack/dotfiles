@@ -38,6 +38,7 @@ Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'luochen1990/rainbow'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
+Plugin 'rbgrouleff/bclose.vim'
 Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -61,6 +62,7 @@ augroup FiletypeGroup
   au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   au BufNewFile,BufRead *.hbs set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.tpl set filetype=html.handlebars syntax=mustache
+  au BufNewFile,BufRead *.mustache set filetype=html.mustache syntax=mustache
 augroup END
 
 " Special Syntax Highlighting
@@ -297,7 +299,7 @@ nnoremap <leader>i mmgg=G`m<CR>
 " Sort
 vnoremap <leader>s :sort<CR>
 " Toggle Gundo Tree
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :MundoToggle<CR>
 " Save a file
 nnoremap <leader>w :w<CR>
 " Unset 'last search' register on return
