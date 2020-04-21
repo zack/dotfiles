@@ -1,3 +1,4 @@
 vendor/*
 node_modules
 *.min.css
+**/node_modules

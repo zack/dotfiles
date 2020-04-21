@@ -52,7 +52,12 @@
   rebase = true
 [rebase]
   autoStash = true
-[include]
-  path = ~/dotfiles/work_dotfiles/gitconfig_etsy.inc
-[include]
-  path = ~/dotfiles/work_dotfiles/gitconfig_etsy2.inc
+[github]
+  user = zyoungren
+[hub]
+  host = github.etsycorp.com
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true

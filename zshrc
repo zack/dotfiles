@@ -36,6 +36,7 @@ bindkey '^R' history-incremental-search-backward
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files'
 
 ### GENERAL CONFIGURATION
 COMPLETION_WAITING_DOTS="true"
@@ -54,7 +55,6 @@ alias ld='ls -d */'
 alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
-alias ssh='mosh'
 alias view='vim -R'
 alias vview='vim -R -u NONE'
 alias vvim='vim -u NONE' # vanilla vim
@@ -122,6 +122,6 @@ for file in ~/dotfiles/work_dotfiles/zshrc_*; do
   source "$file"
 done
 
-# Start the day off right
-fortune | cowsay | lolcat
+fortune | cowsay | lolcat -F .5
 
+export PATH="/usr/local/sbin:$PATH"

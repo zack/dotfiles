@@ -80,6 +80,7 @@ autocmd FileType cpp setlocal tabstop=8|set shiftwidth=8|set softtabstop=8|set n
 autocmd FileType elm setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType html setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
 autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
+autocmd FileType javascript setlocal tabstop=2|set shiftwidth=2|set softtabstop=2|set noexpandtab
 autocmd FileType php setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 autocmd FileType python setlocal tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType rust setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
@@ -364,7 +365,7 @@ let g:ale_pattern_options = {
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
   \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-  \ -g "!{.git,node_modules,vendor}/*" '
+  \ -g "!{.git,**/node_modules,vendor}/*" '
 
 " --column: Show column number
 " --line-number: Show line number
@@ -380,7 +381,7 @@ command! -bang -nargs=* Rg call fzf#vim#grep('
   \rg --column
     \ --fixed-strings
     \ --follow
-    \ --glob "!.git/*" --color "always"
+    \ --glob "!{.git,node_modules}" --color "always"
     \ --hidden
     \ --ignore-case
     \ --line-number
