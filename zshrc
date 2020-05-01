@@ -6,13 +6,14 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$MAVEN_HOME/bin"
 
 ### ALWAYS IN TMUX
-if [ "$TMUX" = "" ]; then tmux -2; fi
+# if [ "$TMUX" = "" ]; then tmux -2; fi
 
 ### MISC EXPORTS
 export ZSH=$HOME/.oh-my-zsh # using oh-my-zsh
 export KEYTIMEOUT=1 # disable wait when switching modes
 export EDITOR=nvim
 export LESS='-iRS#3NM~g'
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ### SOURCE SECRETS
 if [ -s ~/.secrets/secrets.config ];
@@ -64,8 +65,8 @@ alias z='zeus'
 # git aliases
 alias gs='git st'
 alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
-alias gb='git --no-pager branch'
-alias gist='gist -c -p'
+# alias gb='git --no-pager branch'
+# alias gist='gist -c -p'
 
 # rails aliases
 alias rc='rails c'
@@ -113,15 +114,26 @@ fgb() {
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
+# $ git gb 213 to go to a branch
+function gb {
+  if [[ -z "$1" ]]; then
+    git branch -v
+  else
+    git branch | grep -v "^*" | fzf -f "$1" | head -n1 | xargs git checkout
+  fi
+}
+alias gb=gb
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Start the day off right
+fortune | cowsay | lolcat -F 0.5
 
 # Pull in work dotfiles
 for file in ~/dotfiles/work_dotfiles/zshrc_*; do
   source "$file"
 done
-
-fortune | cowsay | lolcat -F .5
 
 export PATH="/usr/local/sbin:$PATH"
