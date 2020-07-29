@@ -63,3 +63,5 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[includeIf "gitdir:~/development/"]
+  path=~/dotfiles/work_dotfiles/gitconfig_etsy
