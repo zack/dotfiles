@@ -12,8 +12,9 @@ export PATH="$PATH:$MAVEN_HOME/bin"
 export ZSH=$HOME/.oh-my-zsh # using oh-my-zsh
 export KEYTIMEOUT=1 # disable wait when switching modes
 export EDITOR=nvim
-export LESS='-iRS#3NM~g'
+#export LESS='-iRS#3NM~g'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+export BAT_CONFIG_PATH=$HOME/.batrc
 
 ### SOURCE SECRETS
 if [ -s ~/.secrets/secrets.config ];
@@ -46,6 +47,7 @@ DISABLE_AUTO_TITLE=true
 ### ALIASES
 # general aliases
 alias ag='ag -p ~/.agignore'
+alias cat='bat'
 alias cm='cmatrix'
 alias cr='cargo run'
 alias ff='nvim $(fzf-tmux -m)'

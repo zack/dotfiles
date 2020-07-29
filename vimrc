@@ -25,28 +25,23 @@ Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'blueyed/smarty.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'dahu/vim-lotr'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'elixir-lang/vim-elixir'
+" Plugin 'elixir-lang/vim-elixir'
 Plugin 'elmcast/elm-vim'
 Plugin 'ervandew/supertab'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
-Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'junegunn/fzf.vim'
-Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'luochen1990/rainbow'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
+" Plugin 'rust-lang/rust.vim'
 Plugin 'rbgrouleff/bclose.vim'
-Plugin 'rking/ag.vim'
-Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'simnalamburt/vim-mundo'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/rainbow-end'
+" Plugin 'vim-scripts/rainbow-end'
 Plugin 'w0rp/ale'
 
 call vundle#end()
@@ -64,6 +59,9 @@ augroup FiletypeGroup
   au BufNewFile,BufRead *.tpl set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.mustache set filetype=html.mustache syntax=mustache
 augroup END
+
+" disable syntax highlighting in files > 250K
+au BufReadPost * if getfsize(bufname("%")) > 250*1024 | set syntax= ai | endif
 
 " Special Syntax Highlighting
 autocmd BufNewFile,BufRead *.json set ft=javascript " JSON using JS rules
@@ -94,8 +92,8 @@ runtime ftplugin/man.vim
 " Sets
 set ai
 set autoindent
-set cursorcolumn
-set cursorline
+" set cursorcolumn
+" set cursorline
 set hidden
 set hlsearch
 set ignorecase
@@ -150,9 +148,6 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" Gutentags
-let g:gutentags_cache_dir = '~/.vim/gutentags'
-
 " Vim-JSX
 let g:jsx_ext_required = 0
 
@@ -195,7 +190,6 @@ au FileType elm nmap <leader>w <Plug>(elm-browse-docs)
 let NERDSpaceDelims =1
 
 set statusline+=%*
-set statusline+=%{gutentags#statusline()}
 set statusline+=%#warningmsg#
 
 "Vim-Gitgutter settings
@@ -270,13 +264,15 @@ nnoremap tx :tabclose<CR>
 " Backspace to go to beginning of file
 nnoremap <BS> gg
 " Open FZF
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
 " Open FZF in buffers mode
 nnoremap <C-b> :Buffers<CR>
 " Open FZF in history mode
 nnoremap <C-y> :History<CR>
 " Toggle rainbowend
 nnoremap <C-d> :call ToggleRainbow()<CR>
+" Open up fzf GFiles? (git status files)
+nnoremap <C-g> :GFiles?<CR>
 " Show the full file name and path
 nnoremap <C-f> :Files<CR>
 " Toggle absolute vs relative numbers
@@ -286,8 +282,6 @@ nnoremap <leader>n :call AllNumberToggle()<CR>
 " Toggle paste
 nnoremap <leader>p :set invpaste<CR>
 " Open FZF in git diff mode
-nnoremap <Leader>g :GFiles?<CR>
-" Ag highlighted text
 vnoremap <leader>A :call fzf#vim#grep('ag --nogroup --color "<C-r>h"', 1)<CR>
 " Search and replace highlighted text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
@@ -362,31 +356,27 @@ let g:ale_pattern_options = {
 \    '\.min\.css$': { 'ale_linters': [], 'ale_fixers': [] }
 \}
 
-let g:rg_command = '
-  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-  \ -g "!{.git,**/node_modules,vendor}/*" '
+" let g:rg_command = '
+  " \ rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --color "always"
+  " \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf,tpl}"
+  " \ -g "!{.git,node_modules,vendor}"
+" '
 
 " --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
 " --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
+" --hidden: Search hidden files and folders
+" --ignore-case: Case insensitive search
+" --line-number: Show line number
 command! -bang -nargs=* Rg call fzf#vim#grep('
   \rg --column
     \ --fixed-strings
     \ --follow
-    \ --glob "!{.git,node_modules}" --color "always"
+    \ --glob "!{.git,node_modules,vendor}/*" --color "always"
     \ --hidden
     \ --ignore-case
     \ --line-number
-    \ --no-heading
-    \ --no-ignore
   \ '
   \.shellescape(<q-args>), 1, <bang>0)
 
