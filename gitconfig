@@ -37,19 +37,19 @@
   autocrlf = input
   editor = vim
   excludesfile = ~/.gitignore_global
-  pager = diff-so-fancy | less --tabs=4
+  pager = delta | less
   filemode = false
 [pager]
-  log = diff-so-fancy | less --tabs=4
-  diff = diff-so-fancy | less --tabs=4
+  log = less
+  diff = delta | less
   branch = cat
-[diff]
-  tool = diffmerge
-[difftool "diffmerge"]
-  cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
-[mergetool "diffmerge"]
-  cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
-  trustExitCode = true
+[delta]
+  line-numbers = true
+  plus-color = "#012800"
+  minus-color = "#340001"
+  syntax-theme = Base2Tone_SeaDark
+[interactive]
+  diffFilter = delta --color-only
 [pull]
   rebase = true
 [rebase]
