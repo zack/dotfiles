@@ -1,12 +1,15 @@
 ### PATH MODIFICATION
-export PATH="$PATH:~/bins"
+export PATH="$PATH:$HOME/bins"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:$HOME/etsy_bins"
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$MAVEN_HOME/bin"
 
+# Added by n-install (see http://git.io/n-install-repo).
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+
 ### ALWAYS IN TMUX
-# if [ "$TMUX" = "" ]; then tmux -2; fi
+if [ "$TMUX" = "" ]; then tmux -2; fi
 
 ### MISC EXPORTS
 export ZSH=$HOME/.oh-my-zsh # using oh-my-zsh
@@ -58,6 +61,8 @@ alias ld='ls -d */'
 alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
+alias vim='~/bins/nvim'
+alias nvim='~/bins/nvim'
 alias view='vim -R'
 alias vview='vim -R -u NONE'
 alias vvim='vim -u NONE' # vanilla vim
@@ -134,8 +139,8 @@ export NVM_DIR="$HOME/.nvm"
 fortune | cowsay | lolcat -F 0.5
 
 # Pull in work dotfiles
-for file in ~/dotfiles/work_dotfiles/zshrc_*; do
-  source "$file"
-done
+# for file in ~/dotfiles/work_dotfiles/zshrc_*; do
+#   source "$file"
+# done
 
 export PATH="/usr/local/sbin:$PATH"
