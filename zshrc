@@ -9,7 +9,7 @@ export PATH="$PATH:$MAVEN_HOME/bin"
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
 ### ALWAYS IN TMUX
-if [ "$TMUX" = "" ]; then tmux -2; fi
+# if [ "$TMUX" = "" ]; then tmux -2; fi
 
 ### MISC EXPORTS
 export ZSH=$HOME/.oh-my-zsh # using oh-my-zsh
@@ -17,7 +17,7 @@ export KEYTIMEOUT=1 # disable wait when switching modes
 export EDITOR=nvim
 #export LESS='-iRS#3NM~g'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-export BAT_CONFIG_PATH=$HOME/.batrc
+# export BAT_CONFIG_PATH=$HOME/.batrc
 
 ### SOURCE SECRETS
 if [ -s ~/.secrets/secrets.config ];
@@ -40,7 +40,6 @@ set -o vi
 bindkey '^R' history-incremental-search-backward
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files'
 
 ### GENERAL CONFIGURATION
