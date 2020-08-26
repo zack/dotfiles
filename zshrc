@@ -12,12 +12,11 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 # if [ "$TMUX" = "" ]; then tmux -2; fi
 
 ### MISC EXPORTS
-export ZSH=$HOME/.oh-my-zsh # using oh-my-zsh
 export KEYTIMEOUT=1 # disable wait when switching modes
 export EDITOR=nvim
-#export LESS='-iRS#3NM~g'
+export LESS='-iRS#3NM~g'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-# export BAT_CONFIG_PATH=$HOME/.batrc
+export BAT_CONFIG_PATH=$HOME/.batrc
 
 ### SOURCE SECRETS
 if [ -s ~/.secrets/secrets.config ];
@@ -25,15 +24,33 @@ then
   source ~/.secrets/secrets.config;
 fi
 
-### OH-MY-ZSH
-ZSH_THEME="robbyrussel-zack"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh # use oh-my-zsh
+### PROMPT
+if [ "$TMUX" != "" ]; then ARROW="→" else ARROW="⇝" fi
+STATUS="%(?.%F{green}.%F{red})${ARROW}%f"
+if [[ -n "$SSH_CLIENT" ]]; then UN="%B%F{yellow}%n%b%f" else UN="" fi
+LOC="%1~"
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
++vi-git-untracked() {
+  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+     git status --porcelain | grep -m 1 '^??' &>/dev/null
+  then
+    hook_com[misc]='%F{red}±%f'
+  fi
+}
+zstyle ':vcs_info:*' unstagedstr "%B%F{yellow}±%f%b"
+zstyle ':vcs_info:*' stagedstr "%F{green}±%f"
+zstyle ':vcs_info:*' formats "(%B%F{magenta}%b%f%%b)%m%u%c"
+setopt prompt_subst
+PROMPT='${UN} ${STATUS} ${LOC}${vcs_info_msg_0_} $ '
 
-# ZSH SYNTAX HIGHLIGHTING
+### ZSH SYNTAX HIGHLIGHTING
 source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# USE VI MODE
+### USE VI MODE
 set -o vi
 
 ### BINDKEYS
