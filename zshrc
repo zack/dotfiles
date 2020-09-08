@@ -20,9 +20,11 @@ export BAT_CONFIG_PATH=$HOME/.batrc
 
 ### HISTORY
 HISTFILE=~/.zsh_history
-HISTSIZE=20000
-SAVEHIST=20000
-setopt appendhistory
+HISTSIZE=100000
+SAVEHIST=100000
+setopt INC_APPEND_HISTORY
+setopt HIST_FIND_NO_DUPS
+export HISTTIMEFORMAT="[%F %T]"
 
 ### SOURCE SECRETS
 if [ -s ~/.secrets/secrets.config ];
