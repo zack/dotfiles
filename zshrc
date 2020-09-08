@@ -18,6 +18,12 @@ export LESS='-iRS#3NM~g'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export BAT_CONFIG_PATH=$HOME/.batrc
 
+### HISTORY
+HISTFILE=~/.zsh_history
+HISTSIZE=20000
+SAVEHIST=20000
+setopt appendhistory
+
 ### SOURCE SECRETS
 if [ -s ~/.secrets/secrets.config ];
 then
@@ -155,8 +161,10 @@ export NVM_DIR="$HOME/.nvm"
 fortune | cowsay | lolcat -F 0.5
 
 # Pull in work dotfiles
-# for file in ~/dotfiles/work_dotfiles/zshrc_*; do
-#   source "$file"
-# done
+for file in ~/dotfiles/work_dotfiles/zshrc_*; do
+  source "$file"
+done
 
 export PATH="/usr/local/sbin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
