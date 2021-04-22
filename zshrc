@@ -6,7 +6,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$MAVEN_HOME/bin"
 
 ### ALWAYS IN TMUX
-if [ "$TMUX" = "" ]; then tmux -2; fi
+# if [ "$TMUX" = "" ]; then tmux -2; fi
 
 ### MISC EXPORTS
 export ZSH=$HOME/.oh-my-zsh # using oh-my-zsh
@@ -125,3 +125,9 @@ done
 fortune | cowsay | lolcat -F .5
 
 export PATH="/usr/local/sbin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/zyoungren/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zyoungren/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/zyoungren/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zyoungren/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
