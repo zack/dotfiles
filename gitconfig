@@ -65,3 +65,5 @@
   required = true
 [includeIf "gitdir:~/development/"]
   path=~/dotfiles/work_dotfiles/gitconfig_etsy
+[etsy]
+	in-single-commit-only = true

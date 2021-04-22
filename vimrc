@@ -25,7 +25,6 @@ Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'blueyed/smarty.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'elmcast/elm-lotr'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'elmcast/elm-vim'
@@ -41,6 +40,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'simnalamburt/vim-mundo'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-surround'
 Plugin 'w0rp/ale'
 
@@ -59,6 +59,7 @@ augroup FiletypeGroup
   au BufNewFile,BufRead *.tpl set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.mustache set filetype=html.mustache syntax=mustache
 augroup END
+au FileType gitcommit 1
 
 " disable syntax highlighting in files > 250K
 au BufReadPost * if getfsize(bufname("%")) > 250*1024 | set syntax= ai | endif
@@ -129,6 +130,7 @@ set guifont      =Consolas/12/-1/5/25/0/0/0/1/0
 set laststatus   =2
 set lcs          =trail:·,tab:»·,eol:$,extends:»
 set scrolloff    =5
+set sidescrolloff=1
 set sidescroll   =1
 set textwidth    =79
 set undodir      =$HOME/.vim/undo

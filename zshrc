@@ -22,9 +22,8 @@ export BAT_CONFIG_PATH=$HOME/.batrc
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
-setopt INC_APPEND_HISTORY
+setopt INC_APPEND_HISTORY_TIME
 setopt HIST_FIND_NO_DUPS
-export HISTTIMEFORMAT="[%F %T]"
 
 ### SOURCE SECRETS
 if [ -s ~/.secrets/secrets.config ];
@@ -73,6 +72,7 @@ DISABLE_AUTO_TITLE=true
 
 ### ALIASES
 # general aliases
+alias ~="cd ~"
 alias ag='ag -p ~/.agignore'
 alias cat='bat'
 alias cm='cmatrix'
