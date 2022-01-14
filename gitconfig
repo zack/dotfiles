@@ -67,3 +67,5 @@
   path=~/dotfiles/work_dotfiles/gitconfig_etsy
 [etsy]
 	in-single-commit-only = true
+[init]
+	defaultBranch = main

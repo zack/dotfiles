@@ -16,10 +16,12 @@ set rtp+=~/.fzf
 
 " Vundle Plugin
 set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.config/nvim/plugged')
 call vundle#rc()
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
