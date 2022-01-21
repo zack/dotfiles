@@ -3,7 +3,9 @@ export PATH="$PATH:$HOME/bins"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:$HOME/etsy_bins"
 export PATH="$PATH:$HOME/.rvm/bin"
-export PATH="$PATH:$MAVEN_HOME/bin"
+export PATH="$PATH:/opt/homebrew/lib/"
+# Created by `pipx` on 2022-01-21 21:29:10
+export PATH="$PATH:/Users/zack.youngren/.local/bin"
 
 # Added by n-install (see http://git.io/n-install-repo).
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
@@ -34,7 +36,7 @@ fi
 ### PROMPT
 if [ "$TMUX" != "" ]; then ARROW="→" else ARROW="⇝" fi
 STATUS="%(?.%F{green}.%F{red})${ARROW}%f"
-if [[ -n "$SSH_CLIENT" ]]; then UN="%B%F{yellow}%n%b%f" else UN="" fi
+if [[ -n "$SSH_CLIENT" ]]; then UN="%B%F{yellow}%n%b%f " else UN="" fi
 LOC="%1~"
 autoload -Uz vcs_info
 precmd() { vcs_info }
@@ -52,7 +54,7 @@ zstyle ':vcs_info:*' unstagedstr "%B%F{yellow}±%f%b"
 zstyle ':vcs_info:*' stagedstr "%F{green}±%f"
 zstyle ':vcs_info:*' formats "(%B%F{magenta}%b%f%%b)%m%u%c"
 setopt prompt_subst
-PROMPT='${UN} ${STATUS} ${LOC}${vcs_info_msg_0_} $ '
+PROMPT='${UN}${STATUS} ${LOC}${vcs_info_msg_0_} $ '
 
 ### ZSH SYNTAX HIGHLIGHTING
 source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -82,6 +84,9 @@ alias installdeb='sudo dpkg -i'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias l1='ls -1'
 alias ld='ls -d */'
+alias ll='ls -la'
+# color for ls
+alias ls='ls -G'
 alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
@@ -167,3 +172,4 @@ fortune | cowsay | lolcat -F 0.5
 export PATH="/usr/local/sbin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
