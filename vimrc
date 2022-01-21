@@ -19,6 +19,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.config/nvim/plugged')
 call vundle#rc()
 call vundle#begin()
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+call plug#end()
+
 
 Plugin 'VundleVim/Vundle.vim'
 
@@ -27,13 +31,13 @@ Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'blueyed/smarty.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'dense-analysis/ale'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'elmcast/elm-vim'
 Plugin 'ervandew/supertab'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
-Plugin 'junegunn/fzf.vim'
 Plugin 'luochen1990/rainbow'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
@@ -44,7 +48,6 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-surround'
-Plugin 'w0rp/ale'
 
 call vundle#end()
 
@@ -350,9 +353,13 @@ let g:ale_linters = {
 \    'zsh': ['shellcheck']
 \}
 
-let g:ale_fixers = {
-\    'javascript': ['prettier']
+let b:ale_fixers = {
+\  'javascript': ['prettier', 'eslint'],
+\  'jsx': ['prettier', 'eslint']
 \}
+
+" Fix files when I save
+let g:ale_fix_on_save = 1
 
 " disable linting on minified stuff
 let g:ale_pattern_options = {
@@ -389,6 +396,6 @@ command! -bang -nargs=* Rg call fzf#vim#grep('
   " au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 " augroup END
 
-for f in split(glob('~/dotfiles/work_dotfiles/vimrc_*'), '\n')
-    exe 'source' f
-endfor
+try
+  source ~/dotfiles/stellar_dotfiles/vimrc
+endtry
