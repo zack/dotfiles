@@ -35,7 +35,7 @@
        || git checkout master && git fetch origin && git reset --hard origin/master
 [core]
   autocrlf = input
-  editor = vim
+  editor = nvim
   excludesfile = ~/.gitignore_global
   pager = delta | less
   filemode = false

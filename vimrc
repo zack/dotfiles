@@ -79,15 +79,15 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 set formatoptions+=j
 
 " Tab options
-autocmd FileType * setlocal tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType cpp setlocal tabstop=8|set shiftwidth=8|set softtabstop=8|set noexpandtab
-autocmd FileType elm setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
-autocmd FileType html setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
-autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
-autocmd FileType javascript setlocal tabstop=2|set shiftwidth=2|set softtabstop=2|set noexpandtab
-autocmd FileType php setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
-autocmd FileType python setlocal tabstop=4|set shiftwidth=4|set expandtab
-autocmd FileType rust setlocal tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
+autocmd FileType *               setlocal tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType cpp             setlocal tabstop=8|set shiftwidth=8|set expandtab
+autocmd FileType elm             setlocal tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType html            setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
+autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType javascript      setlocal tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType php             setlocal tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType python          setlocal tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType rust            setlocal tabstop=4|set shiftwidth=4|set expandtab
 
 " Do/end matching
 runtime macros/matchit.vim
