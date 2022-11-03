@@ -54,7 +54,7 @@ zstyle ':vcs_info:*' unstagedstr "%B%F{yellow}±%f%b"
 zstyle ':vcs_info:*' stagedstr "%F{green}±%f"
 zstyle ':vcs_info:*' formats "(%B%F{magenta}%b%f%%b)%m%u%c"
 setopt prompt_subst
-PROMPT='${UN}${STATUS} ${LOC}${vcs_info_msg_0_} $ '
+PROMPT='👾 ${UN}${STATUS} ${LOC}${vcs_info_msg_0_} $ '
 
 ### ZSH SYNTAX HIGHLIGHTING
 source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -163,7 +163,7 @@ alias gb=gb
 # A kind of lazy loading for nvm,npm,etc.
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
-  nvm_cmds=(nvm node npm yarn)
+  nvm_cmds=(nvm node npm yarn npx)
   for cmd in $nvm_cmds ; do
     alias $cmd="unalias $nvm_cmds && unset nvm_cmds && . $NVM_DIR/nvm.sh &&  . $NVM_DIR/bash_completion && $cmd"
   done

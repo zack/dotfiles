@@ -23,6 +23,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 call plug#end()
 
+" For colors and stuff
+set termguicolors
 
 Plugin 'VundleVim/Vundle.vim'
 
@@ -36,10 +38,13 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'elmcast/elm-vim'
 Plugin 'ervandew/supertab'
+Plugin 'ggandor/lightspeed.nvim'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
+Plugin 'leafOfTree/vim-vue-plugin'
 Plugin 'luochen1990/rainbow'
 Plugin 'mxw/vim-jsx'
+Plugin 'norcalli/nvim-colorizer.lua'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -54,14 +59,17 @@ call vundle#end()
 syntax enable
 filetype plugin indent on
 
+" nvim colorizer
+lua require'colorizer'.setup()
+
 " Colorscheme from minpac plugin
 colorscheme Base2Tone_SeaDark
 
 augroup FiletypeGroup
   autocmd!
-  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-  au BufNewFile,BufRead *.hbs set filetype=html.handlebars syntax=mustache
-  au BufNewFile,BufRead *.tpl set filetype=html.handlebars syntax=mustache
+  au BufNewFile,BufRead *.jsx      set filetype=javascript.jsx
+  au BufNewFile,BufRead *.hbs      set filetype=html.handlebars syntax=mustache
+  au BufNewFile,BufRead *.tpl      set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.mustache set filetype=html.mustache syntax=mustache
 augroup END
 au FileType gitcommit 1
@@ -158,6 +166,24 @@ let g:fzf_action = {
 " Vim-JSX
 let g:jsx_ext_required = 0
 
+" Ale flake-8
+call ale#Set('python_flake8_options', '--config=$HOME/.config/flake8')
+
+" Default configuration from project README
+let g:vim_vue_plugin_config = {
+      \'syntax': {
+      \   'template': ['html'],
+      \   'script': ['javascript'],
+      \   'style': ['css'],
+      \},
+      \'full_syntax': [],
+      \'initial_indent': [],
+      \'attribute': 0,
+      \'keyword': 0,
+      \'foldexpr': 0,
+      \'debug': 0,
+      \}
+
 " Airline
 " Airline Extension
 let g:airline_extensions = [ 'ale', 'branch' ]
@@ -171,9 +197,9 @@ let g:airline_section_z = '%l/%L:%c'
 " Airline config
 let g:airline_detect_paste              = 1
 let g:airline_highlighting_cache        = 1
-let g:airline_left_sep                  = ''
+" let g:airline_left_sep                  = ''
 let g:airline_powerline_fonts           = 1
-let g:airline_right_sep                 = ''
+" let g:airline_right_sep                 = ''
 let g:airline_theme                     = 'Base2Tone_SeaDark'
 
 " Rainbow parens
@@ -350,13 +376,16 @@ let g:ale_linters = {
 \    'php': ['phpcs'],
 \    'rs': ['rls'],
 \    'sh': ['shellcheck'],
-\    'zsh': ['shellcheck']
+\    'zsh': ['shellcheck'],
+\    'python': ['flake8', 'mypy']
 \}
 
-let b:ale_fixers = {
-\  'javascript': ['prettier', 'eslint'],
-\  'jsx': ['prettier', 'eslint']
+let g:ale_fixers = {
+\  'javascript': ['eslint', 'prettier'],
+\  'jsx': ['eslint', 'prettier']
 \}
+
+let g:ale_python_mypy_options='--follow-imports=skip'
 
 " Fix files when I save
 let g:ale_fix_on_save = 1
