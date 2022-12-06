@@ -272,6 +272,8 @@ map <leader>" cs'"<ESC>
 map <leader>r :Rg<CR>
 " Redraw
 map <leader>R :redraw!<CR>
+" Toggle line wrap
+map <leader>w :set wrap!<CR>
 
 " v to expand region
 vmap v <Plug>(expand_region_expand)
@@ -329,8 +331,6 @@ vnoremap <leader>s :sort<CR>
 " Toggle Gundo Tree
 nnoremap <leader>u :MundoToggle<CR>
 " Save a file
-nnoremap <leader>w :w<CR>
-" Unset 'last search' register on return
 nnoremap <silent> <leader>\ :nohl<CR>
 
 " Resize vim splits
