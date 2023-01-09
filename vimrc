@@ -6,7 +6,6 @@ packadd minpac
 call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 " Specify minpac Plugins
-call minpac#add('atelierbram/Base2Tone-vim')
 call minpac#add('vim-jp/syntax-vim-ex')
 " Load all minpack plugins
 packloadall
@@ -47,6 +46,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'norcalli/nvim-colorizer.lua'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'rigellute/rigel'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'simnalamburt/vim-mundo'
 Plugin 'terryma/vim-expand-region'
@@ -63,7 +63,7 @@ filetype plugin indent on
 lua require'colorizer'.setup()
 
 " Colorscheme from minpac plugin
-colorscheme Base2Tone_SeaDark
+colorscheme rigel
 
 augroup FiletypeGroup
   autocmd!
@@ -94,7 +94,7 @@ autocmd FileType html            setlocal tabstop=4|set shiftwidth=4|set expandt
 autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType javascript      setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType php             setlocal tabstop=4|set shiftwidth=4|set expandtab
-autocmd FileType python          setlocal tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType python          setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType rust            setlocal tabstop=4|set shiftwidth=4|set expandtab
 
 " Do/end matching
@@ -166,6 +166,9 @@ let g:fzf_action = {
 " Vim-JSX
 let g:jsx_ext_required = 0
 
+" javascript flow syntax
+let g:javascript_plugin_flow = 1
+
 " Ale flake-8
 call ale#Set('python_flake8_options', '--config=$HOME/.config/flake8')
 
@@ -185,22 +188,22 @@ let g:vim_vue_plugin_config = {
       \}
 
 " Airline
-" Airline Extension
+"" Extensions
 let g:airline_extensions = [ 'ale', 'branch' ]
-" Airline Section Overrides
-"   Don't show tagbar, filetype, or virtualenv
+""" Airline Section Overrides
+""""" Don't show tagbar, filetype, or virtualenv
 let g:airline_section_x = ''
-"   Don't show fileencoding or fileformat
+""""" Don't show fileencoding or fileformat
 let g:airline_section_y = ''
-"   [Current LineNumber]/[Total LineCount]:ColumnNumber
+""""" [Current LineNumber]/[Total LineCount]:ColumnNumber
 let g:airline_section_z = '%l/%L:%c'
-" Airline config
-let g:airline_detect_paste              = 1
-let g:airline_highlighting_cache        = 1
-" let g:airline_left_sep                  = ''
-let g:airline_powerline_fonts           = 1
-" let g:airline_right_sep                 = ''
-let g:airline_theme                     = 'Base2Tone_SeaDark'
+"" Config
+let g:airline_detect_paste       = 1
+let g:airline_highlighting_cache = 1
+let g:airline_powerline_fonts    = 1
+"" Theming
+let g:rigel_airline = 1
+let g:airline_theme = 'rigel'
 
 " Rainbow parens
 let g:rainbow_active = 1
