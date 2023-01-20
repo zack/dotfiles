@@ -67,6 +67,7 @@ bindkey '^R' history-incremental-search-backward
 
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_COMPLETION_TRIGGER='**'
 
 ### GENERAL CONFIGURATION
 COMPLETION_WAITING_DOTS="true"
@@ -91,7 +92,6 @@ alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
 alias vim='nvim'
-alias nvim='nvim'
 alias view='vim -R'
 alias vview='vim -R -u NONE'
 alias vvim='vim -u NONE' # vanilla vim
@@ -173,6 +173,11 @@ fi
 fortune | cowsay | lolcat -F 0.5
 
 [ -f "$HOME/dotfiles/stellar_dotfiles/zshrc" ] && source "$HOME/dotfiles/stellar_dotfiles/zshrc"
+
+# Pull in work dotfiles
+# for file in ~/dotfiles/work_dotfiles/zshrc_*; do
+#   source "$file"
+# done
 
 export PATH="/usr/local/sbin:$PATH"
 

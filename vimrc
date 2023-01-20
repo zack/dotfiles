@@ -19,7 +19,6 @@ call plug#begin('~/.config/nvim/plugged')
 call vundle#rc()
 call vundle#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " For colors and stuff
@@ -40,6 +39,7 @@ Plugin 'ervandew/supertab'
 Plugin 'ggandor/lightspeed.nvim'
 Plugin 'gmarik/vundle'
 Plugin 'groenewege/vim-less'
+Plugin 'junegunn/fzf.vim'
 Plugin 'leafOfTree/vim-vue-plugin'
 Plugin 'luochen1990/rainbow'
 Plugin 'mxw/vim-jsx'
@@ -166,7 +166,7 @@ let g:fzf_action = {
 " Vim-JSX
 let g:jsx_ext_required = 0
 
-" javascript flow syntax
+" javascript flow syntax from rigel documentation
 let g:javascript_plugin_flow = 1
 
 " Ale flake-8
@@ -203,7 +203,7 @@ let g:airline_highlighting_cache = 1
 let g:airline_powerline_fonts    = 1
 "" Theming
 let g:rigel_airline = 1
-let g:airline_theme = 'rigel'
+let g:airline_theme = 'bubblegum'
 
 " Rainbow parens
 let g:rainbow_active = 1
@@ -428,6 +428,6 @@ command! -bang -nargs=* Rg call fzf#vim#grep('
   " au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 " augroup END
 
-try
-  source ~/dotfiles/stellar_dotfiles/vimrc
-endtry
+" try
+  " source ~/dotfiles/stellar_dotfiles/vimrc
+" endtry
