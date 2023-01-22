@@ -53,6 +53,7 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()
 
