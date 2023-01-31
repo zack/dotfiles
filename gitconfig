@@ -45,9 +45,7 @@
   branch = cat
 [delta]
   line-numbers = true
-  plus-style = syntax "#012800"
-  minus-style = normal "#340001"
-  syntax-theme = Base2Tone_SeaDark
+  syntax-theme = OneHalfDark
 [interactive]
   diffFilter = delta --color-only
 [pull]
@@ -55,11 +53,11 @@
 [rebase]
   autoStash = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [advice]
-	detachedHead = false
+  detachedHead = false
