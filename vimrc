@@ -13,6 +13,9 @@ packloadall
 " Get fzf up in here
 set rtp+=~/.fzf
 
+" FZF
+let $FZF_DEFAULT_COMMAND="rg --files | rg -v '(jpg$|png$)'"
+
 " Vundle Plugin
 set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.config/nvim/plugged')
@@ -375,18 +378,20 @@ set showcmd
 
 let g:ale_linters = {
 \    'bash': ['shellcheck'],
-\    'javascript': ['eslint'],
+\    'javascript': ['eslint', 'prettier'],
 \    'jsx': ['eslint'],
 \    'php': ['phpcs'],
 \    'rs': ['rls'],
 \    'sh': ['shellcheck'],
+\    'typescript': ['eslint', 'prettier'],
 \    'zsh': ['shellcheck'],
 \    'python': ['flake8', 'mypy']
 \}
 
 let g:ale_fixers = {
 \  'javascript': ['eslint', 'prettier'],
-\  'jsx': ['eslint', 'prettier']
+\  'jsx': ['eslint', 'prettier'],
+\  'typescript': ['eslint', 'prettier']
 \}
 
 let g:ale_python_mypy_options='--follow-imports=skip'
