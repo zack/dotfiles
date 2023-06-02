@@ -1,3 +1,5 @@
+# This is kind of deprecated? But idk, keeping it around for posterity
+
 # make sure to have intalled:
 # * git
 # * vim
@@ -24,10 +26,6 @@ mkdir -p ~/.vim/undo
 git clone https://github.com/gmarik/Vundle.vim.git ~/dotfiles/vim/bundle/Vundle.vim
 git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/dotfiles/zsh-syntax-highlighting/
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-curl https://raw.githubusercontent.com/zack/zsh-themes/master/robbyrussell-ssh.zsh-theme >> ~/.oh-my-zsh/themes/robbyrussel-zack.zsh-theme
 
 sh ~/dotfiles/install_script
 
