@@ -23,14 +23,13 @@ else
 fi
 
 mkdir -p ~/.vim/undo
-git clone https://github.com/gmarik/Vundle.vim.git ~/dotfiles/vim/bundle/Vundle.vim
-git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/dotfiles/zsh-syntax-highlighting/
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 sh ~/dotfiles/install_script
 
-vim +PluginInstall +qal
-vim +"call minpac#update"
+vim +PlugInstall +qal
 
 # for fzf
 sudo cp ~/dotfiles/with-dir /usr/local/bin/with-dir
