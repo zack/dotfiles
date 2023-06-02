@@ -1,64 +1,49 @@
 set nocompatible
 filetype off
 
-" Minpac Initialization
-packadd minpac
-call minpac#init()
-call minpac#add('k-takata/minpac', {'type': 'opt'})
-" Specify minpac Plugins
-call minpac#add('vim-jp/syntax-vim-ex')
-" Load all minpack plugins
-packloadall
-
 " Get fzf up in here
 set rtp+=~/.fzf
 
 " FZF
 let $FZF_DEFAULT_COMMAND="rg --files | rg -v '(jpg$|png$)'"
 
-" Vundle Plugin
-set rtp+=~/.vim/bundle/Vundle.vim
-call plug#begin('~/.config/nvim/plugged')
-call vundle#rc()
-call vundle#begin()
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-call plug#end()
-
 " For colors and stuff
 set termguicolors
 
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
-Plugin 'airblade/vim-gitgutter'
-Plugin 'benmills/vimux'
-Plugin 'bling/vim-airline'
-Plugin 'blueyed/smarty.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'dense-analysis/ale'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'elmcast/elm-vim'
-Plugin 'ervandew/supertab'
-Plugin 'ggandor/lightspeed.nvim'
-Plugin 'gmarik/vundle'
-Plugin 'groenewege/vim-less'
-Plugin 'junegunn/fzf.vim'
-Plugin 'leafOfTree/vim-vue-plugin'
-Plugin 'luochen1990/rainbow'
-Plugin 'mxw/vim-jsx'
-Plugin 'norcalli/nvim-colorizer.lua'
-Plugin 'pangloss/vim-javascript'
-Plugin 'rbgrouleff/bclose.vim'
-Plugin 'rigellute/rigel'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'simnalamburt/vim-mundo'
-Plugin 'terryma/vim-expand-region'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
+Plug 'bling/vim-airline'
+Plug 'blueyed/smarty.vim'
+Plug 'knubie/vim-kitty-navigator'
+Plug 'dense-analysis/ale'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'elmcast/elm-vim'
+Plug 'ervandew/supertab'
+Plug 'ggandor/lightspeed.nvim'
+Plug 'gmarik/vundle'
+Plug 'groenewege/vim-less'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'leafOfTree/vim-vue-plugin'
+Plug 'luochen1990/rainbow'
+Plug 'mxw/vim-jsx'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'pangloss/vim-javascript'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'rigellute/rigel'
+Plug 'scrooloose/nerdcommenter'
+Plug 'simnalamburt/vim-mundo'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-jp/syntax-vim-ex'
 
-call vundle#end()
+call plug#end()
 
 syntax enable
 filetype plugin indent on

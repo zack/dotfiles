@@ -10,9 +10,6 @@ export PATH="$PATH:/Users/zack.youngren/.local/bin"
 # Added by n-install (see http://git.io/n-install-repo).
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
-### ALWAYS IN TMUX
-if [ "$TMUX" = "" ]; then tmux -2; fi
-
 ### MISC EXPORTS
 export KEYTIMEOUT=1 # disable wait when switching modes
 export EDITOR=nvim
@@ -34,7 +31,6 @@ then
 fi
 
 ### PROMPT
-if [ "$TMUX" != "" ]; then ARROW="→" else ARROW="⇝" fi
 STATUS="%(?.%F{green}.%F{red})${ARROW}%f"
 if [[ -n "$SSH_CLIENT" ]]; then UN="%B%F{yellow}%n%b%f " else UN="" fi
 LOC="%1~"
@@ -80,7 +76,7 @@ alias ag='ag -p ~/.agignore'
 alias cat='bat'
 alias cm='cmatrix'
 alias cr='cargo run'
-alias ff='nvim $(fzf-tmux -m)'
+alias ff='nvim $(fzf -m)'
 alias installdeb='sudo dpkg -i'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias ls='ls --color'
@@ -145,7 +141,7 @@ _fzf_compgen_dir() {
 fgb() {
   local branches branch
   branches=$(git branch -vv) &&
-    branch=$(echo "$branches" | fzf-tmux +m) &&
+    branch=$(echo "$branches" | fzf) &&
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 

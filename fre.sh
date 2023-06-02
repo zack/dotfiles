@@ -1,11 +1,11 @@
 # make sure to have intalled:
-# * tmux
+# * git
 # * vim
 # * zsh
 
 # should also probably install:
 # * ag
-# * diff-so-fancy
+# * delta
 # * fzf
 # * ripgrep
 
