@@ -256,10 +256,12 @@ endfunc
 
 " Nobody uses you and you have no friends
 map q: :q
-" Replace double quotes with single quotes
-map <leader>' cs"'<ESC>
-" Replace single quotes with double quotes
-map <leader>" cs'"<ESC>
+" Replace any quotes with single quotes
+map <leader>' cs"'<ESC>lcs`'<ESC>
+" Replace any quotes with double quotes
+map <leader>" cs'"<ESC>lcs`"<ESC>
+" Replace any quotes with backtick quotes
+map <leader>` cs'`<ESC>lcs"`<ESC>
 " Ripgrep
 map <leader>r :Rg<CR>
 " Redraw
