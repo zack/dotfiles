@@ -50,7 +50,10 @@ zstyle ':vcs_info:*' unstagedstr "%B%F{yellow}±%f%b"
 zstyle ':vcs_info:*' stagedstr "%F{green}±%f"
 zstyle ':vcs_info:*' formats "(%B%F{magenta}%b%f%%b)%m%u%c"
 setopt prompt_subst
-PROMPT='👾 ${UN}${STATUS} ${LOC}${vcs_info_msg_0_} $ '
+PROMPT='${UN}${STATUS} ${LOC}${vcs_info_msg_0_} $ '
+if ! [ -f '/etc/wsl.conf' ]; then
+  PROMPT='👾 ${PROMPT}'
+fi
 
 ### ZSH SYNTAX HIGHLIGHTING
 source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
