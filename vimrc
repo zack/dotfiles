@@ -29,7 +29,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'knubie/vim-kitty-navigator'
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'leafgarland/typescript-vim'
-Plug 'luochen1990/rainbow'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -196,9 +195,6 @@ let g:airline_powerline_fonts    = 1
 let g:rigel_airline = 1
 let g:airline_theme = 'bubblegum'
 
-" Rainbow parens
-let g:rainbow_active = 1
-
 " Rust
 let g:rustfmt_autosave = 1
 
@@ -302,8 +298,6 @@ nnoremap <C-p> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 " Open FZF in history mode
 nnoremap <C-y> :History<CR>
-" Toggle rainbowend
-nnoremap <C-d> :call ToggleRainbow()<CR>
 " Open up fzf GFiles? (git status files)
 nnoremap <C-g> :GFiles?<CR>
 " Show the full file name and path
