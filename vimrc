@@ -16,7 +16,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'blueyed/smarty.vim'
-Plug 'knubie/vim-kitty-navigator'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elixir-lang/vim-elixir'
@@ -27,9 +26,13 @@ Plug 'gmarik/vundle'
 Plug 'groenewege/vim-less'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'knubie/vim-kitty-navigator'
 Plug 'leafOfTree/vim-vue-plugin'
+Plug 'leafgarland/typescript-vim'
 Plug 'luochen1990/rainbow'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mxw/vim-jsx'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'pangloss/vim-javascript'
 Plug 'rbgrouleff/bclose.vim'
@@ -56,7 +59,6 @@ colorscheme rigel
 
 augroup FiletypeGroup
   autocmd!
-  au BufNewFile,BufRead *.jsx      set filetype=javascript.jsx
   au BufNewFile,BufRead *.hbs      set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.tpl      set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.mustache set filetype=html.mustache syntax=mustache
@@ -286,6 +288,8 @@ nnoremap <silent> <leader>ak :ALEPrevious<cr>
 
 " Go back to the most recently open file
 nnoremap <leader><leader> <C-^>
+" Show inferred typescript type
+nnoremap <silent> T :call ShowDocumentation()<CR>
 " New tab
 nnoremap tn :tabedit<CR>
 " Close tab
@@ -342,6 +346,15 @@ vmap <leader>d "+d
 nmap <leader>p "+p
 vmap <leader>y "+y
 
+" For coc.vim
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('T', 'in')
+  endif
+endfunction
+
 " Start putting doesn't replace paste buffer
 function! RestoreRegister()
   let @" = s:restore_reg
@@ -366,19 +379,21 @@ set showcmd
 let g:ale_linters = {
 \    'bash': ['shellcheck'],
 \    'javascript': ['eslint', 'prettier'],
-\    'jsx': ['eslint'],
+\    'javascriptreact': ['eslint', 'prettier'],
 \    'php': ['phpcs'],
+\    'python': ['flake8', 'mypy'],
 \    'rs': ['rls'],
 \    'sh': ['shellcheck'],
 \    'typescript': ['eslint', 'prettier'],
-\    'zsh': ['shellcheck'],
-\    'python': ['flake8', 'mypy']
+\    'typescriptreact': ['eslint'],
+\    'zsh': ['shellcheck']
 \}
 
 let g:ale_fixers = {
 \  'javascript': ['eslint', 'prettier'],
-\  'jsx': ['eslint', 'prettier'],
-\  'typescript': ['eslint', 'prettier']
+\  'javascriptreact': ['eslint', 'prettier'],
+\  'typescript': ['eslint', 'prettier'],
+\  'typescriptreact': ['prettier']
 \}
 
 let g:ale_python_mypy_options='--follow-imports=skip'
