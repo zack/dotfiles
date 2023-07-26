@@ -115,7 +115,6 @@ set splitbelow
 set splitright
 set swapfile
 set undofile
-set undofile
 set wildmenu
 set writebackup
 
@@ -138,7 +137,6 @@ set sidescrolloff=1
 set sidescroll   =1
 set textwidth    =79
 set undodir      =$HOME/.vim/undo
-set undodir     ^=~/.vim/undo//
 set undolevels   =1000
 set undoreload   =10000
 set viminfo      ='20,<1000,s10,h
