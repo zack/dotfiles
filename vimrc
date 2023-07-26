@@ -37,6 +37,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'rigellute/rigel'
 Plug 'scrooloose/nerdcommenter'
+Plug 'sheerun/vim-polyglot'
 Plug 'simnalamburt/vim-mundo'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
@@ -60,7 +61,7 @@ augroup FiletypeGroup
   autocmd!
   au BufNewFile,BufRead *.hbs      set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.tpl      set filetype=html.handlebars syntax=mustache
-  au BufNewFile,BufRead *.mustache set filetype=html.mustache syntax=mustache
+  au BufNewFile,BufRead *.mustache set filetype=html.mustache   syntax=mustache
 augroup END
 au FileType gitcommit 1
 
@@ -97,7 +98,7 @@ runtime ftplugin/man.vim
 set ai
 set autoindent
 " set cursorcolumn
-" set cursorline
+set cursorline
 set hidden
 set hlsearch
 set ignorecase
