@@ -1,12 +1,7 @@
 ### PATH MODIFICATION
 export PATH="$PATH:$HOME/bins"
 export PATH="$PATH:/usr/local/bin/"
-export PATH="$PATH:$HOME/etsy_bins"
-export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:/opt/homebrew/lib/"
-
-# Added by n-install (see http://git.io/n-install-repo).
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
 ### MISC EXPORTS
 export KEYTIMEOUT=1 # disable wait when switching modes
@@ -14,6 +9,7 @@ export EDITOR=nvim
 export LESS='-iRS#3NM~g'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export BAT_CONFIG_PATH=$HOME/.batrc
+export BAT_THEME='Dracula'
 
 ### HISTORY
 HISTFILE=~/.zsh_history

@@ -61,3 +61,5 @@
   required = true
 [advice]
   detachedHead = false
+[credential]
+  helper = cache --timeout=600
