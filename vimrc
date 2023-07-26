@@ -13,7 +13,6 @@ set termguicolors
 call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'blueyed/smarty.vim'
 Plug 'dense-analysis/ale'
