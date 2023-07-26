@@ -4,8 +4,6 @@ export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:$HOME/etsy_bins"
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:/opt/homebrew/lib/"
-# Created by `pipx` on 2022-01-21 21:29:10
-export PATH="$PATH:/Users/zack.youngren/.local/bin"
 
 # Added by n-install (see http://git.io/n-install-repo).
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
@@ -170,12 +168,10 @@ fi
 # Start the day off right
 fortune | cowsay | lolcat -F 0.5
 
-[ -f "$HOME/dotfiles/stellar_dotfiles/zshrc" ] && source "$HOME/dotfiles/stellar_dotfiles/zshrc"
-
 # Pull in work dotfiles
-# for file in ~/dotfiles/work_dotfiles/zshrc_*; do
-#   source "$file"
-# done
+for file in ~/dotfiles/work_dotfiles/zshrc_*; do
+  source "$file"
+done
 
 export PATH="/usr/local/sbin:$PATH"
 
