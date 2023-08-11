@@ -59,8 +59,10 @@ colorscheme rigel
 augroup FiletypeGroup
   autocmd!
   au BufNewFile,BufRead *.hbs      set filetype=html.handlebars syntax=mustache
-  au BufNewFile,BufRead *.tpl      set filetype=html.handlebars syntax=mustache
+  au BufNewFile,BufRead *.js       set filetype=javascript      syntax=javascript
+  au BufNewFile,BufRead *.jsx      set filetype=javascript      syntax=javascript
   au BufNewFile,BufRead *.mustache set filetype=html.mustache   syntax=mustache
+  au BufNewFile,BufRead *.tpl      set filetype=html.handlebars syntax=mustache
 augroup END
 au FileType gitcommit 1
 
@@ -283,7 +285,7 @@ nnoremap <silent> <leader>ak :ALEPrevious<cr>
 " Go back to the most recently open file
 nnoremap <leader><leader> <C-^>
 " Show inferred typescript type
-nnoremap <silent> T :call ShowDocumentation()<CR>
+nnoremap <silent> K :call ShowDocumentation()<CR>
 " New tab
 nnoremap tn :tabedit<CR>
 " Close tab
