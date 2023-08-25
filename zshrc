@@ -172,4 +172,5 @@ done
 
 export PATH="/usr/local/sbin:$PATH"
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
