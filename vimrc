@@ -1,4 +1,5 @@
 set nocompatible
+
 filetype off
 
 " Get fzf up in here
@@ -42,6 +43,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-jp/syntax-vim-ex'
 
@@ -147,6 +149,8 @@ set wildmode     =list:longest,full
 let &colorcolumn             ="80,100"
 let g:clipbrdDefaultReg      ='+'
 let mapleader = "\<Space>"
+
+let g:netrw_liststyle = 3
 
 " FZF
 let g:fzf_action = {
@@ -276,6 +280,9 @@ vmap <C-v> <Plug>(expand_region_shrink)
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
 " Menu navigation
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
+
+" coc.vim remap <cr> to confirm completion
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
 " ALE jump to next error
 nnoremap <silent> <leader>aj :ALENext<cr>
