@@ -166,9 +166,11 @@ fi
 fortune | cowsay | lolcat -F 0.5
 
 # Pull in work dotfiles
-for file in ~/dotfiles/work_dotfiles/zshrc_*; do
+setopt no_nomatch
+for file in `find ~/dotfiles/work_dotfiles/ -type f -iname zshrc_*`; do
   source "$file"
 done
+setopt nomatch
 
 export PATH="/usr/local/sbin:$PATH"
 
