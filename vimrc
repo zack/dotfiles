@@ -370,16 +370,16 @@ let g:ale_linters = {
 \    'python': ['flake8', 'mypy'],
 \    'rs': ['rls'],
 \    'sh': ['shellcheck'],
-\    'typescript': ['tslint', 'prettier'],
-\    'typescriptreact': ['tslint', 'prettier'],
+\    'typescript': ['eslint', 'prettier'],
+\    'typescriptreact': ['eslint', 'prettier'],
 \    'zsh': ['shellcheck']
 \}
 
 let g:ale_fixers = {
 \  'javascript': ['eslint', 'prettier'],
 \  'javascriptreact': ['eslint', 'prettier'],
-\  'typescript': ['tslint', 'prettier'],
-\  'typescriptreact': ['tslint', 'prettier']
+\  'typescript': ['eslint', 'prettier'],
+\  'typescriptreact': ['eslint', 'prettier']
 \}
 
 let g:ale_python_mypy_options='--follow-imports=skip'
