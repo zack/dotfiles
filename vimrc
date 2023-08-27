@@ -24,13 +24,12 @@ Plug 'ervandew/supertab'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gmarik/vundle'
 Plug 'groenewege/vim-less'
+Plug 'herringtonDarkholme/yats.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'knubie/vim-kitty-navigator'
-Plug 'leafOfTree/vim-vue-plugin'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'pangloss/vim-javascript'
@@ -46,6 +45,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-jp/syntax-vim-ex'
+Plug 'yuezk/vim-js'
 
 call plug#end()
 
@@ -62,7 +62,9 @@ augroup FiletypeGroup
   autocmd!
   au BufNewFile,BufRead *.hbs      set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.js       set filetype=javascript      syntax=javascript
-  au BufNewFile,BufRead *.jsx      set filetype=javascript      syntax=javascript
+  au BufNewFile,BufRead *.jsx      set filetype=javascriptreact syntax=javascriptreact
+  au BufNewFile,BufRead *.ts       set filetype=typescript      syntax=typescript
+  au BufNewFile,BufRead *.tsx      set filetype=typescriptreact syntax=typescriptreact
   au BufNewFile,BufRead *.mustache set filetype=html.mustache   syntax=mustache
   au BufNewFile,BufRead *.tpl      set filetype=html.handlebars syntax=mustache
 augroup END
@@ -87,6 +89,7 @@ autocmd FileType elm             setlocal tabstop=4|set shiftwidth=4|set expandt
 autocmd FileType html            setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
 autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType javascript      setlocal tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType typescript      setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType php             setlocal tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType python          setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType rust            setlocal tabstop=4|set shiftwidth=4|set expandtab
@@ -157,29 +160,11 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" Vim-JSX
-let g:jsx_ext_required = 0
-
 " javascript flow syntax from rigel documentation
 let g:javascript_plugin_flow = 1
 
 " Ale flake-8
 call ale#Set('python_flake8_options', '--config=$HOME/.config/flake8')
-
-" Default configuration from project README
-let g:vim_vue_plugin_config = {
-      \'syntax': {
-      \   'template': ['html'],
-      \   'script': ['javascript'],
-      \   'style': ['css'],
-      \},
-      \'full_syntax': [],
-      \'initial_indent': [],
-      \'attribute': 0,
-      \'keyword': 0,
-      \'foldexpr': 0,
-      \'debug': 0,
-      \}
 
 " Airline
 "" Extensions
@@ -385,16 +370,16 @@ let g:ale_linters = {
 \    'python': ['flake8', 'mypy'],
 \    'rs': ['rls'],
 \    'sh': ['shellcheck'],
-\    'typescript': ['eslint', 'prettier'],
-\    'typescriptreact': ['eslint'],
+\    'typescript': ['tslint', 'prettier'],
+\    'typescriptreact': ['tslint', 'prettier'],
 \    'zsh': ['shellcheck']
 \}
 
 let g:ale_fixers = {
 \  'javascript': ['eslint', 'prettier'],
 \  'javascriptreact': ['eslint', 'prettier'],
-\  'typescript': ['eslint', 'prettier'],
-\  'typescriptreact': ['prettier']
+\  'typescript': ['tslint', 'prettier'],
+\  'typescriptreact': ['tslint', 'prettier']
 \}
 
 let g:ale_python_mypy_options='--follow-imports=skip'
