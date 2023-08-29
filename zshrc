@@ -4,12 +4,13 @@ export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/opt/homebrew/lib/"
 
 ### MISC EXPORTS
-export KEYTIMEOUT=1 # disable wait when switching modes
-export EDITOR=nvim
-export LESS='-iRS#3NM~g'
-export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export BAT_CONFIG_PATH=$HOME/.batrc
 export BAT_THEME='Dracula'
+export EDITOR=nvim
+export KEYTIMEOUT=1 # disable wait when switching modes
+export LESS='-iRS#3NM~g'
+export NVM_DIR="$HOME/.nvm"
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ### HISTORY
 HISTFILE=~/.zsh_history
@@ -151,16 +152,6 @@ function gb {
   fi
 }
 alias gb=gb
-
-# A kind of lazy loading for nvm,npm,etc.
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  # nvim because we use coc.vim
-  nvm_cmds=(nvm node npm yarn npx nvim)
-  for cmd in $nvm_cmds ; do
-    alias $cmd="unalias $nvm_cmds && unset nvm_cmds && . $NVM_DIR/nvm.sh &&  . $NVM_DIR/bash_completion && $cmd"
-  done
-fi
 
 # Start the day off right
 fortune | cowsay | lolcat -F 0.5
