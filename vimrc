@@ -63,18 +63,15 @@ augroup FiletypeGroup
   au BufNewFile,BufRead *.hbs      set filetype=html.handlebars syntax=mustache
   au BufNewFile,BufRead *.js       set filetype=javascript      syntax=javascript
   au BufNewFile,BufRead *.jsx      set filetype=javascriptreact syntax=javascriptreact
-  au BufNewFile,BufRead *.ts       set filetype=typescript      syntax=typescript
-  au BufNewFile,BufRead *.tsx      set filetype=typescriptreact syntax=typescriptreact
   au BufNewFile,BufRead *.mustache set filetype=html.mustache   syntax=mustache
   au BufNewFile,BufRead *.tpl      set filetype=html.handlebars syntax=mustache
+  au BufNewFile,BufRead *.ts       set filetype=typescript      syntax=typescript
+  au BufNewFile,BufRead *.tsx      set filetype=typescriptreact syntax=typescriptreact
 augroup END
 au FileType gitcommit 1
 
 " disable syntax highlighting in files > 250K
 au BufReadPost * if getfsize(bufname("%")) > 250*1024 | set syntax= ai | endif
-
-" Special Syntax Highlighting
-autocmd BufNewFile,BufRead *.json set ft=javascript " JSON using JS rules
 
 " Autotrim whitespace
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
@@ -89,10 +86,10 @@ autocmd FileType elm             setlocal tabstop=4|set shiftwidth=4|set expandt
 autocmd FileType html            setlocal tabstop=4|set shiftwidth=4|set expandtab|set fo-=t
 autocmd FileType html.handlebars setlocal tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType javascript      setlocal tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType typescript      setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType php             setlocal tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType python          setlocal tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType rust            setlocal tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType typescript      setlocal tabstop=2|set shiftwidth=2|set expandtab
 
 " Do/end matching
 runtime macros/matchit.vim
@@ -371,7 +368,7 @@ let g:ale_linters = {
 \    'rs': ['rls'],
 \    'sh': ['shellcheck'],
 \    'typescript': ['eslint', 'prettier'],
-\    'typescriptreact': ['eslint', 'prettier'],
+\    'typescriptreact': ['eslint', 'prettier', 'tsserver'],
 \    'zsh': ['shellcheck']
 \}
 
