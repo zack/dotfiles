@@ -33,6 +33,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'pangloss/vim-javascript'
+Plug 'prisma/vim-prisma'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'rigellute/rigel'
 Plug 'scrooloose/nerdcommenter'
