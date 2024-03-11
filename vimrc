@@ -16,6 +16,7 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'blueyed/smarty.vim'
+Plug 'cameron-wags/rainbow_csv.nvim'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elixir-lang/vim-elixir'
@@ -30,6 +31,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'knubie/vim-kitty-navigator'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'pangloss/vim-javascript'
@@ -38,7 +40,6 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'rigellute/rigel'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
-Plug 'simnalamburt/vim-mundo'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -150,6 +151,8 @@ set wildmode     =list:longest,full
 let &colorcolumn             ="80,100"
 let g:clipbrdDefaultReg      ='+'
 let mapleader = "\<Space>"
+
+let g:csv_no_conceal = 1
 
 let g:netrw_liststyle = 3
 
@@ -310,8 +313,8 @@ vnoremap <C-t> "hy:%s/\(<C-r>h\)/\1/gc<left><left><left>
 nnoremap <leader>i mmgg=G`m<CR>
 " Sort
 vnoremap <leader>s :sort<CR>
-" Toggle Gundo Tree
-nnoremap <leader>u :MundoToggle<CR>
+" Toggle Undo Tree
+nnoremap <leader>u :UndotreeToggle<CR>
 " Save a file
 nnoremap <silent> <leader>\ :nohl<CR>
 
@@ -368,7 +371,7 @@ let g:ale_linters = {
 \    'python': ['flake8', 'mypy'],
 \    'rs': ['rls'],
 \    'sh': ['shellcheck'],
-\    'typescript': ['eslint', 'prettier'],
+\    'typescript': ['eslint', 'prettier', 'tsserver'],
 \    'typescriptreact': ['eslint', 'prettier', 'tsserver'],
 \    'zsh': ['shellcheck']
 \}
