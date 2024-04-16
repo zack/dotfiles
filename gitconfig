@@ -27,6 +27,8 @@
   pr = !hub pull-request
   rb = !git fetch upstream && git rebase upstream/master
   rbo = !git fetch origin && git rebase origin/master
+  remain = !git fetch origin && git reset --hard origin/main
+  remaster = !git fetch origin && git reset --hard origin/master
   st = status
   up = !git checkout master && git fetch upstream && git reset --hard upstream/master
   upo = !git checkout master && git fetch origin && git reset --hard origin/master

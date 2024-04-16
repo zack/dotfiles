@@ -84,12 +84,13 @@ alias python='python3'
 alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
+alias v='vim'
+alias vi='vim'
 alias vim='nvim'
 alias view='vim -R'
 alias vview='vim -R -u NONE'
 alias vvim='vim -u NONE' # vanilla vim
 alias when='TZ=America/New_York date -d @\'
-alias z='zeus'
 
 # git aliases
 alias gs='git st'

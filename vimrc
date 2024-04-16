@@ -28,6 +28,7 @@ Plug 'groenewege/vim-less'
 Plug 'herringtonDarkholme/yats.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-peekaboo'
 Plug 'knubie/vim-kitty-navigator'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -45,6 +46,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'unblevable/quick-scope'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-jp/syntax-vim-ex'
 Plug 'yuezk/vim-js'
@@ -155,6 +157,9 @@ let mapleader = "\<Space>"
 let g:csv_no_conceal = 1
 
 let g:netrw_liststyle = 3
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " FZF
 let g:fzf_action = {
