@@ -19,10 +19,8 @@ Plug 'blueyed/smarty.vim'
 Plug 'cameron-wags/rainbow_csv.nvim'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'elmcast/elm-vim'
 Plug 'ervandew/supertab'
-Plug 'ggandor/lightspeed.nvim'
+Plug 'ggandor/leap.nvim'
 Plug 'gmarik/vundle'
 Plug 'groenewege/vim-less'
 Plug 'herringtonDarkholme/yats.vim'
@@ -31,6 +29,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'knubie/vim-kitty-navigator'
 Plug 'leafgarland/typescript-vim'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -171,6 +170,10 @@ let g:javascript_plugin_flow = 1
 
 " Ale flake-8
 call ale#Set('python_flake8_options', '--config=$HOME/.config/flake8')
+
+" leap.nvim settings
+lua require('leap').create_default_mappings()
+lua vim.keymap.set('n',        's', '<Plug>(leap)')
 
 " Airline
 "" Extensions

@@ -84,6 +84,7 @@ alias python='python3'
 alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
+alias rgns='rg --glob "!*spec.js"'
 alias v='vim'
 alias vi='vim'
 alias vim='nvim'
@@ -178,3 +179,6 @@ export PATH="/usr/local/sbin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(zoxide init zsh)"
+ctags=/opt/homebrew/bin/ctags
