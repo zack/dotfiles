@@ -277,7 +277,7 @@ function anyNumberToggle()
   end
 end
 
-local function vim_grep(args, bang)
+local function vim_grep(args)
   local query = '""'
   if args ~= nil then
     query = vim.fn.shellescape(args)
@@ -295,17 +295,7 @@ local function vim_grep(args, bang)
     fzf_opts = {
       ["--preview-window"] = "right:50%"
     },
-    rg_opts = "\
-      --column\
-      --fixed-strings\
-      --follow\
-      --glob\
-      ---\"!{.git, node_modules, vendor}/*\"\
-      --color \"always\"\
-      --hidden\
-      --ignore-case\
-      --line-number\
-    "
+    rg_opts = "--column --fixed-strings --follow --glob \"!{.git, node_modules, vendor}/*\" --color \"always\" --hidden --ignore-case --line-number"
   })
 end
 
