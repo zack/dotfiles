@@ -1,5 +1,6 @@
 ### PATH MODIFICATION
 export PATH="$PATH:$HOME/bins"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/opt/homebrew/lib/"
 

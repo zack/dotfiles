@@ -9,7 +9,7 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 workdir=~/dotfiles/work_dotfiles
 
 # list of files/folders to symlink in homedir
-files="ackrc agignore vimrc vim zshrc gitconfig gitignore_global ripgreprc"
+files="ackrc agignore vim zshrc gitconfig gitignore_global ripgreprc"
 workfiles="zshrc_work"
 
 ##########
@@ -41,3 +41,7 @@ echo "...done"
 # Set up kitty config
 mkdir -p ~/.config/kitty/
 ln -s ~/dotfiles/kitty.config ~/.config/kitty/kitty.conf
+
+# set up neovim config
+mkdir ~/.config/nvim
+ln -s ~/.config/nvim/init.lua $(realpath ~/dotfiles/init.lua)

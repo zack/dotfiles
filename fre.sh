@@ -2,11 +2,10 @@
 
 # make sure to have intalled:
 # * git
-# * vim
+# * neovim
 # * zsh
 
 # should also probably install:
-# * ag
 # * delta
 # * fzf
 # * ripgrep
@@ -24,12 +23,8 @@ fi
 
 mkdir -p ~/.vim/undo
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/dotfiles/zsh-syntax-highlighting/
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 sh ~/dotfiles/install_script
-
-vim +PlugInstall +qal
 
 # for fzf
 sudo cp ~/dotfiles/with-dir /usr/local/bin/with-dir
