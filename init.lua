@@ -167,7 +167,7 @@ vim.g.gitgutter_max_signs = 10000 -- show all the signs
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 -- Sets the vim colorscheme
-local colorscheme = "rigel"
+vim.cmd [[colorscheme rigel]]
 
 -- 80th and 100th columns are red
 vim.cmd("highlight ColorColumn guibg='#800000'")
