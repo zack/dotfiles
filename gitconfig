@@ -1,6 +1,6 @@
 [user]
   name = Zack Youngren
-  email = zack@youngren.io
+	email = github.com@youngren.io
 [push]
   default = current
 [color]
@@ -20,6 +20,7 @@
   fb = !git fetch origin && git checkout origin/master -b
   files = diff-tree --no-commit-id --name-only -r
   fix = !git diff --name-only | uniq | xargs $EDITOR
+  gpo = push origin
   lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
   log-f = log --stat
   log-s = log --oneline --no-merges
@@ -39,17 +40,16 @@
   autocrlf = input
   editor = nvim
   excludesfile = ~/.gitignore_global
-  pager = delta | less
+  ; pager = diff | less
   filemode = false
+[diff]
+  external = difft
 [pager]
-  log = delta | less
-  diff = delta | less
+  ; log = diff | less
+  ; diff = diff | less
   branch = cat
-[delta]
-  line-numbers = true
-  syntax-theme = OneHalfDark
 [interactive]
-  diffFilter = delta --color-only
+  ; diffFilter = diff --color-only
 [pull]
   rebase = true
 [rebase]

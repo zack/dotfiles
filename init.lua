@@ -182,11 +182,6 @@ vim.cmd("highlight GitGutterDelete guifg='#AA0000'")
 -- ║                               AUTOCOMMANDS                                ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
--- Autmatically enter insert mode for git commits
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "gitcommit", "gitrebase" },
-  command = "startinsert | 1",
-})
 
 -- Disable syntax on files longer than 10,000 lines
 vim.api.nvim_create_autocmd("FileType", {
@@ -335,6 +330,7 @@ vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line w
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "<Leader>i", "mmgg=G`m<CR>", {}) -- indent the who file
 vim.api.nvim_set_keymap("n", "<Leader>\\", ":nohl<CR>", {}) -- clear highlighting
+vim.api.nvim_set_keymap("n", "<Leader>b", ":GBrowse<CR>", {}) -- open file in GitHub
 vim.api.nvim_set_keymap("n", "<Leader>h", ":vertical resize +10<CR>", {}) -- resize vertical 10
 vim.api.nvim_set_keymap("n", "<Leader>H", ":vertical resize +1<CR>", {}) -- resize vertical 1
 vim.api.nvim_set_keymap("n", "<Leader>j", ":resize -10<CR>", {}) -- resize horizontal 10

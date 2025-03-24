@@ -64,3 +64,5 @@ nohup.out
 *.kdbx
 
 tags
+tags.lock
+tags.temp
