@@ -72,6 +72,7 @@ require("lazy").setup({
     { 'rigellute/rigel' }, -- colorscheme
     { 'scrooloose/nerdcommenter' }, -- powerful commenting tool
     { 'terryma/vim-expand-region' }, -- tap v to expand selections
+    { 'thirtythreeforty/lessspace.vim' }, -- trim whitespace for edited lines only
     { 'tpope/vim-surround' }, -- easy surround bindings
     { 'tpope/vim-vinegar' }, -- improve netrw usability
     { 'unblevable/quick-scope' }, -- highlights characters for quick jumps
@@ -191,12 +192,6 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.bo.syntax = 'off'
     end
   end,
-})
-
--- Automatically trim whitespace on read & write
-vim.api.nvim_create_autocmd({ "BufRead", "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
 })
 
 -- Default tab behavior for files
