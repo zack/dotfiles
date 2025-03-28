@@ -3,16 +3,16 @@
   email = github.com@youngren.io
 
 [push]
-  default = simple
+  default = current
   autoSetupRemote = true
 
 [color]
   ui = true
 
 [alias]
-  fb = !git fetch origin && git checkout origin/main -b
   files = diff-tree --no-commit-id --name-only -r
   lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+  new = !grt fetch origin && git checkout origin/main -b
   rb = !git fetch origin && git rebase origin/main
   reset = !git fetch origin && git reset --hard origin/main
 
