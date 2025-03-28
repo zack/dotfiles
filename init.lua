@@ -22,6 +22,7 @@
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({
@@ -53,8 +54,6 @@ vim.o.termguicolors = true -- required for colorizer (and maybe other things)
 require("lazy").setup({
   spec = {
     -- General Usability
-    -- TODO: Maybe dedup supertab/coc.nvim
-    { 'ervandew/supertab' }, -- improved (? )tab insert completion
     -- TODO: Change mappings so they don't conflict with surround
     -- { 'ggandor/leap.nvim' }, -- jumping around with 's'
     { 'ibhagwan/fzf-lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
@@ -66,7 +65,6 @@ require("lazy").setup({
     },
     { 'ludovicchabant/vim-gutentags' }, -- tags support
     { 'mbbill/undotree' }, -- powerful branching undo trees
-    { 'neoclide/coc.nvim', branch = "release", build = "npm i" }, -- more completion
     { 'norcalli/nvim-colorizer.lua' }, -- colorizer hexes and color names and stuff
     { 'rbgrouleff/bclose.vim' }, -- delete a buffer without closing the window
     { 'rigellute/rigel' }, -- colorscheme
@@ -76,7 +74,50 @@ require("lazy").setup({
     { 'tpope/vim-surround' }, -- easy surround bindings
     { 'tpope/vim-vinegar' }, -- improve netrw usability
     { 'unblevable/quick-scope' }, -- highlights characters for quick jumps
+    {
+      'hrsh7th/nvim-cmp', -- autocompletion
+      dependencies = {
+        -- LSP completion source
+        'hrsh7th/cmp-nvim-lsp',
+        -- Buffer words completion
+        'hrsh7th/cmp-buffer',
+        -- Path completion
+        'hrsh7th/cmp-path',
+        -- Snippet engine
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+      },
+      config = function()
+        local cmp = require('cmp')
+        local luasnip = require('luasnip')
 
+        cmp.setup({
+          -- Use luasnip as snippet engine
+          snippet = {
+            expand = function(args)
+              luasnip.lsp_expand(args.body)
+            end,
+          },
+
+          -- Completion mappings
+          mapping = cmp.mapping.preset.insert({
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<CR>'] = cmp.mapping.confirm({
+              select = true
+            }),
+          }),
+
+          -- Configure completion sources
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+          }, {
+            { name = 'buffer' },
+          })
+        })
+      end
+    },
 
     -- Git
     { 'airblade/vim-gitgutter' }, -- git indicators on the left
@@ -86,37 +127,12 @@ require("lazy").setup({
     -- CSVs
     { 'cameron-wags/rainbow_csv.nvim' }, -- CSV "cells" colored by column
 
-    -- Linting & Fixing
-    {  -- asynchronous linting engine
-      'dense-analysis/ale',
-      config = function()
-        vim.g.ale_fix_on_save = 1
-
-        vim.g.ale_linters = {
-          lua = {'lua_language_server'},
-          bash = { 'shellcheck' },
-          javascript = { 'eslint', 'prettier' },
-          javascriptreact = { 'eslint', 'prettier' },
-          rs = { 'rls' },
-          sh = { 'shellcheck' },
-          typescript = { 'eslint', 'prettier', 'tsserver' },
-          typescriptreact = { 'eslint', 'prettier', 'tsserver' },
-          zsh = { 'shellcheck' }
-        }
-
-        vim.g.ale_fixers = {
-          javascript = { 'eslint', 'prettier' },
-          javascriptreact = { 'eslint', 'prettier' },
-          typescript = { 'eslint', 'prettier' },
-          typescriptreact = { 'eslint', 'prettier' }
-        }
-      end
-    },
-
     -- Config Management
     { 'editorconfig/editorconfig-vim' }, -- support for .editorconfig files
 
     -- Languages & Frameworks
+    -- LSP
+    { 'neovim/nvim-lspconfig' }, -- LSP config
     ---- Typescript
     ---- TODO: Do we need both of these?
     { 'herringtonDarkholme/yats.vim' },
@@ -160,6 +176,72 @@ vim.g.NERDSpaceDelims = 1
 -- gitgutter
 vim.g.gitgutter_map_keys = 0 -- disable keymappings
 vim.g.gitgutter_max_signs = 10000 -- show all the signs
+
+
+
+-- ╔═══════════════════════════════════════════════════════════════════════════╗
+-- ║                                LSP SETUP                                  ║
+-- ╚═══════════════════════════════════════════════════════════════════════════╝
+
+local lspconfig = require('lspconfig')
+
+-- Lua
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- This tells the language server that 'vim' is a valid global
+        globals = { 'vim' }
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+        }
+      }
+    }
+  }
+}
+
+-- Typescript and Javascript
+lspconfig.ts_ls.setup {
+  filetypes = {
+    'javascript',       -- Standard JavaScript files
+    'javascriptreact',  -- React JavaScript files
+    'javascript.jsx',   -- JSX JavaScript files
+    'typescript',       -- Standard TypeScript files
+    'typescriptreact',  -- React TypeScript files
+    'typescript.tsx'    -- TSX TypeScript files
+  },
+
+  settings = {
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayVariableTypeHints = true, -- Display type hints for variables
+      }
+    },
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayVariableTypeHints = true,
+      }
+    }
+  },
+}
+
+--Eslint
+lspconfig.eslint.setup {
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx'
+  },
+}
 
 
 
@@ -257,7 +339,7 @@ vim.g.netrw_liststyle = 3 -- config for :Explore etc.
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 -- Toggle numbers on and off no matter the type
-function anyNumberToggle()
+function AnyNumberToggle()
   if vim.o.relativenumber or vim.o.number then
     vim.o.number = false
     vim.o.relativenumber = false
@@ -267,12 +349,7 @@ function anyNumberToggle()
   end
 end
 
-local function vim_grep(args)
-  local query = '""'
-  if args ~= nil then
-    query = vim.fn.shellescape(args)
-  end
-
+local function vim_grep()
   --column: Show column number
   --fixed-strings: Search term as a literal string
   --follow: Follow symlinks
@@ -289,8 +366,8 @@ local function vim_grep(args)
   })
 end
 
-vim.api.nvim_create_user_command('Rg', function(c)
-  vim_grep(c.args, c.bang)
+vim.api.nvim_create_user_command('Rg', function()
+  vim_grep()
 end, { bang = true, nargs = '*' })
 
 
@@ -305,9 +382,6 @@ vim.api.nvim_set_keymap("n", "<Leader>r", ":Rg<CR>", {}) -- search word under cu
 ---- vim-expand
 vim.api.nvim_set_keymap("v", "v", "<Plug>(expand_region_expand)", {})
 vim.api.nvim_set_keymap("v", "<C-v>", "<Plug>(expand_region_shrink)", {})
----- Ale
-vim.api.nvim_set_keymap("n", "<Leader>aj", ":ALENext<CR>", {})
-vim.api.nvim_set_keymap("n", "<Leader>ak", ":ALEPrevious<CR>", {})
 ---- FZF
 vim.api.nvim_set_keymap("n", "<C-p>", ":FzfLua git_files<CR>", {})
 vim.api.nvim_set_keymap("n", "<C-b>", ":FzfLua buffers<CR>", {})
@@ -337,7 +411,7 @@ vim.api.nvim_set_keymap("n", "<Leader>L", ":vertical resize -1<CR>", {}) -- resi
 vim.api.nvim_set_keymap("n", "<Leader>'", "cs\"'<ESC>lcs`'<ESC>", { silent = true }) -- change quotes to '
 vim.api.nvim_set_keymap("n", "<Leader>\"", "cs'\"<ESC>lcs`\"<ESC>", { silent = true }) -- change quotes to "
 vim.api.nvim_set_keymap("n", "<Leader>`", "cs\"`<ESC>lcs'`<ESC>", { silent = true }) -- change quotes to `
-vim.api.nvim_set_keymap("n", "<Leader>n", ":lua anyNumberToggle()<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>n", ":lua AnyNumberToggle()<CR>", { silent = true })
 ---- Visual mode
 vim.api.nvim_set_keymap("v", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
 vim.api.nvim_set_keymap("v", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", { noremap = true }) -- sort the visual selection
