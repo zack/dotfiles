@@ -95,7 +95,7 @@ alias vvim='vim -u NONE' # vanilla vim
 alias when='TZ=America/New_York date -d @\'
 
 # git aliases
-alias gs='git st'
+alias gs='git status'
 alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
 # alias gb='git --no-pager branch'
 # alias gist='gist -c -p'
