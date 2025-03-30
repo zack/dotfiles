@@ -131,7 +131,7 @@ require("lazy").setup({
     { 'editorconfig/editorconfig-vim' }, -- support for .editorconfig files
 
     -- Languages & Frameworks
-    -- LSP
+    { "williamboman/mason.nvim" }, -- for managing LSPs, linters, etc.
     { 'neovim/nvim-lspconfig' }, -- LSP config
     ---- Typescript
     ---- TODO: Do we need both of these?
@@ -158,8 +158,9 @@ require("lazy").setup({
 -- ║                               PLUGIN SETUP                                ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
--- require('leap').create_default_mappings()
 require('colorizer').setup()
+-- require('leap').create_default_mappings()
+require("mason").setup()
 
 
 
