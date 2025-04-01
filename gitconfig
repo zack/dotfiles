@@ -10,11 +10,11 @@
   ui = true
 
 [alias]
+  boom = !git fetch origin && git reset --hard origin/main
   files = diff-tree --no-commit-id --name-only -r
   lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
-  new = !grt fetch origin && git checkout origin/main -b
+  new = !git fetch origin && git checkout origin/main -b
   rb = !git fetch origin && git rebase origin/main
-  reset = !git fetch origin && git reset --hard origin/main
 
 [core]
   autocrlf = input

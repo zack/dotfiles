@@ -75,48 +75,10 @@ require("lazy").setup({
     { 'tpope/vim-vinegar' }, -- improve netrw usability
     { 'unblevable/quick-scope' }, -- highlights characters for quick jumps
     {
-      'hrsh7th/nvim-cmp', -- autocompletion
-      dependencies = {
-        -- LSP completion source
-        'hrsh7th/cmp-nvim-lsp',
-        -- Buffer words completion
-        'hrsh7th/cmp-buffer',
-        -- Path completion
-        'hrsh7th/cmp-path',
-        -- Snippet engine
-        'L3MON4D3/LuaSnip',
-        'saadparwaiz1/cmp_luasnip',
-      },
-      config = function()
-        local cmp = require('cmp')
-        local luasnip = require('luasnip')
-
-        cmp.setup({
-          -- Use luasnip as snippet engine
-          snippet = {
-            expand = function(args)
-              luasnip.lsp_expand(args.body)
-            end,
-          },
-
-          -- Completion mappings
-          mapping = cmp.mapping.preset.insert({
-            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
-            ['<CR>'] = cmp.mapping.confirm({
-              select = true
-            }),
-          }),
-
-          -- Configure completion sources
-          sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
-          }, {
-            { name = 'buffer' },
-          })
-        })
-      end
+      'saghen/blink.cmp',
+      dependencies = { 'rafamadriz/friendly-snippets' }, -- provide snippets for the snippet source
+      version = '1.*', -- use a release tag to download pre-built binaries
+      opts_extend = { 'sources.default' }
     },
 
     -- Git
@@ -131,7 +93,7 @@ require("lazy").setup({
     { 'editorconfig/editorconfig-vim' }, -- support for .editorconfig files
 
     -- Languages & Frameworks
-    { "williamboman/mason.nvim" }, -- for managing LSPs, linters, etc.
+    { 'williamboman/mason.nvim' }, -- for managing LSPs, linters, etc.
     { 'neovim/nvim-lspconfig' }, -- LSP config
     ---- Typescript
     ---- TODO: Do we need both of these?
@@ -146,7 +108,7 @@ require("lazy").setup({
   },
 
   -- Colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { 'habamax' } },
 
   -- Automatically check for plugin updates
   checker = { enabled = true },
@@ -185,6 +147,7 @@ vim.g.gitgutter_max_signs = 10000 -- show all the signs
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 local lspconfig = require('lspconfig')
+vim.diagnostic.config({ virtual_text = true }) -- show LSP diagnostic messages
 
 -- Lua
 lspconfig.lua_ls.setup {
