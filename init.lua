@@ -54,7 +54,6 @@ vim.o.termguicolors = true -- required for colorizer (and maybe other things)
 require("lazy").setup({
   spec = {
     -- General Usability
-    -- TODO: Change mappings so they don't conflict with surround
     { 'ggandor/leap.nvim' }, -- jumping around with 's'
     { 'ibhagwan/fzf-lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
     { 'jremmen/vim-ripgrep' }, -- ripgrep
@@ -77,6 +76,11 @@ require("lazy").setup({
       'saghen/blink.cmp',
       dependencies = { 'rafamadriz/friendly-snippets' }, -- provide snippets for the snippet source
       version = '1.*', -- use a release tag to download pre-built binaries
+      opts = {
+        sources = {
+          default = { 'lsp', 'path', 'snippets', 'buffer' },
+        },
+      },
       opts_extend = { 'sources.default' }
     },
 
