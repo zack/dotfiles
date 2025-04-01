@@ -55,20 +55,19 @@ require("lazy").setup({
   spec = {
     -- General Usability
     -- TODO: Change mappings so they don't conflict with surround
-    -- { 'ggandor/leap.nvim' }, -- jumping around with 's'
+    { 'ggandor/leap.nvim' }, -- jumping around with 's'
     { 'ibhagwan/fzf-lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
     { 'jremmen/vim-ripgrep' }, -- ripgrep
-    { 'junegunn/vim-peekaboo' }, -- see contents of registers in a sidebar
     {
       'knubie/vim-kitty-navigator', -- use the same keys to move between kitty & vims
       build = 'cp ./*.py ~/.config/kitty/',
     },
-    { 'ludovicchabant/vim-gutentags' }, -- tags support
-    { 'mbbill/undotree' }, -- powerful branching undo trees
+    { 'mbbill/undotree' }, -- branching undo trees
+    { 'moll/vim-bbye' }, -- delete buffers without closing windows
     { 'norcalli/nvim-colorizer.lua' }, -- colorizer hexes and color names and stuff
     { 'rbgrouleff/bclose.vim' }, -- delete a buffer without closing the window
     { 'rigellute/rigel' }, -- colorscheme
-    { 'scrooloose/nerdcommenter' }, -- powerful commenting tool
+    { 'scrooloose/nerdcommenter' }, -- commenting tool
     { 'terryma/vim-expand-region' }, -- tap v to expand selections
     { 'thirtythreeforty/lessspace.vim' }, -- trim whitespace for edited lines only
     { 'tpope/vim-surround' }, -- easy surround bindings
@@ -121,8 +120,18 @@ require("lazy").setup({
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 require('colorizer').setup()
--- require('leap').create_default_mappings()
+
+require('leap').create_default_mappings()
+
 require("mason").setup()
+
+require("fzf-lua").setup{
+  actions = {
+    files = vim.tbl_extend("force", require("fzf-lua").defaults.actions.files, {
+      ["enter"] = require("fzf-lua").actions.file_edit, -- Override "enter" but keep everything else
+    }),
+  },
+}
 
 
 
@@ -341,7 +350,7 @@ end, { bang = true, nargs = '*' })
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 -- Plugins
----- TODO: Did Rg used to do something else?
+---- TODO: Did Rg use to do something else?
 vim.api.nvim_set_keymap("n", "<Leader>r", ":Rg<CR>", {}) -- search word under cursor
 ---- vim-expand
 vim.api.nvim_set_keymap("v", "v", "<Plug>(expand_region_expand)", {})
@@ -372,6 +381,7 @@ vim.api.nvim_set_keymap("n", "<Leader>k", ":resize +10<CR>", {}) -- resize horiz
 vim.api.nvim_set_keymap("n", "<Leader>K", ":resize +1<CR>", {}) -- resize horizontal 1
 vim.api.nvim_set_keymap("n", "<Leader>l", ":vertical resize -10<CR>", {}) -- resize horizontal 10
 vim.api.nvim_set_keymap("n", "<Leader>L", ":vertical resize -1<CR>", {}) -- resize horizontal 1
+vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {}) -- kill a buffer without affecting windows
 vim.api.nvim_set_keymap("n", "<Leader>'", "cs\"'<ESC>lcs`'<ESC>", { silent = true }) -- change quotes to '
 vim.api.nvim_set_keymap("n", "<Leader>\"", "cs'\"<ESC>lcs`\"<ESC>", { silent = true }) -- change quotes to "
 vim.api.nvim_set_keymap("n", "<Leader>`", "cs\"`<ESC>lcs'`<ESC>", { silent = true }) -- change quotes to `
