@@ -370,10 +370,13 @@ vim.api.nvim_set_keymap("n", "<Leader>u", ":UndotreeToggle<CR>", {})
 
 -- Neovim stuff
 ---- Normal mode
+vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "q:", ":q", {}) -- fix accidentally hitting these in the wrong order
 vim.api.nvim_set_keymap("n", "<Leader>R", ":Rg", {}) -- redraw the screen
 vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line wrap
-vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
+vim.api.nvim_set_keymap("n", "<Leader>aa", ":lua vim.diagnostic.open_float() <CR>", {});
+vim.api.nvim_set_keymap("n", "<Leader>aj", ":lua vim.diagnostic.goto_next() <CR>", {});
+vim.api.nvim_set_keymap("n", "<Leader>ak", ":lua vim.diagnostic.goto_prev() <CR>", {});
 vim.api.nvim_set_keymap("n", "<Leader>i", "mmgg=G`m<CR>", {}) -- indent the who file
 vim.api.nvim_set_keymap("n", "<Leader>\\", ":nohl<CR>", {}) -- clear highlighting
 vim.api.nvim_set_keymap("n", "<Leader>b", ":GBrowse<CR>", {}) -- open file in GitHub
