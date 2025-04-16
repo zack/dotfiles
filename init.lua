@@ -92,15 +92,10 @@ require("lazy").setup({
     -- CSVs
     { 'cameron-wags/rainbow_csv.nvim' }, -- CSV "cells" colored by column
 
-    -- Config Management
-    { 'editorconfig/editorconfig-vim' }, -- support for .editorconfig files
-
     -- Languages & Frameworks
     { 'williamboman/mason.nvim' }, -- for managing LSPs, linters, etc.
     { 'neovim/nvim-lspconfig' }, -- LSP config
     ---- Typescript
-    ---- TODO: Do we need both of these?
-    { 'herringtonDarkholme/yats.vim' },
     { 'leafgarland/typescript-vim' },
     ---- Javascript
     { 'yuezk/vim-js' },
