@@ -61,6 +61,7 @@ require("lazy").setup({
       'knubie/vim-kitty-navigator', -- use the same keys to move between kitty & vims
       build = 'cp ./*.py ~/.config/kitty/',
     },
+    { 'kylechui/nvim-surround' }, -- easy surround bindings
     { 'mbbill/undotree' }, -- branching undo trees
     { 'moll/vim-bbye' }, -- delete buffers without closing windows
     { 'norcalli/nvim-colorizer.lua' }, -- colorizer hexes and color names and stuff
@@ -69,7 +70,6 @@ require("lazy").setup({
     { 'scrooloose/nerdcommenter' }, -- commenting tool
     { 'terryma/vim-expand-region' }, -- tap v to expand selections
     { 'thirtythreeforty/lessspace.vim' }, -- trim whitespace for edited lines only
-    { 'tpope/vim-surround' }, -- easy surround bindings
     { 'tpope/vim-vinegar' }, -- improve netrw usability
     { 'unblevable/quick-scope' }, -- highlights characters for quick jumps
     {
@@ -129,6 +129,22 @@ require("fzf-lua").setup{
     files = vim.tbl_extend("force", require("fzf-lua").defaults.actions.files, {
       ["enter"] = require("fzf-lua").actions.file_edit, -- Override "enter" but keep everything else
     }),
+  },
+}
+
+require("nvim-surround").setup{
+  keymaps = {
+    insert = "<C-g>r",
+    insert_line = "<C-g>R",
+    normal = "yr",
+    normal_cur = "yrr",
+    normal_line = "yR",
+    normal_cur_line = "yRR",
+    visual = "R",
+    visual_line = "gR",
+    delete = "dr",
+    change = "cr",
+    change_line = "cR",
   },
 }
 
@@ -384,9 +400,9 @@ vim.api.nvim_set_keymap("n", "<Leader>K", ":resize +1<CR>", {}) -- resize horizo
 vim.api.nvim_set_keymap("n", "<Leader>l", ":vertical resize -10<CR>", {}) -- resize horizontal 10
 vim.api.nvim_set_keymap("n", "<Leader>L", ":vertical resize -1<CR>", {}) -- resize horizontal 1
 vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {}) -- kill a buffer without affecting windows
-vim.api.nvim_set_keymap("n", "<Leader>'", "cs\"'<ESC>lcs`'<ESC>", { silent = true }) -- change quotes to '
-vim.api.nvim_set_keymap("n", "<Leader>\"", "cs'\"<ESC>lcs`\"<ESC>", { silent = true }) -- change quotes to "
-vim.api.nvim_set_keymap("n", "<Leader>`", "cs\"`<ESC>lcs'`<ESC>", { silent = true }) -- change quotes to `
+vim.api.nvim_set_keymap("n", "<Leader>'", "cr\"'<ESC>lcr`'<ESC>", { silent = true }) -- change quotes to '
+vim.api.nvim_set_keymap("n", "<Leader>\"", "cr'\"<ESC>lcr`\"<ESC>", { silent = true }) -- change quotes to "
+vim.api.nvim_set_keymap("n", "<Leader>`", "cr\"`<ESC>lcr'`<ESC>", { silent = true }) -- change quotes to `
 vim.api.nvim_set_keymap("n", "<Leader>n", ":lua AnyNumberToggle()<CR>", { silent = true })
 ---- Visual mode
 vim.api.nvim_set_keymap("v", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
