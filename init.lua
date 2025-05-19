@@ -127,7 +127,8 @@ require("mason").setup()
 require("fzf-lua").setup{
   actions = {
     files = vim.tbl_extend("force", require("fzf-lua").defaults.actions.files, {
-      ["enter"] = require("fzf-lua").actions.file_edit, -- Override "enter" but keep everything else
+      ["enter"] = require("fzf-lua").actions.file_edit,
+      ["ctrl-x"] = require("fzf-lua").actions.file_vsplit,
     }),
   },
 }
@@ -358,6 +359,13 @@ vim.api.nvim_create_user_command('Rg', function()
   vim_grep()
 end, { bang = true, nargs = '*' })
 
+-- Show errors and warnings in a floating window after a few seconds
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
+  end,
+})
+
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -365,6 +373,8 @@ end, { bang = true, nargs = '*' })
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 -- Plugins
+---- Lazy.nvim
+vim.api.nvim_set_keymap("n", "<Leader>z", ":Lazy<CR>", {})
 ---- TODO: Did Rg use to do something else?
 vim.api.nvim_set_keymap("n", "<Leader>r", ":Rg<CR>", {}) -- search word under cursor
 ---- vim-expand
