@@ -171,11 +171,10 @@ vim.g.gitgutter_max_signs = 10000 -- show all the signs
 -- ║                                LSP SETUP                                  ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
-local lspconfig = require('lspconfig')
 vim.diagnostic.config({ virtual_text = true }) -- show LSP diagnostic messages
 
 -- Lua
-lspconfig.lua_ls.setup {
+vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
       diagnostics = {
@@ -191,10 +190,10 @@ lspconfig.lua_ls.setup {
       }
     }
   }
-}
+})
 
 -- Typescript and Javascript
-lspconfig.ts_ls.setup {
+vim.lsp.config("ts_ls", {
   filetypes = {
     'javascript',       -- Standard JavaScript files
     'javascriptreact',  -- React JavaScript files
@@ -218,10 +217,10 @@ lspconfig.ts_ls.setup {
       }
     }
   },
-}
+})
 
 --Eslint
-lspconfig.eslint.setup {
+vim.lsp.config("eslint", {
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -230,7 +229,7 @@ lspconfig.eslint.setup {
     'typescriptreact',
     'typescript.tsx'
   },
-}
+})
 
 
 
@@ -289,7 +288,7 @@ vim.opt.wildignore = { -- ignore these files when expanding
 }
 
 -- vim.o
-vim.o.cursorcolumn = true -- highlight the cursor's column
+-- vim.o.cursorcolumn = true -- highlight the cursor's column
 vim.o.cursorline = true -- highlight the cursor's line
 vim.o.ignorecase = true -- searches case-insensitive by default
 vim.o.lcs = "trail:·,tab:»·,eol:$,extends:»,nbsp:+" -- setlist chars
