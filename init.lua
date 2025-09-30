@@ -174,7 +174,7 @@ vim.g.gitgutter_max_signs = 10000 -- show all the signs
 vim.diagnostic.config({ virtual_text = true }) -- show LSP diagnostic messages
 
 -- Lua
-vim.lsp.config("lua_ls", {
+vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
@@ -191,9 +191,10 @@ vim.lsp.config("lua_ls", {
     }
   }
 })
+vim.lsp.enable('lua_ls')
 
 -- Typescript and Javascript
-vim.lsp.config("ts_ls", {
+vim.lsp.config('ts_ls', {
   cmd = { 'typescript-language-server', '--stdio'},
 
   filetypes = {
@@ -220,9 +221,10 @@ vim.lsp.config("ts_ls", {
     }
   },
 })
+vim.lsp.enable('ts_ls')
 
 --Eslint
-vim.lsp.config("eslint", {
+vim.lsp.config('eslint', {
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -232,6 +234,7 @@ vim.lsp.config("eslint", {
     'typescript.tsx'
   },
 })
+vim.lsp.enable('eslint');
 
 
 
