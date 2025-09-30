@@ -194,6 +194,8 @@ vim.lsp.config("lua_ls", {
 
 -- Typescript and Javascript
 vim.lsp.config("ts_ls", {
+  cmd = { 'typescript-language-server', '--stdio'},
+
   filetypes = {
     'javascript',       -- Standard JavaScript files
     'javascriptreact',  -- React JavaScript files
