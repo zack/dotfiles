@@ -85,7 +85,8 @@ alias python='python3'
 alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
-alias rgns='rg --glob "!*spec.js"'
+alias rgns='rg --glob "!*spec.jsx"'
+alias rgjsx='rg --glob "*.jsx" --glob "!*spec.jsx"'
 alias v='vim'
 alias vi='vim'
 alias vim='nvim'
@@ -178,8 +179,8 @@ setopt nomatch
 
 export PATH="/usr/local/sbin:$PATH"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" haven't used ruby in ages
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(zoxide init zsh)"
-ctags=/opt/homebrew/bin/ctags
+# eval "$(zoxide init zsh)" don't think i ever actually used this
+# ctags=/opt/homebrew/bin/ctags i don't think i use these anymore

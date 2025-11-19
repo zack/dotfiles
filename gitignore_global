@@ -66,3 +66,6 @@ nohup.out
 tags
 tags.lock
 tags.temp
+
+## LLM Agent Files
+AGENTS.md

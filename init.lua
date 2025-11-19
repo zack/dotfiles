@@ -65,6 +65,7 @@ require("lazy").setup({
     { 'mbbill/undotree' }, -- branching undo trees
     { 'moll/vim-bbye' }, -- delete buffers without closing windows
     { 'norcalli/nvim-colorizer.lua' }, -- colorizer hexes and color names and stuff
+    { 'nvimtools/none-ls.nvim', dependencies = { 'nvim-lua/plenary.nvim' }}, -- autoformatting
     { 'rbgrouleff/bclose.vim' }, -- delete a buffer without closing the window
     { 'rigellute/rigel' }, -- colorscheme
     { 'scrooloose/nerdcommenter' }, -- commenting tool
@@ -82,6 +83,77 @@ require("lazy").setup({
         },
       },
       opts_extend = { 'sources.default' }
+    },
+    { 'zbirenbaum/copilot.lua' , -- Github copilot lua fork
+      dependencies = { "copilotlsp-nvim/copilot-lsp" }, -- (optional) for NES functionality
+      cmd = "Copilot",
+      event = "InsertEnter",
+      config = function()
+        require("copilot").setup({
+          suggestion = {
+            enabled = true,
+            auto_trigger = true,
+            accept = true,
+          },
+          panel = {
+            enbabled = false,
+          },
+          filetypes = {
+            ["*"] = true,
+          },
+        })
+        vim.keymap.set("i", "<S-Tab>", function()
+          if require("copilot.suggestion").is_visible() then
+            require("copilot.suggestion").accept()
+          else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
+          end
+        end, {
+        silent = true,
+      })
+      end,
+    },
+    { "yetone/avante.nvim",
+      build = vim.fn.has("win32") ~= 0
+          and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+          or "make",
+      event = "VeryLazy",
+      version = false, -- Never set this value to "*"! Never!
+      ---@module 'avante'
+      ---@type avante.Config
+      opts = {
+        instructions_file = "avante.md",
+        provider="copilot",
+        behaviour = {
+          auto_approve_tool_permissions = false,
+          enable_fastapply = false,
+        },
+        edit = {
+          auto_apply = false, -- prevent automatic application of edits
+          diff_preview = true, -- show diff preview instead of direct application
+        },
+      },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        --- The below dependencies are optional,
+        "nvim-mini/mini.pick", -- for file_selector provider mini.pick
+        "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+        "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+        "ibhagwan/fzf-lua", -- for file_selector provider fzf
+        "stevearc/dressing.nvim", -- for input provider dressing
+        "folke/snacks.nvim", -- for input provider snacks
+        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+        "zbirenbaum/copilot.lua", -- for providers='copilot'
+        {
+          -- Make sure to set this up properly if you have lazy=true
+          'MeanderingProgrammer/render-markdown.nvim',
+          opts = {
+            file_types = { "markdown", "Avante" },
+          },
+          ft = { "markdown", "Avante" },
+        },
+      },
     },
 
     -- Git
@@ -149,6 +221,26 @@ require("nvim-surround").setup{
   },
 }
 
+local null_ls = require("null-ls")
+local format_autogrp = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettierd,
+  },
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      -- Format on save
+      vim.api.nvim_clear_autocmds({ group = format_autogrp, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = format_autogrp,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+      })
+    end
+  end,
+})
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -191,7 +283,7 @@ vim.lsp.config('lua_ls', {
     }
   }
 })
-vim.lsp.enable('lua_ls')
+vim.lsp.enable({"lua_ls"})
 
 -- Typescript and Javascript
 vim.lsp.config('ts_ls', {
@@ -221,7 +313,7 @@ vim.lsp.config('ts_ls', {
     }
   },
 })
-vim.lsp.enable('ts_ls')
+vim.lsp.enable({"ts_ls"})
 
 --Eslint
 vim.lsp.config('eslint', {
@@ -247,6 +339,14 @@ vim.cmd [[colorscheme rigel]]
 
 -- 80th and 100th columns are red
 vim.cmd("highlight ColorColumn guibg='#800000'")
+
+-- Disable highlights for Avante panes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "Avante*",
+  callback = function()
+    vim.wo.colorcolumn = ""
+  end,
+})
 
 -- GitGutter symbol colors
 vim.cmd("highlight GitGutterAdd guifg='#00AA00'")
