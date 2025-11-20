@@ -1,0 +1,15 @@
+### asdf
+# . "$HOME/.asdf/asdf.sh" what was this doing here?
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
+nvm use
+
+### aliases
+alias app='cd ~/dev/rs-app-replacement-app/main'
+alias api='cd ~/dev/rs-app-replacement-api'
+alias calc='cd ~/dev/rs-app-replacement-calc-service'
+alias infra='cd ~/dev/rs-app-replacement-infra'
+alias cleandocker='docker ps -a --filter "ancestor=opm-rs-app-replacement-infra-rs-app-replacement" -q | xargs -r docker rm -f && docker rmi -f opm-rs-app-replacement-infra-rs-app-replacement'
