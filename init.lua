@@ -54,7 +54,6 @@ vim.o.termguicolors = true -- required for colorizer (and maybe other things)
 require("lazy").setup({
   spec = {
     -- General Usability
-    { 'ggandor/leap.nvim' }, -- jumping around with 's'
     { 'ibhagwan/fzf-lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
     { 'jremmen/vim-ripgrep' }, -- ripgrep
     {
@@ -80,11 +79,12 @@ require("lazy").setup({
       opts = {
         sources = {
           default = { 'lsp', 'path', 'snippets', 'buffer' },
+          codecompanion = { "codecompanion" },
         },
       },
       opts_extend = { 'sources.default' }
     },
-    { 'zbirenbaum/copilot.lua' , -- Github copilot lua fork
+    { 'zbirenbaum/copilot.lua', -- Github copilot lua fork
       dependencies = { "copilotlsp-nvim/copilot-lsp" }, -- (optional) for NES functionality
       cmd = "Copilot",
       event = "InsertEnter",
@@ -113,48 +113,88 @@ require("lazy").setup({
       })
       end,
     },
-    { "yetone/avante.nvim",
-      build = vim.fn.has("win32") ~= 0
-          and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-          or "make",
-      event = "VeryLazy",
-      version = false, -- Never set this value to "*"! Never!
-      ---@module 'avante'
-      ---@type avante.Config
+    {
+      "olimorris/codecompanion.nvim",
       opts = {
-        instructions_file = "avante.md",
-        provider="copilot",
-        behaviour = {
-          auto_approve_tool_permissions = false,
-          enable_fastapply = false,
-        },
-        edit = {
-          auto_apply = false, -- prevent automatic application of edits
-          diff_preview = true, -- show diff preview instead of direct application
+        strategies = {
+          chat = {
+            name = "copilot",
+            model = "claude-sonnet-4"
+          },
+          inline = {
+            name = "copilot",
+            model = "claude-sonnet-4"
+          },
         },
       },
       dependencies = {
         "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-        --- The below dependencies are optional,
-        "nvim-mini/mini.pick", -- for file_selector provider mini.pick
-        "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-        "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-        "ibhagwan/fzf-lua", -- for file_selector provider fzf
-        "stevearc/dressing.nvim", -- for input provider dressing
-        "folke/snacks.nvim", -- for input provider snacks
-        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-        "zbirenbaum/copilot.lua", -- for providers='copilot'
-        {
-          -- Make sure to set this up properly if you have lazy=true
-          'MeanderingProgrammer/render-markdown.nvim',
-          opts = {
-            file_types = { "markdown", "Avante" },
-          },
-          ft = { "markdown", "Avante" },
+      },
+    },
+    { -- markdown in the CodeCompanion chat buffer, also other markdown files
+      "OXY2DEV/markview.nvim",
+      lazy = false,
+      opts = {
+        preview = {
+          filetypes = { "markdown", "codecompanion" },
+          ignore_buftypes = {},
         },
       },
     },
+    { -- Better diff view in the CodeCompanion chat buffer
+      "echasnovski/mini.diff",
+      config = function()
+        local diff = require("mini.diff")
+        diff.setup({
+          -- Disabled by default
+          source = diff.gen_source.none(),
+        })
+      end,
+    },
+    --[[
+       [ { "yetone/avante.nvim",
+       [   build = vim.fn.has("win32") ~= 0
+       [       and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+       [       or "make",
+       [   event = "VeryLazy",
+       [   version = false, -- Never set this value to "*"! Never!
+       [   ---@module 'avante'
+       [   ---@type avante.Config
+       [   opts = {
+       [     instructions_file = "avante.md",
+       [     provider="copilot",
+       [     behaviour = {
+       [       auto_approve_tool_permissions = false,
+       [       enable_fastapply = false,
+       [     },
+       [     edit = {
+       [       auto_apply = false, -- prevent automatic application of edits
+       [       diff_preview = true, -- show diff preview instead of direct application
+       [     },
+       [   },
+       [   dependencies = {
+       [     "nvim-lua/plenary.nvim",
+       [     "MunifTanjim/nui.nvim",
+       [     --- The below dependencies are optional,
+       [     "nvim-mini/mini.pick", -- for file_selector provider mini.pick
+       [     "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+       [     "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+       [     "ibhagwan/fzf-lua", -- for file_selector provider fzf
+       [     "stevearc/dressing.nvim", -- for input provider dressing
+       [     "folke/snacks.nvim", -- for input provider snacks
+       [     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+       [     "zbirenbaum/copilot.lua", -- for providers='copilot'
+       [     {
+       [       -- Make sure to set this up properly if you have lazy=true
+       [       'MeanderingProgrammer/render-markdown.nvim',
+       [       opts = {
+       [         file_types = { "markdown", "Avante" },
+       [       },
+       [       ft = { "markdown", "Avante" },
+       [     },
+       [   },
+       [ },
+       ]]
 
     -- Git
     { 'airblade/vim-gitgutter' }, -- git indicators on the left
@@ -191,8 +231,6 @@ require("lazy").setup({
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 require('colorizer').setup()
-
-require('leap').create_default_mappings()
 
 require("mason").setup()
 
@@ -342,7 +380,7 @@ vim.cmd("highlight ColorColumn guibg='#800000'")
 
 -- Disable highlights for Avante panes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "Avante*",
+  pattern = "codecompanion*",
   callback = function()
     vim.wo.colorcolumn = ""
   end,
@@ -492,6 +530,11 @@ vim.api.nvim_set_keymap("n", "<C-g>", ":FzfLua git_status<CR>", {})
 vim.api.nvim_set_keymap("n", "<C-f>", ":FzfLua files<CR>", {})
 ---- Undotree
 vim.api.nvim_set_keymap("n", "<Leader>u", ":UndotreeToggle<CR>", {})
+--- CodeCompanion
+vim.api.nvim_set_keymap("n", "<Leader>A", ":CodeCompanionChat<CR>", {})
+vim.api.nvim_set_keymap("v", "A", ":CodeCompanion #{buffer} ", {})
+vim.api.nvim_set_keymap("v", "C", ":CodeCompanionChat Add<CR>", {})
+
 
 -- Neovim stuff
 ---- Normal mode
