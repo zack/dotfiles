@@ -19,6 +19,7 @@
 -- ║                                 LAZY.NVIM                                 ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 ---@diagnostic disable-next-line: undefined-field
@@ -53,15 +54,10 @@ vim.o.termguicolors = true -- required for colorizer (and maybe other things)
 require("lazy").setup({
   spec = {
     -- General Usability
-    { -- move command line and messages into nicer places
+    {
       "folke/noice.nvim",
       event = "VeryLazy",
       opts = { -- 100% suggested config
-        cmdline = {
-          popupmenu = {
-            enabled = true,
-          },
-        },
         views = {
           cmdline_popup = {
             position = {
@@ -76,7 +72,7 @@ require("lazy").setup({
           popupmenu = {
             relative = "editor",
             position = {
-              row = 8,
+              row = 23,
               col = "50%",
             },
             size = {
@@ -103,7 +99,6 @@ require("lazy").setup({
         -- you can enable a preset for easier configuration
         presets = {
           bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = false, -- add a border to hover docs and signature help
@@ -125,6 +120,7 @@ require("lazy").setup({
     { 'moll/vim-bbye' }, -- delete buffers without closing windows
     { 'norcalli/nvim-colorizer.lua' }, -- colorizer hexes and color names and stuff
     {
+      -- don't forget to `:TSInstall vim regex lua bash mardkwon markdown_inline`
       'nvim-treesitter/nvim-treesitter',
       branch = 'master',
       lazy = false,
@@ -137,7 +133,6 @@ require("lazy").setup({
     { 'terryma/vim-expand-region' }, -- tap v to expand selections
     { 'thirtythreeforty/lessspace.vim' }, -- trim whitespace for edited lines only
     { 'tpope/vim-vinegar' }, -- improve netrw usability
-    { 'unblevable/quick-scope' }, -- highlights characters for quick jumps
     {
       'saghen/blink.cmp',
       dependencies = { 'rafamadriz/friendly-snippets' }, -- provide snippets for the snippet source
@@ -147,6 +142,7 @@ require("lazy").setup({
           default = { 'lsp', 'path', 'snippets', 'buffer' },
           codecompanion = { "codecompanion" },
         },
+        cmdline = { enabled = false },
       },
       opts_extend = { 'sources.default' }
     },
