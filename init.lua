@@ -15,7 +15,6 @@
 --   #####     ####     ####      ##/         ##   ##### /         ##/     ##
 
 
-
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
 -- ║                                 LAZY.NVIM                                 ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
@@ -54,6 +53,67 @@ vim.o.termguicolors = true -- required for colorizer (and maybe other things)
 require("lazy").setup({
   spec = {
     -- General Usability
+    { -- move command line and messages into nicer places
+      "folke/noice.nvim",
+      event = "VeryLazy",
+      opts = { -- 100% suggested config
+        cmdline = {
+          popupmenu = {
+            enabled = true,
+          },
+        },
+        views = {
+          cmdline_popup = {
+            position = {
+              row = 20,
+              col = "50%",
+            },
+            size = {
+              width = 60,
+              height = "auto",
+            },
+          },
+          popupmenu = {
+            relative = "editor",
+            position = {
+              row = 8,
+              col = "50%",
+            },
+            size = {
+              width = 60,
+              height = 10,
+            },
+            border = {
+              style = "rounded",
+              padding = { 0, 1 },
+            },
+            win_options = {
+              winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+            },
+          },
+        },
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
+      },
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+        }
+    },
     { 'ibhagwan/fzf-lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
     { 'jremmen/vim-ripgrep' }, -- ripgrep
     {
@@ -64,6 +124,12 @@ require("lazy").setup({
     { 'mbbill/undotree' }, -- branching undo trees
     { 'moll/vim-bbye' }, -- delete buffers without closing windows
     { 'norcalli/nvim-colorizer.lua' }, -- colorizer hexes and color names and stuff
+    {
+      'nvim-treesitter/nvim-treesitter',
+      branch = 'master',
+      lazy = false,
+      build = ':TSUpdate'
+    },
     { 'nvimtools/none-ls.nvim', dependencies = { 'nvim-lua/plenary.nvim' }}, -- autoformatting
     { 'rbgrouleff/bclose.vim' }, -- delete a buffer without closing the window
     { 'rigellute/rigel' }, -- colorscheme
@@ -429,7 +495,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.opt.wildignore = { -- ignore these files when expanding
   "*/.git/*", "*/.hg/*", "*/.svn/*", "*/.idea/*", "*/.DS_Store", "*/vendor", "*/node_modules", "*.swp"
 }
-
 -- vim.o
 -- vim.o.cursorcolumn = true -- highlight the cursor's column
 vim.o.cursorline = true -- highlight the cursor's line
