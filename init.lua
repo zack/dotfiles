@@ -158,7 +158,7 @@ require("lazy").setup({
             accept = true,
           },
           panel = {
-            enbabled = false,
+            enabled = false,
           },
           filetypes = {
             ["*"] = true,
@@ -601,7 +601,6 @@ vim.api.nvim_set_keymap("v", "C", ":CodeCompanionChat Add<CR>", {})
 ---- Normal mode
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "q:", ":q", {}) -- fix accidentally hitting these in the wrong order
-vim.api.nvim_set_keymap("n", "<Leader>R", ":Rg", {}) -- redraw the screen
 vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line wrap
 vim.api.nvim_set_keymap("n", "<Leader>aa", ":lua vim.diagnostic.open_float() <CR>", {});
 vim.api.nvim_set_keymap("n", "<Leader>aj", ":lua vim.diagnostic.goto_next() <CR>", {});
