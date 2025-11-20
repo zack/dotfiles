@@ -1,0 +1,75 @@
+[user]
+  name = Zack Youngren
+  email = github.com@youngren.io
+
+[push]
+  default = current
+  autoSetupRemote = true
+
+[color]
+  ui = true
+
+[alias]
+  boom = !git fetch origin && git reset --hard origin/main
+  files = diff-tree --no-commit-id --name-only -r
+  lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+  new = !git fetch origin && git checkout origin/main -b
+  rb = !git fetch origin && git rebase origin/main
+
+[core]
+  autocrlf = input
+  editor = nvim
+  excludesfile = ~/.gitignore_global
+  filemode = false
+  fsmonitor = true
+  untrackedCache = true
+
+[diff]
+  external = difft
+
+[pager]
+  branch = cat
+
+[pull]
+  rebase = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+
+[init]
+  defaultBranch = main
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[advice]
+  detachedHead = false
+
+[credential]
+  helper = cache --timeout=600
+
+[tag]
+  sort = version:refname
+
+[fetch]
+  all = true
+  prune = true
+  pruneTags = true
+
+[help]
+  autocorrect = prompt
+
+[commit]
+  verbose = true
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
+[merge]
+  conflictstyle = zdiff3

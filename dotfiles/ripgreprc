@@ -1,0 +1,12 @@
+--max-columns=150
+
+--type-add
+web:*{html,css,js}*
+
+--type-add
+tpl:*{tpl}*
+
+--glob=!tmp/*
+--glob=!node_modules/*
+
+--colors=line:style:bold
