@@ -55,6 +55,18 @@ require("lazy").setup({
   spec = {
     -- General Usability
     {
+      "folke/snacks.nvim",
+      priority = 1000,
+      lazy = false,
+      opts = {
+        notifier = { enabled = true },
+      },
+      keys = {
+        { "<leader>dn", function() require("snacks").notifier.hide() end, desc = "Dismiss All Notifications" },
+        { "<leader>hn", function() require("snacks").picker.notifications() end, desc = "Notification History" },
+      },
+    },
+    {
       "folke/noice.nvim",
       event = "VeryLazy",
       opts = { -- 100% suggested config
@@ -107,7 +119,6 @@ require("lazy").setup({
       },
       dependencies = {
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
         }
     },
     { 'ibhagwan/fzf-lua', dependencies = { 'nvim-tree/nvim-web-devicons' }},
