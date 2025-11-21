@@ -267,16 +267,29 @@ require("lazy").setup({
     -- CSVs
     { 'cameron-wags/rainbow_csv.nvim' }, -- CSV "cells" colored by column
 
-    -- Languages & Frameworks
-    { 'williamboman/mason.nvim' }, -- for managing LSPs, linters, etc.
-    { 'neovim/nvim-lspconfig' }, -- LSP config
+    -- Languages Servers and Linters
+    { 'neovim/nvim-lspconfig' }, -- Collection of configurations for built-in LSP client
+    { 'mason-org/mason.nvim' }, -- for managing LSPs, linters, etc.
+    { -- connect mason and lsp-config
+      "mason-org/mason-lspconfig.nvim",
+      opts = {},
+      dependencies = {
+          { "mason-org/mason.nvim", opts = {} },
+          "neovim/nvim-lspconfig",
+      },
+    },
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim' }, -- install tools from init.lua
+
     ---- Typescript
     { 'dmmulroy/ts-error-translator.nvim' },
     { 'leafgarland/typescript-vim' },
+
     ---- Javascript
     { 'yuezk/vim-js' },
+
     ---- JSX
     { 'maxmellon/vim-jsx-pretty' },
+
     ---- Prisma
     { 'prisma/vim-prisma' },
   },
@@ -297,6 +310,16 @@ require("lazy").setup({
 require('colorizer').setup()
 
 require("mason").setup()
+require("mason-tool-installer").setup({
+  ensure_installed = {
+    "eslint",
+    "eslint-lsp",
+    "eslint_d",
+    "lua-language-server",
+    "prettierd",
+    "typescript-language-server",
+  },
+})
 
 require("fzf-lua").setup{
   actions = {
@@ -395,21 +418,9 @@ vim.lsp.config('lua_ls', {
     }
   }
 })
-vim.lsp.enable({"lua_ls"})
 
 -- Typescript and Javascript
 vim.lsp.config('ts_ls', {
-  cmd = { 'typescript-language-server', '--stdio'},
-
-  filetypes = {
-    'javascript',       -- Standard JavaScript files
-    'javascriptreact',  -- React JavaScript files
-    'javascript.jsx',   -- JSX JavaScript files
-    'typescript',       -- Standard TypeScript files
-    'typescriptreact',  -- React TypeScript files
-    'typescript.tsx'    -- TSX TypeScript files
-  },
-
   settings = {
     javascript = {
       inlayHints = {
@@ -425,20 +436,6 @@ vim.lsp.config('ts_ls', {
     }
   },
 })
-vim.lsp.enable({"ts_ls"})
-
---Eslint
-vim.lsp.config('eslint', {
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx'
-  },
-})
-vim.lsp.enable('eslint');
 
 
 
