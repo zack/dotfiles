@@ -89,6 +89,7 @@ require("lazy").setup({
           },
         },
         lsp = {
+          progress = { enabled = false }, -- disable lsp progress messages
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -466,6 +467,15 @@ vim.cmd("highlight GitGutterChangeDelete guifg='#AA0000'")
 vim.cmd("highlight GitGutterDelete guifg='#AA0000'")
 
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
+-- ║                                 COMMANDS                                  ║
+-- ╚═══════════════════════════════════════════════════════════════════════════╝
+
+-- Highlight yanks
+vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank()]]
+
+
+
+-- ╔═══════════════════════════════════════════════════════════════════════════╗
 -- ║                               AUTOCOMMANDS                                ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
@@ -607,11 +617,11 @@ vim.api.nvim_set_keymap("n", "<Leader>A", ":CodeCompanionChat<CR>", {})
 vim.api.nvim_set_keymap("v", "A", ":CodeCompanion #{buffer} ", {})
 vim.api.nvim_set_keymap("v", "C", ":CodeCompanionChat Add<CR>", {})
 
-
 -- Neovim stuff
 ---- Insert mode
-vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = false }) -- quick quit
-vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = false }) -- quick quit
+vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true; silent = true }) -- quick quit
+vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true; silent = true }) -- quick quit
+vim.api.nvim_set_keymap("i", "<Esc>", "<C-o>:echoerr \"Use jk\"<CR>", { noremap = true, silent = true }) -- No more esc
 ---- Normal mode
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "<Leader>'", "cr\"'<ESC>lcr`'<ESC>", { silent = true }) -- change quotes to '

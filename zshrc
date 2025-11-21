@@ -3,6 +3,7 @@ export PATH="$PATH:$HOME/bins"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/opt/homebrew/lib/"
+export FPATH="~/.eza/completions/zsh:$FPATH"
 
 ### MISC EXPORTS
 export KEYTIMEOUT=1 # disable wait when switching modes
@@ -72,13 +73,14 @@ DISABLE_AUTO_TITLE=true
 alias ~="cd ~"
 alias ag='ag -p ~/.agignore'
 alias cat='bat'
+alias cd='z'
 alias cm='chezmoi'
 alias cma='chezmoi apply'
 alias cr='cargo run'
 alias ff='nvim $(fzf -m)'
 alias installdeb='sudo dpkg -i'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
-alias ls='ls --color'
+alias ls='eza'
 alias l1='ls -1'
 alias ld='ls -d */'
 alias ll='ls -la'
@@ -180,8 +182,8 @@ setopt nomatch
 
 export PATH="/usr/local/sbin:$PATH"
 
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" haven't used ruby in ages
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# eval "$(zoxide init zsh)" don't think i ever actually used this
-# ctags=/opt/homebrew/bin/ctags i don't think i use these anymore
+# zoxide
+eval "$(zoxide init zsh)"
+
