@@ -270,6 +270,7 @@ require("lazy").setup({
     { 'williamboman/mason.nvim' }, -- for managing LSPs, linters, etc.
     { 'neovim/nvim-lspconfig' }, -- LSP config
     ---- Typescript
+    { 'dmmulroy/ts-error-translator.nvim' },
     { 'leafgarland/typescript-vim' },
     ---- Javascript
     { 'yuezk/vim-js' },
@@ -320,6 +321,16 @@ require("nvim-surround").setup{
     change_line = "cR",
   },
 }
+
+require("ts-error-translator").setup({
+  -- Auto-attach to LSP servers for TypeScript diagnostics (default: true)
+  auto_attach = true,
+
+  -- LSP server names to translate diagnostics for (default shown below)
+  servers = {
+    "ts_ls",
+  },
+})
 
 local null_ls = require("null-ls")
 local format_autogrp = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
