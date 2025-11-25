@@ -368,6 +368,14 @@ require("ts-error-translator").setup({
 })
 
 local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+    },
+})
+
 local format_autogrp = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 null_ls.setup({
   sources = {
