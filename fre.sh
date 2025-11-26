@@ -31,3 +31,6 @@ sudo cp ~/dotfiles/with-dir /usr/local/bin/with-dir
 sudo cp ~/dotfiles/only-dir /usr/local/bin/only-dir
 sudo chmod +x /usr/local/bin/with-dir
 sudo chmod +x /usr/local/bin/only-dir
+
+# vim-tmux-navigator
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
