@@ -1,0 +1,4 @@
+-- colorscheme
+return {
+  'rigellute/rigel'
+}

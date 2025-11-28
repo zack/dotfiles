@@ -34,3 +34,7 @@ sudo chmod +x /usr/local/bin/only-dir
 
 # vim-tmux-navigator
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Set up nvim.lazy plugins
+mkdir -p ~/.config/nvim/lua
+ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua
