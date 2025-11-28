@@ -1,3 +1,6 @@
+# Always start in tmux
+if [ "$TMUX" = "" ]; then tmux; fi
+
 ### PATH MODIFICATION
 export PATH="$PATH:$HOME/bins"
 export PATH="$PATH:$HOME/.local/bin"
