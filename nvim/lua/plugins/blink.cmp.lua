@@ -10,7 +10,9 @@ return {
     },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
-      codecompanion = { "codecompanion" },
+      per_filetype = {
+        codecompanion = { "codecompanion" },
+      },
     },
     cmdline = { enabled = false },
   },

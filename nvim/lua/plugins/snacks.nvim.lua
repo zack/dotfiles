@@ -2,15 +2,14 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  opts = {
+    notifier = { enabled = true },
+  },
+  keys = {
+    { "<Leader>dn", function() require("snacks").notifier.hide() end, desc = "Dismiss All Notifications" },
+    { "<Leader>hn", function() require("snacks").picker.notifications() end, desc = "Notification History" },
+  },
   config = function ()
-    require("snacks").setup({
-      notifier = { enabled = true },
-      keys = {
-        { "<leader>dn", function() require("snacks").notifier.hide() end, desc = "Dismiss All Notifications" },
-        { "<leader>hn", function() require("snacks").picker.notifications() end, desc = "Notification History" },
-      },
-    })
-
     vim.api.nvim_create_autocmd("RecordingEnter", {
       callback = function()
         local reg = vim.fn.reg_recording()
