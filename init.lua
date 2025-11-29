@@ -53,6 +53,7 @@ vim.o.termguicolors = true -- required for colorizer (and maybe other things)
 
 require("lazy").setup({
   spec = {
+    -- imports plugins from lua/plugins directory
     { import = "plugins" },
   },
 
