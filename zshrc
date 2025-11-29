@@ -64,8 +64,18 @@ set -o vi
 bindkey '^R' history-incremental-search-backward
 
 # fzf
+## fzf completion for Ubuntu
+if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
+  source /usr/share/doc/fzf/examples/completion.zsh
+fi
+
+if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+fi
+# source for zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# defaults
 export FZF_DEFAULT_COMMAND='rg --files'
-export FZF_COMPLETION_TRIGGER='**'
 
 ### GENERAL CONFIGURATION
 COMPLETION_WAITING_DOTS="true"
@@ -186,8 +196,5 @@ setopt nomatch
 
 export PATH="/usr/local/sbin:$PATH"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # zoxide
 eval "$(zoxide init zsh)"
-
