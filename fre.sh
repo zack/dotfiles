@@ -36,5 +36,5 @@ sudo chmod +x /usr/local/bin/only-dir
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Set up nvim.lazy plugins
-mkdir -p ~/.config/nvim/lua
+mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua

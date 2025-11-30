@@ -9,7 +9,7 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 workdir=~/dotfiles/work_dotfiles
 
 # list of files/folders to symlink in homedir
-files="ackrc agignore vim zshrc gitconfig gitignore_global ripgreprc"
+files="ackrc agignore vim zshrc gitconfig gitignore_global ripgreprc tmux.conf"
 workfiles="zshrc_work"
 
 ##########
