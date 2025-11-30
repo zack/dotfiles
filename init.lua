@@ -271,8 +271,8 @@ vim.api.nvim_set_keymap("n", "<Leader>z", ":Lazy<CR>", {})
 ---- TODO: Did Rg use to do something else?
 vim.api.nvim_set_keymap("n", "<Leader>r", ":Rg<CR>", {}) -- search word under cursor
 ---- vim-expand
-vim.api.nvim_set_keymap("v", "v", "<Plug>(expand_region_expand)", {})
-vim.api.nvim_set_keymap("v", "<C-v>", "<Plug>(expand_region_shrink)", {})
+vim.api.nvim_set_keymap("x", "v", "<Plug>(expand_region_expand)", {})
+vim.api.nvim_set_keymap("x", "<C-v>", "<Plug>(expand_region_shrink)", {})
 ---- FZF
 vim.api.nvim_set_keymap("n", "<C-p>", ":FzfLua git_files<CR>", {})
 vim.api.nvim_set_keymap("n", "<C-b>", ":FzfLua buffers<CR>", {})
@@ -315,6 +315,6 @@ vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {}) -- kill a buffer withou
 vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line wrap
 vim.api.nvim_set_keymap("n", "q:", ":q", {}) -- fix accidentally hitting these in the wrong order
 ---- Visual mode
-vim.api.nvim_set_keymap("v", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
-vim.api.nvim_set_keymap("v", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", { noremap = true }) -- sort the visual selection
-vim.api.nvim_set_keymap("v", "p", "P", {}) -- 'put' without overwriting register
+vim.api.nvim_set_keymap("x", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
+vim.api.nvim_set_keymap("x", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", { noremap = true }) -- sort the visual selection
+vim.api.nvim_set_keymap("x", "p", "P", {}) -- 'put' without overwriting register
