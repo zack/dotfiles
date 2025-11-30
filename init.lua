@@ -292,6 +292,7 @@ vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true; silent = true }) -
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true; silent = true }) -- quick quit
 vim.api.nvim_set_keymap("i", "<Esc>", "<C-o>:echoerr \"Use jk\"<CR>", { noremap = true, silent = true }) -- No more esc
 ---- Normal mode
+vim.api.nvim_set_keymap("n", "<C-[>", "<C-t>", {}) -- jump backward in the tagstack
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "<Leader>'", "cr\"'<ESC>lcr`'<ESC>", { silent = true }) -- change quotes to '
 vim.api.nvim_set_keymap("n", "<Leader>H", ":vertical resize +1<CR>", {}) -- resize vertical 1
