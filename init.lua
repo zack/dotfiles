@@ -318,6 +318,8 @@ vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {}) -- kill a buffer withou
 vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line wrap
 vim.api.nvim_set_keymap("n", "q:", ":q", {}) -- fix accidentally hitting these in the wrong order
 ---- Visual mode
-vim.api.nvim_set_keymap("x", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
+vim.api.nvim_set_keymap("x", "'", 'c\'<C-r>"\'<Esc>', { noremap = true, silent = true }) -- wrap selection in single quotes
 vim.api.nvim_set_keymap("x", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", { noremap = true }) -- sort the visual selection
+vim.api.nvim_set_keymap("x", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
+vim.api.nvim_set_keymap("x", "\"", 'c"<C-r>""<Esc>', { noremap = true, silent = true }) -- wrap selection in double quotes
 vim.api.nvim_set_keymap("x", "p", "P", {}) -- 'put' without overwriting register
