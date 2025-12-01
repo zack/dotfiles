@@ -255,7 +255,7 @@ end, { bang = true, nargs = '*' })
 -- Show errors and warnings in a floating window after a few seconds
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
-    vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
+    vim.diagnostic.open_float(nil, { focusable = false, source = false })
   end,
 })
 
@@ -290,7 +290,9 @@ vim.api.nvim_set_keymap("v", "C", ":CodeCompanionChat Add<CR>", {})
 ---- Insert mode
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true; silent = true }) -- quick quit
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true; silent = true }) -- quick quit
-vim.api.nvim_set_keymap("i", "<Esc>", "<C-o>:echoerr \"Use jk\"<CR>", { noremap = true, silent = true }) -- No more esc
+vim.keymap.set("i", "<Esc>", function() -- not allowed to use Esc to exit insert mode
+  require("snacks").notifier.notify("Use jk", "error")
+end, { noremap = true, silent = true })
 ---- Normal mode
 vim.api.nvim_set_keymap("n", "<C-[>", "<C-t>", {}) -- jump backward in the tagstack
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
