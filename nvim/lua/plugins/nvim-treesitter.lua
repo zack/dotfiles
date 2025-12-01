@@ -1,5 +1,16 @@
 return {
-  -- don't forget to `:TSInstall vim regex lua bash mardkwon markdown_inline jsx tsx typescript javascript`
+  -- don't forget to `:TSInstall the following:
+  -- bash
+  -- javascript
+  -- jsx
+  -- lua
+  -- markdown
+  -- markdown_inline
+  -- prisma
+  -- regex
+  -- tsx
+  -- typescript
+  -- vim
   'nvim-treesitter/nvim-treesitter',
   branch = 'master',
   lazy = false,
