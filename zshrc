@@ -15,6 +15,7 @@ export LESS='-iRS#3NM~g'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export BAT_CONFIG_PATH=$HOME/.batrc
 export BAT_THEME='Dracula'
+export GROFF_NO_SGR=1 # for fixing colorized man pages
 
 ### HISTORY
 HISTFILE=~/.zsh_history
