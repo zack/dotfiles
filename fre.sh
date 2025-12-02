@@ -32,6 +32,10 @@ sudo cp ~/dotfiles/only-dir /usr/local/bin/only-dir
 sudo chmod +x /usr/local/bin/with-dir
 sudo chmod +x /usr/local/bin/only-dir
 
+# zsh fzf-tab completion
+mkdir ~/.zsh-plugins
+git clone https://github.com/Aloxaf/fzf-tab ~/.zsh-plugins/fzf-tab
+
 # vim-tmux-navigator
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 

@@ -58,6 +58,10 @@ fi
 ### ZSH SYNTAX HIGHLIGHTING
 source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+### ZSH fzf-tab completion
+autoload -U compinit; compinit
+source ~/.zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
+
 ### USE VI MODE
 set -o vi
 
