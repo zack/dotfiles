@@ -38,3 +38,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Set up nvim.lazy plugins
 mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua
+
+# Install yq: https://github.com/mikefarah/yq
+echo "Install yq"
