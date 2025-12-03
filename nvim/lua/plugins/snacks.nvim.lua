@@ -4,13 +4,11 @@ return {
   lazy = false,
   opts = {
     notifier = { enabled = true},
-    indent = { enabled = true },
-    animate = { -- animation settings for indent
-      enabled = vim.fn.has("nvim-0.10") == 1,
-      duration = {
-        step = 10, -- ms per step
-        total = 100, -- maximum duration
-      },
+    indent = {
+      enabled = true,
+      animate = {
+        enabled = false
+      }
     },
   },
   keys = {
