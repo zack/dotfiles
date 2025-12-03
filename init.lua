@@ -294,9 +294,8 @@ vim.keymap.set("i", "<Esc>", function() -- not allowed to use Esc to exit insert
   require("snacks").notifier.notify("Use jk", "error")
 end, { noremap = true, silent = true })
 ---- Normal mode
-vim.api.nvim_set_keymap("n", "0", "$", {}) -- a sane keybind for going to the end of the line
-vim.api.nvim_set_keymap("n", "1", "^", { noremap = true}) -- a sane keybind for going to the first printable char
-vim.api.nvim_set_keymap("n", "!", "0", { noremap = true}) -- a sane keybind for going to the first column
+vim.api.nvim_set_keymap("n", "L", "$", {}) -- a sane keybind for going to the end of the line
+vim.api.nvim_set_keymap("n", "H", "^", {}) -- a sane keybind for going to the first printable char
 vim.api.nvim_set_keymap("n", "<C-[>", "<C-t>", {}) -- jump backward in the tagstack
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "<Leader>'", "cr\"'<ESC>lcr`'<ESC>", { silent = true }) -- change quotes to '
