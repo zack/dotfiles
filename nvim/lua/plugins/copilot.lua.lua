@@ -17,17 +17,25 @@ return {
         ["*"] = true,
       },
     })
-    vim.keymap.set(
-      "i",
-      "<S-Tab>",
+
+    vim.keymap.set("i", "<S-Tab>",
       function()
         if require("copilot.suggestion").is_visible() then
           require("copilot.suggestion").accept()
         else
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
         end
-      end, {
-      silent = true,
-    })
+      end,
+      { silent = true, }
+    )
+
+    vim.keymap.set("i", "<C-\\>",
+      function()
+        vim.notify("Copilot auto_trigger toggled")
+        require("copilot.suggestion").toggle_auto_trigger()
+        require("copilot.suggestion").dismiss()
+      end,
+      {}
+    )
   end,
 }

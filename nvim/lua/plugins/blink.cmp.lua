@@ -5,10 +5,11 @@ return {
   opts = {
     keymap = {
       preset = "enter",
-      ["K"] = { "select_prev", "fallback" },
-      ["J"] = { "select_next", "fallback" },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "select_next", "fallback" },
     },
     sources = {
+      -- find a way to disable this for comment writing...
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
         codecompanion = { "codecompanion" },
