@@ -90,6 +90,7 @@ DISABLE_AUTO_TITLE=true
 # general aliases
 alias ~="cd ~"
 alias ag='ag -p ~/.agignore'
+alias bat='batcat'
 alias cat='bat'
 alias cd='z'
 alias cm='chezmoi'
