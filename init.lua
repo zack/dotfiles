@@ -288,7 +288,6 @@ vim.api.nvim_set_keymap("v", "C", ":CodeCompanionChat Add<CR>", {})
 
 -- Neovim stuff
 ---- Insert mode
-vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true; silent = true }) -- quick quit
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true; silent = true }) -- quick quit
 vim.keymap.set("i", "<Esc>", function() -- not allowed to use Esc to exit insert mode
   require("snacks").notifier.notify("Use jk", "error")
