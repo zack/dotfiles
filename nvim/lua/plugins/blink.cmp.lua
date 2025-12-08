@@ -41,7 +41,12 @@ return {
         auto_show = function()
           return not in_treesitter_capture("comment") and not require("luasnip").expand_or_jumpable()
         end
-      }
+      },
+      list = {
+        selection = {
+          preselect = false,
+        },
+      },
     },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
