@@ -297,8 +297,6 @@ vim.api.nvim_set_keymap("n", "L", "$", {}) -- a sane keybind for going to the en
 vim.api.nvim_set_keymap("n", "H", "^", {}) -- a sane keybind for going to the first printable char
 vim.api.nvim_set_keymap("n", "<C-[>", "<C-t>", {}) -- jump backward in the tagstack
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
-vim.api.nvim_set_keymap("n", "<C-k>", "<C-u>", { silent = true }) -- toggle relativeumber
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-d>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "<Leader>'", "cr\"'<ESC>lcr`'<ESC>", { silent = true }) -- change quotes to '
 vim.api.nvim_set_keymap("n", "<Leader>H", ":vertical resize +1<CR>", {}) -- resize vertical 1
 vim.api.nvim_set_keymap("n", "<Leader>J", ":resize -1<CR>", {}) -- resize horizontal 1
