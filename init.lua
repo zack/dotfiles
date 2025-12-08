@@ -188,6 +188,7 @@ vim.o.ignorecase = true -- searches case-insensitive by default
 vim.o.lcs = "trail:·,tab:»·,eol:$,extends:»,nbsp:+" -- setlist chars
 vim.o.list = true -- display special characters
 vim.o.number = true -- show line numbers
+vim.o.relativenumber = true -- show relative line numbers
 vim.o.scrolloff = 5 -- lines to keep in view at top/bottom of window
 vim.o.sidescrolloff = 3 -- characters to keep in view on left/right of window
 vim.o.sm = true -- briefly flash to matching bracket when typing
