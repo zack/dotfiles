@@ -182,8 +182,8 @@ vim.opt.wildignore = { -- ignore these files when expanding
   "*/.git/*", "*/.hg/*", "*/.svn/*", "*/.idea/*", "*/.DS_Store", "*/vendor", "*/node_modules", "*.swp"
 }
 -- vim.o
--- vim.o.cursorcolumn = true -- highlight the cursor's column
 vim.o.cursorline = true -- highlight the cursor's line
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#555555", blend = 0 })
 vim.o.ignorecase = true -- searches case-insensitive by default
 vim.o.lcs = "trail:·,tab:»·,eol:$,extends:»,nbsp:+" -- setlist chars
 vim.o.list = true -- display special characters
