@@ -283,7 +283,7 @@ vim.api.nvim_set_keymap("n", "<C-f>", ":FzfLua files<CR>", {})
 ---- Undotree
 vim.api.nvim_set_keymap("n", "<Leader>u", ":UndotreeToggle<CR>", {})
 --- CodeCompanion
-      vim.api.nvim_set_keymap("n", "<Leader>A", ":CodeCompanionChat<CR>", {})
+vim.api.nvim_set_keymap("n", "<Leader>A", ":CodeCompanionChat<CR>", {})
 vim.api.nvim_set_keymap("v", "A", ":CodeCompanion #{buffer} ", {})
 vim.api.nvim_set_keymap("v", "C", ":CodeCompanionChat Add<CR>", {})
 
@@ -294,8 +294,6 @@ vim.keymap.set("i", "<Esc>", function() -- not allowed to use Esc to exit insert
   require("snacks").notifier.notify("Use jk", "error")
 end, { noremap = true, silent = true })
 ---- Normal mode
-vim.api.nvim_set_keymap("n", "L", "$", {}) -- a sane keybind for going to the end of the line
-vim.api.nvim_set_keymap("n", "H", "^", {}) -- a sane keybind for going to the first printable char
 vim.api.nvim_set_keymap("n", "<C-[>", "<C-t>", {}) -- jump backward in the tagstack
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "<Leader>'", "cr\"'<ESC>lcr`'<ESC>", { silent = true }) -- change quotes to '
@@ -318,10 +316,14 @@ vim.api.nvim_set_keymap("n", "<Leader>l", ":vertical resize -10<CR>", {}) -- res
 vim.api.nvim_set_keymap("n", "<Leader>n", ":lua AnyNumberToggle()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {}) -- kill a buffer without affecting windows
 vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line wrap
+vim.api.nvim_set_keymap("n", "H", "^", {}) -- a sane keybind for going to the first printable char
+vim.api.nvim_set_keymap("n", "L", "$", {}) -- a sane keybind for going to the end of the line
 vim.api.nvim_set_keymap("n", "q:", ":q", {}) -- fix accidentally hitting these in the wrong order
 ---- Visual mode
 vim.api.nvim_set_keymap("x", "'", 'c\'<C-r>"\'<Esc>', { noremap = true, silent = true }) -- wrap selection in single quotes
 vim.api.nvim_set_keymap("x", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", { noremap = true }) -- sort the visual selection
 vim.api.nvim_set_keymap("x", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
+vim.api.nvim_set_keymap("x", "J", ":m+1<CR>V", {}) -- Move the line down one line
+vim.api.nvim_set_keymap("x", "K", ":m-2<CR>V", {}) -- Move the line up one line
 vim.api.nvim_set_keymap("x", "\"", 'c"<C-r>""<Esc>', { noremap = true, silent = true }) -- wrap selection in double quotes
 vim.api.nvim_set_keymap("x", "p", "P", {}) -- 'put' without overwriting register

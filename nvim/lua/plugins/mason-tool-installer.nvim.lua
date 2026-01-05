@@ -1,4 +1,3 @@
--- installs tools specified in init.luau
 return {
   'WhoIsSethDaniel/mason-tool-installer.nvim',
   opts = {
@@ -7,6 +6,7 @@ return {
       "eslint-lsp",
       "lua-language-server",
       "prettierd",
+      "prisma-language-server",
       "typescript-language-server",
     },
   },
