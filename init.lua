@@ -123,7 +123,7 @@ vim.cmd("highlight ColorColumn guibg='#800000'")
 
 -- Disable highlights for Avante panes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "codecompanion*",
+  pattern = "Avante*",
   callback = function()
     vim.wo.colorcolumn = ""
   end,
@@ -282,10 +282,6 @@ vim.api.nvim_set_keymap("n", "<C-g>", ":FzfLua git_status<CR>", {})
 vim.api.nvim_set_keymap("n", "<C-f>", ":FzfLua files<CR>", {})
 ---- Undotree
 vim.api.nvim_set_keymap("n", "<Leader>u", ":UndotreeToggle<CR>", {})
---- CodeCompanion
-vim.api.nvim_set_keymap("n", "<Leader>A", ":CodeCompanionChat<CR>", {})
-vim.api.nvim_set_keymap("v", "A", ":CodeCompanion #{buffer} ", {})
-vim.api.nvim_set_keymap("v", "C", ":CodeCompanionChat Add<CR>", {})
 
 -- Neovim stuff
 ---- Insert mode

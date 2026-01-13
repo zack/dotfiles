@@ -18,6 +18,9 @@ return {
       auto_apply = false, -- prevent automatic application of edits
       diff_preview = true, -- show diff preview instead of direct application
     },
+    mappings = {
+      ask = "<leader>A",
+    },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
