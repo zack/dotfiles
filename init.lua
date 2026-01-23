@@ -270,7 +270,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 ---- Lazy.nvim
 vim.api.nvim_set_keymap("n", "<Leader>z", ":Lazy<CR>", {})
 ---- TODO: Did Rg use to do something else?
-vim.api.nvim_set_keymap("n", "<Leader>r", ":Rg<CR>", {}) -- search word under cursor
+-- vim.api.nvim_set_keymap("n", "<Leader>r", ":Rg<CR>", {}) -- search word under cursor
 ---- vim-expand
 vim.api.nvim_set_keymap("x", "v", "<Plug>(expand_region_expand)", {})
 vim.api.nvim_set_keymap("x", "<C-v>", "<Plug>(expand_region_shrink)", {})
