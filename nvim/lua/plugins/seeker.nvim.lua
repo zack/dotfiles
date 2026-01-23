@@ -3,7 +3,7 @@ return {
   dependencies = { 'folke/snacks.nvim' },
   cmd = { 'Seeker' },
   keys = {
-    { '<leader>f', ':Seeker<CR>', desc = 'Seek Files' },
+    { '<leader>f', ':Seeker files<CR>', desc = 'Seek Files' },
     { '<leader>r', ':Seeker git_files<CR>', desc = 'Seek Git Files' },
     -- { '<leader>fg', ':Seeker grep<CR>', desc = 'Seek Grep' },
   },
