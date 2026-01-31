@@ -286,6 +286,7 @@ vim.api.nvim_set_keymap("n", "<Leader>u", ":UndotreeToggle<CR>", {})
 -- Neovim stuff
 ---- Insert mode
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true; silent = true }) -- quick quit
+vim.api.nvim_set_keymap('i', '<C-H>', '<C-W>', {noremap = true}) -- delete last word
 vim.keymap.set("i", "<Esc>", function() -- not allowed to use Esc to exit insert mode
   require("snacks").notifier.notify("Use jk", "error")
 end, { noremap = true, silent = true })
