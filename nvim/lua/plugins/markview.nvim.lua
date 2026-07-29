@@ -1,11 +1,10 @@
--- markdown in the CodeCompanion chat buffer, also other markdown files
 return {
   "OXY2DEV/markview.nvim",
   lazy = false,
   opts = {
     preview = {
-      filetypes = { "markdown", "codecompanion" },
-      ignore_buftypes = {},
+      filetypes = { "Avante", "markdown" },
+      ignore_buftypes = {}, -- default ignores nofile, which is what Avante's sidebar is
     },
   },
 }

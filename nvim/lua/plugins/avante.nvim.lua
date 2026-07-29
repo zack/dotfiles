@@ -34,16 +34,5 @@ return {
     "folke/snacks.nvim", -- for input provider snacks
     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
     "zbirenbaum/copilot.lua", -- for providers='copilot'
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      -- Only Avante's own buffers — markview.nvim owns the markdown filetype,
-      -- and having both attach to markdown makes render-markdown's overlay
-      -- icon land on top of the heading text.
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        file_types = { "Avante" },
-      },
-      ft = { "Avante" },
-    },
   },
 }
