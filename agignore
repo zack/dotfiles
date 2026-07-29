@@ -1,5 +1,0 @@
-vendor/*
-node_modules
-*.min.css
-**/node_modules
-test-results.xml
