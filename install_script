@@ -38,10 +38,6 @@ ln -s $workdir/$file ~/.$file
 done
 echo "...done"
 
-# Set up kitty config
-mkdir -p ~/.config/kitty/
-ln -s ~/dotfiles/kitty.config ~/.config/kitty/kitty.conf
-
 # set up neovim config
 mkdir ~/.config/nvim
 ln -s $(realpath ~/dotfiles/init.lua) ~/.config/nvim/init.lua 
