@@ -69,3 +69,5 @@ tags.temp
 
 ## LLM Agent Files
 AGENTS.md
+
+**/.claude/settings.local.json

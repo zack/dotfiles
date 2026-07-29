@@ -6,6 +6,7 @@ export PATH="$PATH:$HOME/bins"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/opt/homebrew/lib/"
+export PATH="$PATH:/snap/bin"
 export FPATH="~/.eza/completions/zsh:$FPATH"
 
 ### MISC EXPORTS
