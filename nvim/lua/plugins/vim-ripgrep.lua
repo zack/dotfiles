@@ -1,3 +1,0 @@
-return {
-  'jremmen/vim-ripgrep'
-}

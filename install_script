@@ -1,43 +1,427 @@
-# This script creates symlinks from the home directory
-# to any desired dotfiles in ~/dotfiles
-############################
+#!/bin/sh
+#
+# Creates symlinks from the home directory to the dotfiles in ~/dotfiles.
+# Installs the tools those dotfiles assume are present. Safe to re-run:
+# anything already linked or installed is left alone, anything in the way of
+# a symlink gets backed up to ~/dotfiles_old/<timestamp>/ first.
+#
+# Assumes SSH is set up for github access
 
-########## Variables
+# Fail loudly on error, nonzero returns, or on accessing unset variables
+set -eu
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-workdir=~/dotfiles/work_dotfiles
+dir=$HOME/dotfiles
+olddir=$HOME/dotfiles_old/$(date +%Y%m%d-%H%M%S)
+workdir=$dir/work_dotfiles
 
-# list of files/folders to symlink in homedir
-files="ackrc agignore vim zshrc gitconfig gitignore_global ripgreprc tmux.conf"
-workfiles="zshrc_work"
+# list of files to symlink ~/dotfiles/<name> -> ~/.<name>
+files="zshenv zshrc gitconfig gitignore_global ripgreprc tmux.conf"
 
-##########
+# tools actually installed/failed this run, reported at the end.
+# Don't add no-ops to either list.
+installed=""
+failed=""
 
-# create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
-mkdir -p $olddir
-echo "...done"
 
-# change to the dotfiles directory
-echo "Changing to the $dir directory"
-cd $dir
-echo "...done"
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                  HELPERS                                  ║
+# ║                                                                           ║
+# ║ Shared functions every section below calls into, so each one reads as     ║
+# ║ just a couple lines of actual logic.                                      ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
+# link SRC DEST — no-op if DEST is already the right symlink, otherwise backs
+# up whatever's currently at DEST (if anything) and symlinks it.
+link() {
+  src=$1
+  dest=$2
+  if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
+    return 0
+  fi
+  if [ -e "$dest" ] || [ -L "$dest" ]; then
+    backup=$olddir${dest#"$HOME"}
+    mkdir -p "$(dirname "$backup")"
+    mv "$dest" "$backup"
+    echo "backed up $dest -> $backup"
+  fi
+  mkdir -p "$(dirname "$dest")"
+  ln -s "$src" "$dest"
+  echo "linked $dest -> $src"
+}
+
+# try_to_clone DIR REPO LABEL — prompts and clones REPO into DIR if DIR is
+# missing or empty
+try_to_clone() {
+  path=$1
+  repo=$2
+  label=$3
+  if [ -d "$path" ] && [ -n "$(ls -A "$path" 2>/dev/null)" ]; then
+    return 0
+  fi
+  printf '%s not found. Clone it now? [y/N] ' "$label"
+  if ! read -r ans < /dev/tty 2>/dev/null; then
+    ans=n
+  fi
+  case $ans in
+    y | Y)
+      if git clone "$repo" "$path"; then
+        echo "cloned $label"
+      else
+        echo "failed to clone $label — continuing without it" >&2
+      fi
+      ;;
+    *)
+      echo "skipping $label"
+      ;;
+  esac
+}
+
+# install_pkg BINARY PACKAGE — installs PACKAGE via apt if BINARY isn't already
+# on PATH.
+install_pkg() {
+  bin=$1
+  pkg=$2
+  if command -v "$bin" > /dev/null 2>&1; then
+    return 0
+  fi
+  if sudo apt-get install -y "$pkg"; then
+    echo "installed $pkg"
+    installed="$installed $pkg"
+  else
+    echo "failed to install $pkg — continuing" >&2
+    failed="$failed $pkg"
+  fi
+}
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                DIRECTORIES                                ║
+# ║                                                                           ║
+# ║ every fixed, always-needed directory something below writes into          ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+mkdir -p "$HOME/bins" "$HOME/.config/nvim"
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                              SYSTEM PACKAGES                              ║
+# ║                                                                           ║
+# ║ The baseline CLI tools needed on every machine                            ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+sudo apt-get update || echo "apt-get update failed — installs below may fail or be stale" >&2
+install_pkg zsh zsh
+install_pkg cc build-essential
+install_pkg curl curl
+install_pkg wget wget
+install_pkg fortune fortune-mod
+install_pkg cowsay cowsay
+install_pkg fusermount3 fuse3
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                    ZSH                                    ║
+# ║                                                                           ║
+# ║ https://zsh.org/                                                          ║
+# ║ Like bash, but different.                                                 ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if command -v zsh > /dev/null 2>&1; then
+  zsh_path=$(command -v zsh)
+  current_shell=$(getent passwd "$(id -un)" | cut -d: -f7)
+  if [ "$current_shell" != "$zsh_path" ]; then
+    if chsh -s "$zsh_path"; then
+      echo "set zsh as login shell"
+      installed="$installed zsh-shell"
+    else
+      echo "failed to set zsh as login shell — run yourself: chsh -s $zsh_path" >&2
+      failed="$failed zsh-shell"
+    fi
+  fi
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                    EZA                                    ║
+# ║                                                                           ║
+# ║ https://github.com/eza-community/eza/                                     ║
+# ║ eza is a modern replacement for ls, the file-listing command that ships   ║
+# ║ with Unix and Linux. It adds more features and better defaults: colour to ║
+# ║ distinguish file types and metadata, and awareness of symlinks, extended  ║
+# ║ attributes, and Git.                                                      ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v eza > /dev/null 2>&1; then
+  tmp=$(mktemp -d)
+  if wget -q https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz -O "$tmp/eza.tar.gz" \
+    && tar -xzf "$tmp/eza.tar.gz" -C "$tmp" \
+    && bin=$(find "$tmp" -type f -name eza | head -n1) \
+    && [ -n "$bin" ] \
+    && cp "$bin" "$HOME/bins/eza" \
+    && chmod +x "$HOME/bins/eza"; then
+    echo "installed eza"
+    installed="$installed eza"
+  else
+    echo "failed to install eza — continuing without it" >&2
+    failed="$failed eza"
+  fi
+  rm -rf "$tmp"
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                  ZOXIDE                                   ║
+# ║                                                                           ║
+# ║ https://github.com/ajeetdsouza/zoxide/                                    ║
+# ║ zoxide is a smarter cd command, inspired by z and autojump. It remembers  ║
+# ║ which directories get used most, so jumping to one takes just a few       ║
+# ║ keystrokes, and works across all major shells.                            ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v zoxide > /dev/null 2>&1; then
+  if curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
+    echo "installed zoxide"
+    installed="$installed zoxide"
+  else
+    echo "failed to install zoxide — continuing without it" >&2
+    failed="$failed zoxide"
+  fi
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                DIFFTASTIC                                 ║
+# ║                                                                           ║
+# ║ https://github.com/Wilfred/difftastic/                                    ║
+# ║ difftastic is a structural diff tool that compares files based on their   ║
+# ║ syntax rather than line by line, so a reformat that just reflows lines    ║
+# ║ doesn't look like a wall of unrelated changes.                            ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v difft > /dev/null 2>&1; then
+  tmp=$(mktemp -d)
+  if wget -q https://github.com/Wilfred/difftastic/releases/latest/download/difft-x86_64-unknown-linux-gnu.tar.gz -O "$tmp/difft.tar.gz" \
+    && tar -xzf "$tmp/difft.tar.gz" -C "$tmp" \
+    && bin=$(find "$tmp" -type f -name difft | head -n1) \
+    && [ -n "$bin" ] \
+    && cp "$bin" "$HOME/bins/difft" \
+    && chmod +x "$HOME/bins/difft"; then
+    echo "installed difft"
+    installed="$installed difft"
+  else
+    echo "failed to install difft — continuing" >&2
+    failed="$failed difft"
+  fi
+  rm -rf "$tmp"
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                   TMUX                                    ║
+# ║                                                                           ║
+# ║ https://github.com/tmux/tmux/                                             ║
+# ║ tmux is a terminal multiplexer: it lets a number of terminals be created, ║
+# ║ accessed, and controlled from a single screen, and can detach from that   ║
+# ║ screen and keep running in the background to be reattached later.         ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v tmux > /dev/null 2>&1; then
+  tmp=$(mktemp -d)
+  version=$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/tmux/tmux/releases/latest)
+  version=${version##*/}
+  if sudo apt-get install -y libevent-dev libncurses-dev pkg-config \
+    && wget -q "https://github.com/tmux/tmux/releases/download/$version/tmux-$version.tar.gz" -O "$tmp/tmux.tar.gz" \
+    && tar -xzf "$tmp/tmux.tar.gz" -C "$tmp" \
+    && srcdir=$(find "$tmp" -maxdepth 1 -type d -name "tmux-*" | head -n1) \
+    && [ -n "$srcdir" ] \
+    && (cd "$srcdir" && ./configure > /dev/null && make -j"$(nproc)" > /dev/null) \
+    && cp "$srcdir/tmux" "$HOME/bins/tmux" \
+    && chmod +x "$HOME/bins/tmux"; then
+    echo "installed tmux"
+    installed="$installed tmux"
+  else
+    echo "failed to install tmux — continuing" >&2
+    failed="$failed tmux"
+  fi
+  rm -rf "$tmp"
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                  RIPGREP                                  ║
+# ║                                                                           ║
+# ║ https://github.com/BurntSushi/ripgrep/                                    ║
+# ║ ripgrep is a line-oriented search tool that recursively searches a        ║
+# ║ directory for a regex pattern, respecting gitignore rules and skipping    ║
+# ║ hidden and binary files by default. Similar in spirit to The Silver       ║
+# ║ Searcher, ack, and grep, but faster.                                      ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v rg > /dev/null 2>&1; then
+  tmp=$(mktemp -d)
+  version=$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/BurntSushi/ripgrep/releases/latest)
+  version=${version##*/}
+  if wget -q "https://github.com/BurntSushi/ripgrep/releases/download/$version/ripgrep-$version-x86_64-unknown-linux-musl.tar.gz" -O "$tmp/rg.tar.gz" \
+    && tar -xzf "$tmp/rg.tar.gz" -C "$tmp" \
+    && bin=$(find "$tmp" -type f -name rg | head -n1) \
+    && [ -n "$bin" ] \
+    && cp "$bin" "$HOME/bins/rg" \
+    && chmod +x "$HOME/bins/rg"; then
+    echo "installed rg"
+    installed="$installed rg"
+  else
+    echo "failed to install rg — continuing" >&2
+    failed="$failed rg"
+  fi
+  rm -rf "$tmp"
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                    FZF                                    ║
+# ║                                                                           ║
+# ║ https://github.com/junegunn/fzf/                                          ║
+# ║ fzf is a general-purpose command-line fuzzy finder and interactive        ║
+# ║ terminal toolkit — for selecting files, browsing command history,         ║
+# ║ previewing data, or building custom menus and workflows out of shell      ║
+# ║ scripts.                                                                  ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v fzf > /dev/null 2>&1; then
+  tmp=$(mktemp -d)
+  tag=$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/junegunn/fzf/releases/latest)
+  tag=${tag##*/}
+  ver=${tag#v}
+  if wget -q "https://github.com/junegunn/fzf/releases/download/$tag/fzf-$ver-linux_amd64.tar.gz" -O "$tmp/fzf.tar.gz" \
+    && tar -xzf "$tmp/fzf.tar.gz" -C "$tmp" \
+    && bin=$(find "$tmp" -type f -name fzf | head -n1) \
+    && [ -n "$bin" ] \
+    && cp "$bin" "$HOME/bins/fzf" \
+    && chmod +x "$HOME/bins/fzf"; then
+    echo "installed fzf"
+    installed="$installed fzf"
+  else
+    echo "failed to install fzf — continuing" >&2
+    failed="$failed fzf"
+  fi
+  rm -rf "$tmp"
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                    BAT                                    ║
+# ║                                                                           ║
+# ║ https://github.com/sharkdp/bat/                                           ║
+# ║ bat is a cat clone with syntax highlighting and git integration           ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v bat > /dev/null 2>&1; then
+  tmp=$(mktemp -d)
+  tag=$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/sharkdp/bat/releases/latest)
+  tag=${tag##*/}
+  if wget -q "https://github.com/sharkdp/bat/releases/download/$tag/bat-$tag-x86_64-unknown-linux-gnu.tar.gz" -O "$tmp/bat.tar.gz" \
+    && tar -xzf "$tmp/bat.tar.gz" -C "$tmp" \
+    && bin=$(find "$tmp" -type f -name bat | head -n1) \
+    && [ -n "$bin" ] \
+    && cp "$bin" "$HOME/bins/bat" \
+    && chmod +x "$HOME/bins/bat"; then
+    echo "installed bat"
+    installed="$installed bat"
+  else
+    echo "failed to install bat — continuing" >&2
+    failed="$failed bat"
+  fi
+  rm -rf "$tmp"
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                   NVIM                                    ║
+# ║                                                                           ║
+# ║ https://github.com/neovim/neovim/                                         ║
+# ║ neovim is a project that aggressively refactors Vim to simplify           ║
+# ║ maintenance, split work between multiple developers, enable advanced UIs  ║
+# ║ without modifying the core, and maximize extensibility.                   ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v nvim > /dev/null 2>&1; then
+  if wget -q https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage -O "$HOME/bins/nvim" \
+    && chmod +x "$HOME/bins/nvim"; then
+    echo "installed nvim"
+    installed="$installed nvim"
+  else
+    echo "failed to install nvim — continuing without it" >&2
+    failed="$failed nvim"
+  fi
+fi
+
+link "$(realpath "$dir/init.lua")" "$HOME/.config/nvim/init.lua"
+link "$dir/nvim/lua" "$HOME/.config/nvim/lua"
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                    NVM                                    ║
+# ║                                                                           ║
+# ║ https://github.com/nvm-sh/nvm/                                            ║
+# ║ nvm is a version manager for node.js, designed to be installed per-user,  ║
+# ║ and invoked per-shell. nvm works on any POSIX-compliant shell (sh, dash,  ║
+# ║ ksh, zsh, bash), in particular on these platforms: unix, macOS, and       ║
+# ║ Windows WSL.                                                              ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
+  tag=$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/nvm-sh/nvm/releases/latest)
+  tag=${tag##*/}
+  if PROFILE=/dev/null bash -c "$(curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/$tag/install.sh")" \
+    && bash -c '. "$HOME/.nvm/nvm.sh" && nvm install --lts' > /dev/null; then
+    echo "installed nvm"
+    installed="$installed nvm"
+  else
+    echo "failed to install nvm — continuing without it" >&2
+    failed="$failed nvm"
+  fi
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                  DOTFILES                                 ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
 for file in $files; do
-echo "Creating symlink to $file in home directory."
-ln -s $dir/$file ~/.$file
+  link "$dir/$file" "$HOME/.$file"
 done
-echo "...done"
 
-# Do the same for the work dotfiles
-for file in $workfiles; do
-echo "Creating symlink to $file in home directory."
-ln -s $workdir/$file ~/.$file
-done
-echo "...done"
 
-# set up neovim config
-mkdir ~/.config/nvim
-ln -s $(realpath ~/dotfiles/init.lua) ~/.config/nvim/init.lua 
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                  SCRIPTS                                  ║
+# ║                                                                           ║
+# ║ they go straight into ~/bins                                              ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+link "$dir/rainbow" "$HOME/bins/rainbow"
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                               WORK DOTFILES                               ║
+# ║                                                                           ║
+# ║ private repo that can't just be symlinked                                 ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+try_to_clone "$workdir" git@github.com:zack/work_dotfiles.git work_dotfiles
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                 SUMMARY                                   ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if [ -n "$installed" ]; then
+  echo "installed:$installed"
+else
+  echo "installed: nothing (already had everything)"
+fi
+
+if [ -n "$failed" ]; then
+  echo "failed:$failed"
+fi
+
+echo "...done"

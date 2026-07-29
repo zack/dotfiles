@@ -1,20 +1,20 @@
-# Always start in tmux
-if [ "$TMUX" = "" ]; then tmux; fi
+# always launch in tmux, but use existing session if one exists
+if [ "$TMUX" = "" ]; then tmux attach || tmux; fi
+typeset -U PATH path FPATH fpath # deduplicate path values after launching tmux
 
 ### PATH MODIFICATION
-export PATH="$PATH:$HOME/bins"
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:/usr/local/bin/"
-export PATH="$PATH:/opt/homebrew/lib/"
+export FPATH="$HOME/.eza/completions/zsh:$FPATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bins:$PATH"
 export PATH="$PATH:/snap/bin"
-export FPATH="~/.eza/completions/zsh:$FPATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
 ### MISC EXPORTS
 export KEYTIMEOUT=1 # disable wait when switching modes
 export EDITOR=nvim
 export LESS='-iRS#3NM~g'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-export BAT_CONFIG_PATH=$HOME/.batrc
 export BAT_THEME='Dracula'
 export GROFF_NO_SGR=1 # for fixing colorized man pages
 
@@ -25,18 +25,12 @@ SAVEHIST=100000
 setopt INC_APPEND_HISTORY_TIME
 setopt HIST_FIND_NO_DUPS
 
-### SOURCE SECRETS
-if [ -s ~/.secrets/secrets.config ];
-then
-  source ~/.secrets/secrets.config;
-fi
-
 ### PROMPT
+if [ "$TMUX" != "" ]; then ARROW="➜ " else ARROW="⇝ " fi
 STATUS="%(?.%F{green}.%F{red})${ARROW}%f"
 if [[ -n "$SSH_CLIENT" ]]; then UN="%B%F{yellow}%n%b%f " else UN="" fi
 LOC="%1~"
-autoload -Uz vcs_info
-precmd() { vcs_info }
+autoload -Uz add-zsh-hook; add-zsh-hook precmd vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
@@ -56,49 +50,24 @@ if ! [ -f '/etc/wsl.conf' ]; then
   PROMPT="👾 ${PROMPT}"
 fi
 
-### ZSH SYNTAX HIGHLIGHTING
-source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-### ZSH fzf-tab completion
-autoload -U compinit; compinit
-source ~/.zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
-
 ### USE VI MODE
 set -o vi
 
-### BINDKEYS
-bindkey '^R' history-incremental-search-backward
-
 # fzf
-## fzf completion for Ubuntu
-if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
-  source /usr/share/doc/fzf/examples/completion.zsh
-fi
-
-if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
-fi
-# source for zsh
+## ZSH fzf-tab completion
+autoload -U compinit; compinit
+source ~/.zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
+## source for zsh, looks backwards but needs to come after fzf-tab.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# defaults
+## defaults
 export FZF_DEFAULT_COMMAND='rg --files'
-
-### GENERAL CONFIGURATION
-COMPLETION_WAITING_DOTS="true"
-DISABLE_AUTO_TITLE=true
 
 ### ALIASES
 # general aliases
 alias ~="cd ~"
-alias ag='ag -p ~/.agignore'
-alias bat='batcat'
 alias cat='bat'
 alias cd='z'
-alias cm='chezmoi'
-alias cma='chezmoi apply'
-alias cme='chezmoi edit --watch '
-alias cr='cargo run'
-alias ff='nvim $(fzf -m)'
+alias ff='() { [[ -n "$1" ]] && nvim "$@" } "${(@f)$(fzf -m)}"' # kill nvim if <esc>d
 alias installdeb='sudo dpkg -i'
 alias killswp='rm **/.*.swp; rm **/.*.swo'
 alias la='ls -la'
@@ -106,7 +75,6 @@ alias ls='eza'
 alias l1='ls -1'
 alias ld='ls -d */'
 alias ll='ls -la'
-alias python='python3'
 alias wtr='curl http://wttr.in/11217'
 # alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
@@ -126,11 +94,6 @@ alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
 # alias gb='git --no-pager branch'
 # alias gist='gist -c -p'
 
-# rails aliases
-alias rc='rails c'
-alias rs='rails s 2>&1 | grep -v content-length'
-alias tc='bundle exec rake tmp:clear'
-
 ### FUNCTIONS
 # colorize man pages
 man() {
@@ -147,9 +110,6 @@ man() {
 
 # speeds up git autocomplete
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
-
-# For travis-ci plugin
-[ -f /Users/zack/.travis/travis.sh ] && source /Users/zack/.travis/travis.sh
 
 # Use rg (https://github.com/BurntSushi/ripgrep) instead of the default find
 # command for listing path candidates.
@@ -172,6 +132,12 @@ fgb() {
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
+# open a dir in Windows Explorer; explorer.exe only understands absolute
+# paths, so translate whatever we're given (default to cwd) with wslpath first
+exp() {
+  explorer.exe "$(wslpath -w "${1:-.}")"
+}
+
 # $ git gb 213 to go to a branch
 function gb {
   if [[ -z "$1" ]]; then
@@ -180,12 +146,11 @@ function gb {
     git branch | grep -v "^*" | fzf -f "$1" | head -n1 | xargs git checkout
   fi
 }
-alias gb=gb
 
 # A kind of lazy loading for nvm,npm,etc.
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
-  # nvim because we use coc.vim
+  # nvim for the mason-installed LSP servers
   nvm_cmds=(nvm node npm yarn npx nvim)
   for cmd in $nvm_cmds ; do
     alias $cmd="unalias $nvm_cmds && unset nvm_cmds && . $NVM_DIR/nvm.sh &&  . $NVM_DIR/bash_completion && $cmd"
@@ -193,16 +158,22 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
 fi
 
 # Start the day off right
-fortune | cowsay | lolcat -F 0.5
-
-# Pull in work dotfiles
-setopt no_nomatch
-for file in `find ~/dotfiles/work_dotfiles/ -type f -iname zshrc_*`; do
-  source "$file"
-done
-setopt nomatch
-
-export PATH="/usr/local/sbin:$PATH"
+[[ -o interactive && -t 1 ]] && fortune | cowsay | rainbow 0.5
 
 # zoxide
+# Its doctor warns that init isn't last in the file, but syntax highlighting
+# genuinely has to come after it, so that's a warning we can never satisfy.
+export _ZO_DOCTOR=0
 eval "$(zoxide init zsh)"
+
+### WORK DOTFILES
+# no per-file symlinking here, this just sources whatever's in the private
+# work_dotfiles repo directly. The (N) glob qualifier is zsh's inline
+# nullglob, so this is silent instead of erroring on a machine that never
+# cloned work_dotfiles
+for f in "$HOME"/dotfiles/work_dotfiles/zshrc_*(N); do
+  source "$f"
+done
+
+### ZSH SYNTAX HIGHLIGHTING (must be last!)
+source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -44,10 +44,6 @@ Thumbs.db
 *.swo
 .*.un~
 
-# Secret #
-##########
-secrets
-
 # VIM #
 #######
 vim/bundle/
@@ -63,11 +59,10 @@ nohup.out
 
 *.kdbx
 
-tags
+# Tags #
+########
+/tags
 tags.lock
 tags.temp
-
-## LLM Agent Files
-AGENTS.md
 
 **/.claude/settings.local.json
