@@ -34,7 +34,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
+      { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -43,10 +43,16 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Mason's bin dir is normally added to PATH by mason.nvim's setup(), but that
+-- plugin is lazy-loaded on VeryLazy, which can fire after buffers (and their
+-- format-on-save autocmds) are already set up. Prepend it eagerly so tools
+-- like stylua are always resolvable, regardless of plugin load order.
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+
 -- Settings needed to make sure plugins work properly
-vim.g.mapleader = " "       -- Make sure to setup `mapleader` and `maplocalleader` before
+vim.g.mapleader = " " -- Make sure to setup `mapleader` and `maplocalleader` before
 vim.g.maplocalleader = "\\" -- loading lazy.nvim so that mappings are correct.
-vim.o.termguicolors = true  -- required for colorizer (and maybe other things)
+vim.o.termguicolors = true -- required for colorizer (and maybe other things)
 
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
 -- ║                                  PLUGINS                                  ║
@@ -173,36 +179,36 @@ vim.opt.wildignore = { -- ignore these files when expanding
   "*.swp",
 }
 -- vim.o
-vim.o.cursorline = true                             -- highlight the cursor's line
+vim.o.cursorline = true -- highlight the cursor's line
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#555555", blend = 0 })
-vim.o.ignorecase = true                             -- searches case-insensitive by default
+vim.o.ignorecase = true -- searches case-insensitive by default
 vim.o.lcs = "trail:·,tab:»·,eol:$,extends:»,nbsp:+" -- setlist chars
-vim.o.list = true                                   -- display special characters
-vim.o.number = true                                 -- show line numbers
-vim.o.relativenumber = true                         -- show relative line numbers
-vim.o.scrolloff = 5                                 -- lines to keep in view at top/bottom of window
-vim.o.sidescrolloff = 3                             -- characters to keep in view on left/right of window
-vim.o.sm = true                                     -- briefly flash to matching bracket when typing
-vim.o.smartcase = true                              -- search becomes case-sensitive when capitals
-vim.o.splitbelow = true                             -- horizontal splits default to below
-vim.o.splitright = true                             -- vertical splits default to the right
-vim.o.timeoutlen = 300                              -- how long to wait on a mapping that's a prefix of another
-vim.o.undofile = true                               -- enables undofile for persistent history
-vim.o.undolevels = 1000                             -- number of lines to keep in undofile
-vim.o.undoreload = 1000                             -- number of undo lines to retain when a file is reloaded
-vim.o.wildmenu = true                               -- enable wild menu for command completion
-vim.o.wildmode = "longest:full,full"                -- wildmenu config
-vim.o.viminfo = "'20,<1000,s10,h"                   -- searches, commands, etc. to persist between sessions
-vim.o.wrap = false                                  -- disable line wrapping by default
-vim.o.colorcolumn = "80,100"                        -- highlight 80th and 100th columns
-vim.o.clipboard = "unnamedplus"                     -- yank to the system clipboard
+vim.o.list = true -- display special characters
+vim.o.number = true -- show line numbers
+vim.o.relativenumber = true -- show relative line numbers
+vim.o.scrolloff = 5 -- lines to keep in view at top/bottom of window
+vim.o.sidescrolloff = 3 -- characters to keep in view on left/right of window
+vim.o.sm = true -- briefly flash to matching bracket when typing
+vim.o.smartcase = true -- search becomes case-sensitive when capitals
+vim.o.splitbelow = true -- horizontal splits default to below
+vim.o.splitright = true -- vertical splits default to the right
+vim.o.timeoutlen = 300 -- how long to wait on a mapping that's a prefix of another
+vim.o.undofile = true -- enables undofile for persistent history
+vim.o.undolevels = 1000 -- number of lines to keep in undofile
+vim.o.undoreload = 1000 -- number of undo lines to retain when a file is reloaded
+vim.o.wildmenu = true -- enable wild menu for command completion
+vim.o.wildmode = "longest:full,full" -- wildmenu config
+vim.o.viminfo = "'20,<1000,s10,h" -- searches, commands, etc. to persist between sessions
+vim.o.wrap = false -- disable line wrapping by default
+vim.o.colorcolumn = "80,100" -- highlight 80th and 100th columns
+vim.o.clipboard = "unnamedplus" -- yank to the system clipboard
 
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
 -- ║                              GLOBAL OPTIONS                               ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 vim.g.csv_no_conceal = true -- Always show commas (etc.) in csv files
-vim.g.netrw_liststyle = 3   -- config for :Explore etc.
+vim.g.netrw_liststyle = 3 -- config for :Explore etc.
 
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
 -- ║                                 FUNCTIONS                                 ║
@@ -245,44 +251,44 @@ vim.api.nvim_set_keymap("n", "<Leader>m", ":Markview<CR>", {}) -- toggles the ma
 ---- Insert mode
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true }) -- quick quit
 ---- Command-line mode
-vim.keymap.set("c", "jk", function()                                           -- close the : command line, but not / ? =
+vim.keymap.set("c", "jk", function() -- close the : command line, but not / ? =
   return vim.fn.getcmdtype() == ":" and "<C-c>" or "jk"
 end, { expr = true, noremap = true })
 vim.api.nvim_set_keymap("i", "<C-H>", "<C-W>", { noremap = true }) -- delete last word
-vim.keymap.set("i", "<Esc>", function()                            -- not allowed to use Esc to exit insert mode
+vim.keymap.set("i", "<Esc>", function() -- not allowed to use Esc to exit insert mode
   require("snacks").notifier.notify("Use jk", "error")
 end, { noremap = true, silent = true })
 ---- Normal mode
-vim.api.nvim_set_keymap("n", "<C-[>", "<C-t>", { noremap = true })                   -- jump backward in the tagstack
+vim.api.nvim_set_keymap("n", "<C-[>", "<C-t>", { noremap = true }) -- jump backward in the tagstack
 vim.api.nvim_set_keymap("n", "<C-n>", ":set relativenumber!<CR>", { silent = true }) -- toggle relativeumber
 vim.api.nvim_set_keymap("n", "<Leader>'", "cs\"'<ESC>lcs`'<ESC>", { silent = true }) -- change quotes to '
-vim.api.nvim_set_keymap("n", "<Leader>H", ":vertical resize +1<CR>", {})             -- resize vertical 1
-vim.api.nvim_set_keymap("n", "<Leader>J", ":resize -1<CR>", {})                      -- resize horizontal 1
-vim.api.nvim_set_keymap("n", "<Leader>K", ":resize +1<CR>", {})                      -- resize horizontal 1
-vim.api.nvim_set_keymap("n", "<Leader>L", ":vertical resize -1<CR>", {})             -- resize horizontal 1
+vim.api.nvim_set_keymap("n", "<Leader>H", ":vertical resize +1<CR>", {}) -- resize vertical 1
+vim.api.nvim_set_keymap("n", "<Leader>J", ":resize -1<CR>", {}) -- resize horizontal 1
+vim.api.nvim_set_keymap("n", "<Leader>K", ":resize +1<CR>", {}) -- resize horizontal 1
+vim.api.nvim_set_keymap("n", "<Leader>L", ":vertical resize -1<CR>", {}) -- resize horizontal 1
 vim.api.nvim_set_keymap("n", '<Leader>"', 'cs\'"<ESC>lcs`"<ESC>', { silent = true }) -- change quotes to "
-vim.api.nvim_set_keymap("n", "<Leader>\\", ":nohl<CR>", {})                          -- clear highlighting
+vim.api.nvim_set_keymap("n", "<Leader>\\", ":nohl<CR>", {}) -- clear highlighting
 vim.api.nvim_set_keymap("n", "<Leader>`", "cs\"`<ESC>lcs'`<ESC>", { silent = true }) -- change quotes to `
 vim.api.nvim_set_keymap("n", "<Leader>aa", ":lua vim.diagnostic.open_float() <CR>", {})
 vim.api.nvim_set_keymap("n", "<Leader>aj", ":lua vim.diagnostic.jump({ count = 1, float = true }) <CR>", {})
 vim.api.nvim_set_keymap("n", "<Leader>ak", ":lua vim.diagnostic.jump({ count = -1, float = true }) <CR>", {})
-vim.api.nvim_set_keymap("n", "<Leader>b", ":GBrowse<CR>", {})                                    -- open file in GitHub
-vim.api.nvim_set_keymap("n", "<Leader>h", ":vertical resize +10<CR>", {})                        -- resize vertical 10
-vim.api.nvim_set_keymap("n", "<Leader>i", "mmgg=G`m<CR>", {})                                    -- indent the who file
-vim.api.nvim_set_keymap("n", "<Leader>j", ":resize -10<CR>", {})                                 -- resize horizontal 10
-vim.api.nvim_set_keymap("n", "<Leader>k", ":resize +10<CR>", {})                                 -- resize horizontal 10
-vim.api.nvim_set_keymap("n", "<Leader>l", ":vertical resize -10<CR>", {})                        -- resize horizontal 10
+vim.api.nvim_set_keymap("n", "<Leader>b", ":GBrowse<CR>", {}) -- open file in GitHub
+vim.api.nvim_set_keymap("n", "<Leader>h", ":vertical resize +10<CR>", {}) -- resize vertical 10
+vim.api.nvim_set_keymap("n", "<Leader>i", "mmgg=G`m<CR>", {}) -- indent the who file
+vim.api.nvim_set_keymap("n", "<Leader>j", ":resize -10<CR>", {}) -- resize horizontal 10
+vim.api.nvim_set_keymap("n", "<Leader>k", ":resize +10<CR>", {}) -- resize horizontal 10
+vim.api.nvim_set_keymap("n", "<Leader>l", ":vertical resize -10<CR>", {}) -- resize horizontal 10
 vim.api.nvim_set_keymap("n", "<Leader>n", ":lua AnyNumberToggle()<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {})                                         -- kill a buffer without affecting windows
-vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {})                                  -- toggle line wrap
-vim.api.nvim_set_keymap("n", "H", "^", {})                                                       -- a sane keybind for going to the first printable char
-vim.api.nvim_set_keymap("n", "L", "$", {})                                                       -- a sane keybind for going to the end of the line
-vim.api.nvim_set_keymap("n", "q:", ":q", {})                                                     -- fix accidentally hitting these in the wrong order
+vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {}) -- kill a buffer without affecting windows
+vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line wrap
+vim.api.nvim_set_keymap("n", "H", "^", {}) -- a sane keybind for going to the first printable char
+vim.api.nvim_set_keymap("n", "L", "$", {}) -- a sane keybind for going to the end of the line
+vim.api.nvim_set_keymap("n", "q:", ":q", {}) -- fix accidentally hitting these in the wrong order
 ---- Visual mode
-vim.api.nvim_set_keymap("x", "'", "c'<C-r>\"'<Esc>", { noremap = true, silent = true })          -- wrap selection in single quotes
+vim.api.nvim_set_keymap("x", "'", "c'<C-r>\"'<Esc>", { noremap = true, silent = true }) -- wrap selection in single quotes
 vim.api.nvim_set_keymap("x", "<C-r>", '"hy:%s/<C-r>h//gc<left><left><left>', { noremap = true }) -- find and select the visual selection
-vim.api.nvim_set_keymap("x", "<Leader>s", ":sort<CR>", {})                                       -- sort the visual selection
-vim.api.nvim_set_keymap("x", "J", ":m+1<CR>V", {})                                               -- Move the line down one line
-vim.api.nvim_set_keymap("x", "K", ":m-2<CR>V", {})                                               -- Move the line up one line
-vim.api.nvim_set_keymap("x", '"', 'c"<C-r>""<Esc>', { noremap = true, silent = true })           -- wrap selection in double quotes
-vim.api.nvim_set_keymap("x", "p", "P", {})                                                       -- 'put' without overwriting register
+vim.api.nvim_set_keymap("x", "<Leader>s", ":sort<CR>", {}) -- sort the visual selection
+vim.api.nvim_set_keymap("x", "J", ":m+1<CR>V", {}) -- Move the line down one line
+vim.api.nvim_set_keymap("x", "K", ":m-2<CR>V", {}) -- Move the line up one line
+vim.api.nvim_set_keymap("x", '"', 'c"<C-r>""<Esc>', { noremap = true, silent = true }) -- wrap selection in double quotes
+vim.api.nvim_set_keymap("x", "p", "P", {}) -- 'put' without overwriting register
