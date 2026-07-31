@@ -31,15 +31,9 @@ esac
 
 # Get the repositories
 git clone git@github.com:zack/dotfiles.git ~/dotfiles
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/dotfiles/zsh-syntax-highlighting/
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-git clone https://github.com/Aloxaf/fzf-tab ~/.zsh-plugins/fzf-tab
+git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ~/dotfiles/zsh-syntax-highlighting/
+git clone git@github.com:tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone git@github.com:Aloxaf/fzf-tab ~/.zsh-plugins/fzf-tab
 
 # Install everything
 sh ~/dotfiles/install_script
-
-# Final steps for fzf
-sudo cp ~/dotfiles/with-dir /usr/local/bin/with-dir
-sudo cp ~/dotfiles/only-dir /usr/local/bin/only-dir
-sudo chmod +x /usr/local/bin/with-dir
-sudo chmod +x /usr/local/bin/only-dir

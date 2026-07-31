@@ -5,7 +5,6 @@ typeset -U PATH path FPATH fpath # deduplicate path values after launching tmux
 ### PATH MODIFICATION
 export FPATH="$HOME/.eza/completions/zsh:$FPATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bins:$PATH"
 export PATH="$PATH:/snap/bin"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"

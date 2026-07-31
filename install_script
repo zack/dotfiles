@@ -100,7 +100,7 @@ install_pkg() {
 # ║ every fixed, always-needed directory something below writes into          ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
-mkdir -p "$HOME/bins" "$HOME/.config/nvim"
+mkdir -p "$HOME/.local/bin" "$HOME/.config/nvim"
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -157,8 +157,8 @@ if ! command -v eza > /dev/null 2>&1; then
     && tar -xzf "$tmp/eza.tar.gz" -C "$tmp" \
     && bin=$(find "$tmp" -type f -name eza | head -n1) \
     && [ -n "$bin" ] \
-    && cp "$bin" "$HOME/bins/eza" \
-    && chmod +x "$HOME/bins/eza"; then
+    && cp "$bin" "$HOME/.local/bin/eza" \
+    && chmod +x "$HOME/.local/bin/eza"; then
     echo "installed eza"
     installed="$installed eza"
   else
@@ -204,8 +204,8 @@ if ! command -v difft > /dev/null 2>&1; then
     && tar -xzf "$tmp/difft.tar.gz" -C "$tmp" \
     && bin=$(find "$tmp" -type f -name difft | head -n1) \
     && [ -n "$bin" ] \
-    && cp "$bin" "$HOME/bins/difft" \
-    && chmod +x "$HOME/bins/difft"; then
+    && cp "$bin" "$HOME/.local/bin/difft" \
+    && chmod +x "$HOME/.local/bin/difft"; then
     echo "installed difft"
     installed="$installed difft"
   else
@@ -235,8 +235,8 @@ if ! command -v tmux > /dev/null 2>&1; then
     && srcdir=$(find "$tmp" -maxdepth 1 -type d -name "tmux-*" | head -n1) \
     && [ -n "$srcdir" ] \
     && (cd "$srcdir" && ./configure > /dev/null && make -j"$(nproc)" > /dev/null) \
-    && cp "$srcdir/tmux" "$HOME/bins/tmux" \
-    && chmod +x "$HOME/bins/tmux"; then
+    && cp "$srcdir/tmux" "$HOME/.local/bin/tmux" \
+    && chmod +x "$HOME/.local/bin/tmux"; then
     echo "installed tmux"
     installed="$installed tmux"
   else
@@ -265,8 +265,8 @@ if ! command -v rg > /dev/null 2>&1; then
     && tar -xzf "$tmp/rg.tar.gz" -C "$tmp" \
     && bin=$(find "$tmp" -type f -name rg | head -n1) \
     && [ -n "$bin" ] \
-    && cp "$bin" "$HOME/bins/rg" \
-    && chmod +x "$HOME/bins/rg"; then
+    && cp "$bin" "$HOME/.local/bin/rg" \
+    && chmod +x "$HOME/.local/bin/rg"; then
     echo "installed rg"
     installed="$installed rg"
   else
@@ -296,8 +296,8 @@ if ! command -v fzf > /dev/null 2>&1; then
     && tar -xzf "$tmp/fzf.tar.gz" -C "$tmp" \
     && bin=$(find "$tmp" -type f -name fzf | head -n1) \
     && [ -n "$bin" ] \
-    && cp "$bin" "$HOME/bins/fzf" \
-    && chmod +x "$HOME/bins/fzf"; then
+    && cp "$bin" "$HOME/.local/bin/fzf" \
+    && chmod +x "$HOME/.local/bin/fzf"; then
     echo "installed fzf"
     installed="$installed fzf"
   else
@@ -323,8 +323,8 @@ if ! command -v bat > /dev/null 2>&1; then
     && tar -xzf "$tmp/bat.tar.gz" -C "$tmp" \
     && bin=$(find "$tmp" -type f -name bat | head -n1) \
     && [ -n "$bin" ] \
-    && cp "$bin" "$HOME/bins/bat" \
-    && chmod +x "$HOME/bins/bat"; then
+    && cp "$bin" "$HOME/.local/bin/bat" \
+    && chmod +x "$HOME/.local/bin/bat"; then
     echo "installed bat"
     installed="$installed bat"
   else
@@ -345,8 +345,8 @@ fi
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
 if ! command -v nvim > /dev/null 2>&1; then
-  if wget -q https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage -O "$HOME/bins/nvim" \
-    && chmod +x "$HOME/bins/nvim"; then
+  if wget -q https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage -O "$HOME/.local/bin/nvim" \
+    && chmod +x "$HOME/.local/bin/nvim"; then
     echo "installed nvim"
     installed="$installed nvim"
   else
@@ -385,6 +385,7 @@ fi
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
 # ║                                  DOTFILES                                 ║
+# ║                                                                           ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
 for file in $files; do
@@ -395,10 +396,11 @@ done
 # ╔═══════════════════════════════════════════════════════════════════════════╗
 # ║                                  SCRIPTS                                  ║
 # ║                                                                           ║
-# ║ they go straight into ~/bins                                              ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
-link "$dir/rainbow" "$HOME/bins/rainbow"
+link "$dir/rainbow" "$HOME/.local/bin/rainbow"
+link "$dir/only-dir" "$HOME/.local/bin/only-dir"
+link "$dir/with-dir" "$HOME/.local/bin/with-dir"
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -412,10 +414,11 @@ try_to_clone "$workdir" git@github.com:zack/work_dotfiles.git work_dotfiles
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
 # ║                                 THE END                                   ║
+# ║                                                                           ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
 if [ -n "$installed" ]; then
-  echo "installed:$installed"
+  echo "installed: $installed"
 else
   echo "installed: nothing (already had everything)"
 fi
@@ -424,4 +427,4 @@ if [ -n "$failed" ]; then
   echo "failed:$failed"
 fi
 
-echo "...done"
+echo " ...done."
