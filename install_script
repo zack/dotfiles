@@ -1,10 +1,10 @@
 #!/bin/sh
-#
+
 # Creates symlinks from the home directory to the dotfiles in ~/dotfiles.
 # Installs the tools those dotfiles assume are present. Safe to re-run:
 # anything already linked or installed is left alone, anything in the way of
 # a symlink gets backed up to ~/dotfiles_old/<timestamp>/ first.
-#
+
 # Assumes SSH is set up for github access
 
 # Fail loudly on error, nonzero returns, or on accessing unset variables
@@ -411,7 +411,7 @@ try_to_clone "$workdir" git@github.com:zack/work_dotfiles.git work_dotfiles
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
-# ║                                 SUMMARY                                   ║
+# ║                                 THE END                                   ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
 if [ -n "$installed" ]; then
