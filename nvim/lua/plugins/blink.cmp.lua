@@ -28,9 +28,7 @@ end
 
 return {
   "saghen/blink.cmp",
-  dependencies = {
-    "rafamadriz/friendly-snippets", -- provide snippets for the snippet source
-  },
+  event = "InsertEnter",
   version = "1.*", -- use a release tag to download pre-built binaries
   opts = {
     keymap = {
@@ -41,7 +39,7 @@ return {
     completion = {
       menu = {
         auto_show = function()
-          return not in_treesitter_capture("comment") and not require("luasnip").expand_or_jumpable()
+          return not in_treesitter_capture("comment")
         end,
       },
       list = {
@@ -51,7 +49,7 @@ return {
       },
     },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "buffer" },
     },
     cmdline = { enabled = false },
   },
