@@ -1,17 +1,24 @@
-#!/usr/bin/env ruby
-
-require 'set'
-base = ARGV.first || '.'
-dirs = Set.new
-$stdin.each_line do |line|
-  dir = File.dirname(line)
-  anc = []
-  while dirs.add?(dir)
-    anc << dir
-    break if dir == base
-    dir = File.dirname(dir)
-  end
-  puts anc.reverse unless anc.empty?
-end
-
+#!/bin/sh
+# Replaces junegunn's `only-dir`:
 # https://gist.github.com/junegunn/8c3796a965f22e6a803fe53096ad7a75
+
+exec awk -v base="${1:-.}" '
+  function dirname(path,    idx) {
+    idx = length(path)
+    while (idx > 0 && substr(path, idx, 1) != "/") idx--
+    if (idx == 0) return "."
+    if (idx == 1) return "/"
+    return substr(path, 1, idx - 1)
+  }
+  {
+    dir = dirname($0)
+    n = 0
+    while (!(dir in seen)) {
+      seen[dir] = 1
+      anc[n++] = dir
+      if (dir == base) break
+      dir = dirname(dir)
+    }
+    for (i = n - 1; i >= 0; i--) print anc[i]
+  }
+'

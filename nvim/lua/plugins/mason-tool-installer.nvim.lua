@@ -1,5 +1,5 @@
 return {
-  'WhoIsSethDaniel/mason-tool-installer.nvim',
+  "WhoIsSethDaniel/mason-tool-installer.nvim",
   opts = {
     auto_update = true,
     ensure_installed = {
@@ -7,6 +7,7 @@ return {
       "lua-language-server",
       "prettierd",
       "prisma-language-server",
+      "stylua",
       "typescript-language-server",
     },
   },

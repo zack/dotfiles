@@ -1,10 +1,17 @@
 --max-columns=150
+--max-columns-preview
 
 --type-add
-web:*{html,css,js}*
+web:*.{html,css,js}
 
 --type-add
-tpl:*{tpl}*
+tpl:*.tpl
+
+--type-add
+spec:*.spec.{js,ts}
+
+--type-add
+tsx:*.tsx
 
 --glob=!tmp/*
 --glob=!node_modules/*
