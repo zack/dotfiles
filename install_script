@@ -360,6 +360,29 @@ link "$dir/nvim/lua" "$HOME/.config/nvim/lua"
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                TREE-SITTER                                ║
+# ║                                                                           ║
+# ║ https://github.com/tree-sitter/tree-sitter/                               ║
+# ║ tree-sitter is a parser generator tool and incremental parsing library.   ║
+# ║ The nvim-treesitter plugin shells out to its `tree-sitter build` command  ║
+# ║ to compile parser grammars, so it has to be on PATH for parser installs   ║
+# ║ to succeed.                                                               ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+if ! command -v tree-sitter > /dev/null 2>&1; then
+  if wget -q https://github.com/tree-sitter/tree-sitter/releases/latest/download/tree-sitter-linux-x64.gz -O "$HOME/.local/bin/tree-sitter.gz" \
+    && gunzip -f "$HOME/.local/bin/tree-sitter.gz" \
+    && chmod +x "$HOME/.local/bin/tree-sitter"; then
+    echo "installed tree-sitter"
+    installed="$installed tree-sitter"
+  else
+    echo "failed to install tree-sitter — continuing without it" >&2
+    failed="$failed tree-sitter"
+  fi
+fi
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
 # ║                                    NVM                                    ║
 # ║                                                                           ║
 # ║ https://github.com/nvm-sh/nvm/                                            ║

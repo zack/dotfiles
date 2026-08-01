@@ -75,7 +75,6 @@ alias l1='ls -1'
 alias ld='ls -d */'
 alias ll='ls -la'
 alias wtr='curl http://wttr.in/11217'
-# alias pipes='pipes.sh -f35 -r0'
 alias rg='rg -S --type-add "jsx:*.jsx"'
 alias rgns='rg --glob "!*spec.jsx"'
 alias rgjsx='rg --glob "*.jsx" --glob "!*spec.jsx"'
@@ -90,8 +89,6 @@ alias when='TZ=America/New_York date -d @\'
 # git aliases
 alias gs='git status'
 alias vgit='vim -p `git status --porcelain | cut -c4-`' # Open dirty files
-# alias gb='git --no-pager branch'
-# alias gist='gist -c -p'
 
 ### FUNCTIONS
 # colorize man pages
