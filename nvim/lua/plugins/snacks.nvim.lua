@@ -3,12 +3,12 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    notifier = { enabled = true},
+    notifier = { enabled = true },
     indent = {
       enabled = true,
       animate = {
-        enabled = false
-      }
+        enabled = false,
+      },
     },
     -- These two take over vim.ui.input and vim.ui.select for every plugin,
     -- which is the job dressing.nvim used to do.
@@ -44,22 +44,19 @@ return {
     },
   },
   keys = {
-    { "<Leader>dn", function() require("snacks").notifier.hide() end, desc = "Dismiss All Notifications" },
-    { "<Leader>hn", function() require("snacks").picker.notifications() end, desc = "Notification History" },
+    {
+      "<Leader>dn",
+      function()
+        require("snacks").notifier.hide()
+      end,
+      desc = "Dismiss All Notifications",
+    },
+    {
+      "<Leader>hn",
+      function()
+        require("snacks").picker.notifications()
+      end,
+      desc = "Notification History",
+    },
   },
-  -- config = function ()
-    -- vim.api.nvim_create_autocmd("RecordingEnter", {
-      -- callback = function()
-        -- local reg = vim.fn.reg_recording()
-        -- Last_recorded_reg = reg ~= "" and reg or "?"
-        -- require("snacks").notifier.notify("Recording started to: @" .. Last_recorded_reg, "info")
-      -- end,
-    -- })
-
-    -- vim.api.nvim_create_autocmd("RecordingLeave", {
-      -- callback = function()
-        -- require("snacks").notifier.notify("Recording ended, stored in: @" .. Last_recorded_reg, "info")
-      -- end,
-    -- })
-  -- end
 }
