@@ -117,6 +117,8 @@ install_pkg wget wget
 install_pkg fortune fortune-mod
 install_pkg cowsay cowsay
 install_pkg fusermount3 fuse3
+install_pkg bison bison
+install_pkg byacc byacc
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
