@@ -71,6 +71,56 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
+-- Automatically sync (install/clean/update) plugins once a day.
+local lazy_sync_stamp = vim.fn.stdpath("data") .. "/lazy-sync-debounce"
+local lazy_sync_debounce_hours = 24
+
+local function lazy_sync_due()
+  local f = io.open(lazy_sync_stamp)
+  local last = f and tonumber(f:read())
+  if f then
+    f:close()
+  end
+  if last and (os.time() - last) < lazy_sync_debounce_hours * 3600 then
+    return false
+  end
+  local w = assert(io.open(lazy_sync_stamp, "w"))
+  w:write(os.time())
+  w:close()
+  return true
+end
+
+local lazy_sync_augroup = vim.api.nvim_create_augroup("LazySync", { clear = true })
+
+-- sync runs clean + install + update
+vim.api.nvim_create_autocmd("User", {
+  group = lazy_sync_augroup,
+  pattern = "LazySync",
+  callback = function()
+    for _, plugin in pairs(require("lazy.core.config").plugins) do
+      if require("lazy.core.plugin").has_errors(plugin) then
+        vim.notify(
+          "lazy.nvim: automatic sync hit an error, run :Lazy for details",
+          vim.log.levels.ERROR,
+          { title = "lazy.nvim" }
+        )
+        return
+      end
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = lazy_sync_augroup,
+  callback = function()
+    if lazy_sync_due() then
+      vim.defer_fn(function()
+        require("lazy").sync({ show = false })
+      end, 2000)
+    end
+  end,
+})
+
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
 -- ║                                LSP SETUP                                  ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
@@ -124,11 +174,11 @@ vim.cmd([[colorscheme rigel]])
 -- 80th and 100th columns are red
 vim.cmd("highlight ColorColumn guibg='#800000'")
 
--- GitGutter symbol colors
-vim.cmd("highlight GitGutterAdd guifg='#00AA00'")
-vim.cmd("highlight GitGutterChange guifg='#AAAA00'")
-vim.cmd("highlight GitGutterChangeDelete guifg='#AA0000'")
-vim.cmd("highlight GitGutterDelete guifg='#AA0000'")
+-- Gitsigns symbol colors
+vim.cmd("highlight GitSignsAdd guifg='#00AA00'")
+vim.cmd("highlight GitSignsChange guifg='#AAAA00'")
+vim.cmd("highlight GitSignsChangedelete guifg='#AA0000'")
+vim.cmd("highlight GitSignsDelete guifg='#AA0000'")
 
 -- ╔═══════════════════════════════════════════════════════════════════════════╗
 -- ║                                 COMMANDS                                  ║
@@ -141,8 +191,12 @@ vim.cmd([[au TextYankPost * silent! lua vim.hl.on_yank()]])
 -- ║                               AUTOCOMMANDS                                ║
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
+-- clear = true so re-sourcing this file doesn't stack duplicate autocmds
+local init_augroup = vim.api.nvim_create_augroup("Init", { clear = true })
+
 -- Disable syntax on files longer than 10,000 lines
 vim.api.nvim_create_autocmd("FileType", {
+  group = init_augroup,
   pattern = { "*" },
   callback = function()
     if vim.api.nvim_buf_line_count(0) > 10000 then
@@ -153,12 +207,14 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Default tab behavior for files
 vim.api.nvim_create_autocmd("FileType", {
+  group = init_augroup,
   pattern = { "*" },
   command = "setlocal tabstop=2|set shiftwidth=2|set expandtab",
 })
 
 -- Tab behavior for files needing 4-space tabs
 vim.api.nvim_create_autocmd("FileType", {
+  group = init_augroup,
   pattern = { "elm", "html", "php", "rust" },
   command = "setlocal tabstop=4|set shiftwidth=4",
 })
@@ -215,7 +271,7 @@ vim.g.netrw_liststyle = 3 -- config for :Explore etc.
 -- ╚═══════════════════════════════════════════════════════════════════════════╝
 
 -- Toggle numbers on and off no matter the type
-function AnyNumberToggle()
+local function AnyNumberToggle()
   if vim.o.relativenumber or vim.o.number then
     vim.o.number = false
     vim.o.relativenumber = false
@@ -227,6 +283,7 @@ end
 
 -- Show errors and warnings in a floating window after a few seconds
 vim.api.nvim_create_autocmd("CursorHold", {
+  group = init_augroup,
   callback = function()
     vim.diagnostic.open_float(nil, { focusable = false, source = false })
   end,
@@ -265,7 +322,7 @@ vim.api.nvim_set_keymap("n", "<Leader>'", "cs\"'<ESC>lcs`'<ESC>", { silent = tru
 vim.api.nvim_set_keymap("n", "<Leader>H", ":vertical resize +1<CR>", {}) -- resize vertical 1
 vim.api.nvim_set_keymap("n", "<Leader>J", ":resize -1<CR>", {}) -- resize horizontal 1
 vim.api.nvim_set_keymap("n", "<Leader>K", ":resize +1<CR>", {}) -- resize horizontal 1
-vim.api.nvim_set_keymap("n", "<Leader>L", ":vertical resize -1<CR>", {}) -- resize horizontal 1
+vim.api.nvim_set_keymap("n", "<Leader>L", ":vertical resize -1<CR>", {}) -- resize vertical 1
 vim.api.nvim_set_keymap("n", '<Leader>"', 'cs\'"<ESC>lcs`"<ESC>', { silent = true }) -- change quotes to "
 vim.api.nvim_set_keymap("n", "<Leader>\\", ":nohl<CR>", {}) -- clear highlighting
 vim.api.nvim_set_keymap("n", "<Leader>`", "cs\"`<ESC>lcs'`<ESC>", { silent = true }) -- change quotes to `
@@ -277,8 +334,8 @@ vim.api.nvim_set_keymap("n", "<Leader>h", ":vertical resize +10<CR>", {}) -- res
 vim.api.nvim_set_keymap("n", "<Leader>i", "mmgg=G`m<CR>", {}) -- indent the who file
 vim.api.nvim_set_keymap("n", "<Leader>j", ":resize -10<CR>", {}) -- resize horizontal 10
 vim.api.nvim_set_keymap("n", "<Leader>k", ":resize +10<CR>", {}) -- resize horizontal 10
-vim.api.nvim_set_keymap("n", "<Leader>l", ":vertical resize -10<CR>", {}) -- resize horizontal 10
-vim.api.nvim_set_keymap("n", "<Leader>n", ":lua AnyNumberToggle()<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>l", ":vertical resize -10<CR>", {}) -- resize vertical 10
+vim.keymap.set("n", "<Leader>n", AnyNumberToggle, { silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>q", ":Bd<CR>", {}) -- kill a buffer without affecting windows
 vim.api.nvim_set_keymap("n", "<Leader>w", ":set wrap!<CR>", {}) -- toggle line wrap
 vim.api.nvim_set_keymap("n", "H", "^", {}) -- a sane keybind for going to the first printable char

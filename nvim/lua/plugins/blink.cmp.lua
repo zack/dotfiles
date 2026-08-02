@@ -1,5 +1,5 @@
 -- from https://github.com/Saghen/blink.cmp/discussions/564#discussioncomment-13439030
-function in_treesitter_capture(capture)
+local function in_treesitter_capture(capture)
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   if vim.api.nvim_get_mode().mode == "i" then
     col = col - 1

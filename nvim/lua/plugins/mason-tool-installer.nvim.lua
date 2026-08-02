@@ -3,6 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     auto_update = true,
+    debounce_hours = 24,
     ensure_installed = {
       "eslint-lsp",
       "lua-language-server",
