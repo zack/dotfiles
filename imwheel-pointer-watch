@@ -25,14 +25,23 @@ set -eu
 # imwheel never actually starts. Pull the values from an already-running
 # session process instead of hardcoding them, since the exact XAUTHORITY
 # path is display-manager-specific (GDM here) and could change later.
-if [ -z "${DISPLAY:-}" ]; then
+
+# Checked on every loop iteration, not just once at startup: at boot,
+# systemd --user can start this service before cinnamon-session-binary
+# itself is up, so a one-shot check can lose that race and never get
+# DISPLAY at all. Once DISPLAY is set this is just one cheap `[ -n ]` test
+# per iteration, so retrying costs nothing in steady state.
+discover_x_env() {
+  if [ -n "${DISPLAY:-}" ]; then
+    return 0
+  fi
   session_pid=$(pgrep -u "$(id -u)" -f cinnamon-session-binary | head -n1)
   if [ -n "$session_pid" ] && [ -r "/proc/$session_pid/environ" ]; then
     DISPLAY=$(tr '\0' '\n' < "/proc/$session_pid/environ" | sed -n 's/^DISPLAY=//p')
     XAUTHORITY=$(tr '\0' '\n' < "/proc/$session_pid/environ" | sed -n 's/^XAUTHORITY=//p')
     export DISPLAY XAUTHORITY
   fi
-fi
+}
 
 imwheel_running() {
   pgrep -x imwheel > /dev/null 2>&1
@@ -53,6 +62,7 @@ sync_imwheel() {
 }
 
 while :; do
+  discover_x_env
   sync_imwheel
   sleep 0.1
 done
