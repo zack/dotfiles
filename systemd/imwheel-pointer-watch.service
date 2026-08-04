@@ -1,0 +1,10 @@
+[Unit]
+Description=Run imwheel only while the pointer is over GNOME Terminal
+
+[Service]
+ExecStart=%h/.local/bin/imwheel-pointer-watch
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target

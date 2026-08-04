@@ -1,0 +1,15 @@
+# imwheel config. Multiplies mouse wheel scroll events for windows matching
+# the regex below, since GNOME Terminal (VTE) has no built-in scroll speed
+# setting of its own. Ctrl/Shift scroll are left alone (font zoom, etc.).
+#
+# No catch-all rule here: ~/dotfiles/imwheel-focus-watch only runs imwheel
+# while a GNOME Terminal window is focused, so it never touches any other
+# window's events in the first place.
+
+"^Gnome-terminal$"
+None,      Up,   Button4, 3
+None,      Down, Button5, 3
+Control_L, Up,   Control_L|Button4
+Control_L, Down, Control_L|Button5
+Shift_L,   Up,   Shift_L|Button4
+Shift_L,   Down, Shift_L|Button5

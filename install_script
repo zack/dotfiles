@@ -15,7 +15,10 @@ olddir=$HOME/dotfiles_old/$(date +%Y%m%d-%H%M%S)
 workdir=$dir/work_dotfiles
 
 # list of files to symlink ~/dotfiles/<name> -> ~/.<name>
-files="zshenv zshrc gitconfig gitignore_global ripgreprc tmux.conf"
+files="zshenv zshrc gitconfig gitignore_global ripgreprc tmux.conf imwheelrc"
+
+# list of files to symlink ~/dotfiles/systemd/<name> -> ~/.config/systemd/user/<name>
+systemd_files="imwheel-pointer-watch.service"
 
 # tools actually installed/failed this run, reported at the end.
 # Don't add no-ops to either list.
@@ -100,7 +103,7 @@ install_pkg() {
 # ║ every fixed, always-needed directory something below writes into          ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
-mkdir -p "$HOME/.local/bin" "$HOME/.config/nvim"
+mkdir -p "$HOME/.local/bin" "$HOME/.config/nvim" "$HOME/.config/systemd/user"
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -119,6 +122,8 @@ install_pkg cowsay cowsay
 install_pkg fusermount3 fuse3
 install_pkg bison bison
 install_pkg byacc byacc
+install_pkg imwheel imwheel
+install_pkg xdotool xdotool
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -426,6 +431,26 @@ done
 link "$dir/rainbow" "$HOME/.local/bin/rainbow"
 link "$dir/only-dir" "$HOME/.local/bin/only-dir"
 link "$dir/with-dir" "$HOME/.local/bin/with-dir"
+link "$dir/imwheel-pointer-watch" "$HOME/.local/bin/imwheel-pointer-watch"
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                  SYSTEMD                                  ║
+# ║                                                                           ║
+# ║ user services, symlinked into ~/.config/systemd/user and enabled so       ║
+# ║ systemd restarts them if they ever die                                    ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+for file in $systemd_files; do
+  link "$dir/systemd/$file" "$HOME/.config/systemd/user/$file"
+done
+
+if systemctl --user daemon-reload && systemctl --user enable --now imwheel-pointer-watch.service; then
+  echo "enabled imwheel-pointer-watch.service"
+else
+  echo "failed to enable imwheel-pointer-watch.service — continuing" >&2
+  failed="$failed imwheel-pointer-watch.service"
+fi
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
