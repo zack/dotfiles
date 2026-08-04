@@ -1,5 +1,19 @@
-# always launch in tmux, but use existing session if one exists
-if [ "$TMUX" = "" ]; then tmux attach || tmux; fi
+# First terminal opened with nothing else running: resume wherever we left
+# off. Additional windows opened while others are already up: each gets its
+# own independent session, so they don't mirror each other -- tmux.conf
+# prunes these back down once closed.
+if [ "$TMUX" = "" ]; then
+  if [ -z "$(tmux list-clients 2>/dev/null)" ]; then
+    last=$(tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null | sort -rn | head -n1 | cut -d' ' -f2-)
+    if [ -n "$last" ]; then
+      tmux attach-session -t "$last"
+    else
+      tmux new-session -s "term-$$"
+    fi
+  else
+    tmux new-session -s "term-$$"
+  fi
+fi
 typeset -U PATH path FPATH fpath # deduplicate path values after launching tmux
 
 ### PATH MODIFICATION
