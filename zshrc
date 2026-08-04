@@ -185,5 +185,33 @@ for f in "$HOME"/dotfiles/work_dotfiles/zshrc_*(N); do
   source "$f"
 done
 
+### SESSION COLOR
+# The SessionStart hook (session-hue.sh) writes one shared file,
+# themes/random.json, so concurrent `claude` sessions kept overwriting each
+# other's colors. --settings is a per-invocation override that never touches
+# settings.json, so computing the theme here and passing it through gives
+# each launch its own themes/hue-N.json with no shared state to race on.
+# --resume <id> reuses that id's hue (same math the hook uses, so resuming
+# from either path lands on the same color); bare -c doesn't carry a known
+# id here, so it just rerolls.
+claude() {
+  local seed=""
+  local i
+  for ((i = 1; i <= $#; i++)); do
+    if [[ "${@[i]}" == "--resume" ]]; then
+      seed="${@[i + 1]}"
+    fi
+  done
+
+  local theme
+  theme=$("$HOME/.claude/session-color.sh" "$seed" 2>/dev/null)
+
+  if [[ -n "$theme" ]]; then
+    command claude --settings "{\"theme\":\"$theme\"}" "$@"
+  else
+    command claude "$@"
+  fi
+}
+
 ### ZSH SYNTAX HIGHLIGHTING (must be last!)
 source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
