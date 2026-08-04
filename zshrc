@@ -2,17 +2,33 @@
 # off. Additional windows opened while others are already up: each gets its
 # own independent session, so they don't mirror each other -- tmux.conf
 # prunes these back down once closed.
-if [ "$TMUX" = "" ]; then
-  if [ -z "$(tmux list-clients 2>/dev/null)" ]; then
-    last=$(tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null | sort -rn | head -n1 | cut -d' ' -f2-)
+#
+# Shadows the real tmux binary, since ctrl+d in the last pane kills the
+# session outright (not a detach, so tmux.conf's prune hook never fires)
+# and drops back to a plain shell. Without this, typing tmux by hand
+# afterward would skip straight to tmux's own numbered session instead of
+# reattaching or making a fresh term-$$ one.
+tmux() {
+  if [ $# -gt 0 ]; then
+    command tmux "$@"
+    return
+  fi
+
+  if [ -z "$(command tmux list-clients 2>/dev/null)" ]; then
+    local last
+    last=$(command tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null | sort -rn | head -n1 | cut -d' ' -f2-)
     if [ -n "$last" ]; then
-      tmux attach-session -t "$last"
+      command tmux attach-session -t "$last"
     else
-      tmux new-session -s "term-$$"
+      command tmux new-session -s "term-$$"
     fi
   else
-    tmux new-session -s "term-$$"
+    command tmux new-session -s "term-$$"
   fi
+}
+
+if [ "$TMUX" = "" ]; then
+  tmux
 fi
 typeset -U PATH path FPATH fpath # deduplicate path values after launching tmux
 
