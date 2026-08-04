@@ -70,8 +70,9 @@ set -o vi
 ## ZSH fzf-tab completion
 autoload -U compinit; compinit
 source ~/.zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
-## source for zsh, looks backwards but needs to come after fzf-tab.plugin.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+## completion and key bindings (ctrl-r, etc.); needs to come after
+## fzf-tab.plugin.zsh, looks backwards but that's the order fzf-tab wants
+command -v fzf > /dev/null 2>&1 && source <(fzf --zsh)
 ## defaults
 export FZF_DEFAULT_COMMAND='rg --files'
 
