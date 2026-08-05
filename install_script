@@ -13,6 +13,7 @@ set -eu
 dir=$HOME/dotfiles
 olddir=$HOME/dotfiles_old/$(date +%Y%m%d-%H%M%S)
 workdir=$dir/work_dotfiles
+privatedir=$dir/private_dotfiles
 
 # list of files to symlink ~/dotfiles/<name> -> ~/.<name>
 files="zshenv zshrc gitconfig gitignore_global ripgreprc tmux.conf imwheelrc"
@@ -470,12 +471,18 @@ fi
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
-# ║                               WORK DOTFILES                               ║
+# ║                              RIVATE DOTFILES                              ║
 # ║                                                                           ║
-# ║ private repo that can't just be symlinked                                 ║
+# ║ private repos that can't just be symlinked                                ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
 try_to_clone "$workdir" git@github.com:zack/work_dotfiles.git work_dotfiles
+try_to_clone "$privatedir" git@github.com:zack/private_dotfiles.git private_dotfiles
+
+# hand off to whatever private_dotfiles wants to bootstrap on its own
+if [ -x "$privatedir/install" ]; then
+  "$privatedir/install"
+fi
 
 
 # ╔═══════════════════════════════════════════════════════════════════════════╗
