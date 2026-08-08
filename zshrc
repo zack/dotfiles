@@ -174,14 +174,12 @@ function gb {
   fi
 }
 
-# A kind of lazy loading for nvm,npm,etc.
+# nvm is a shell function nvm.sh defines, not a binary, so it can't just
+# sit on PATH like an ordinary command -- lazy-load it on first use instead
+# of sourcing nvm.sh (slow) on every shell startup.
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
-  # nvim for the mason-installed LSP servers
-  nvm_cmds=(nvm node npm yarn npx nvim)
-  for cmd in $nvm_cmds ; do
-    alias $cmd="unalias $nvm_cmds && unset nvm_cmds && . $NVM_DIR/nvm.sh &&  . $NVM_DIR/bash_completion && $cmd"
-  done
+  alias nvm="unalias nvm && . $NVM_DIR/nvm.sh && . $NVM_DIR/bash_completion && nvm"
 fi
 
 # Start the day off right
