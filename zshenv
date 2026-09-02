@@ -16,3 +16,9 @@ if [ -r "$HOME/.nvm/alias/default" ]; then
   [ -d "$nvm_default_bin" ] && export PATH="$nvm_default_bin:$PATH"
   unset nvm_default_alias nvm_default_bin
 fi
+
+# zshrc launches tmux before it reaches its own PATH section, and tmux here is
+# a source build in ~/.local/bin rather than a package in /usr/bin. The entry
+# has to exist before zshrc runs at all, or the first terminal of a session
+# comes up with "command not found: tmux" and no tmux.
+export PATH="$HOME/.local/bin:$PATH"
