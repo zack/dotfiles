@@ -22,3 +22,4 @@ fi
 # has to exist before zshrc runs at all, or the first terminal of a session
 # comes up with "command not found: tmux" and no tmux.
 export PATH="$HOME/.local/bin:$PATH"
+. "$HOME/.cargo/env"
