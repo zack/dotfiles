@@ -10,6 +10,7 @@
   ui = true
 
 [alias]
+  bl = "!f() { cd \"${GIT_PREFIX:-.}\" && root=$(git rev-parse --show-toplevel) && ignore=\"$root/.git-blame-ignore-revs\" && if [ -f \"$ignore\" ]; then git blame --ignore-revs-file=\"$ignore\" \"$@\"; else git blame \"$@\"; fi; }; f"
   boom = !git fetch origin && git reset --hard origin/main
   files = diff-tree --no-commit-id --name-only -r
   lo = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
