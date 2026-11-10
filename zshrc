@@ -14,6 +14,14 @@ tmux() {
     return
   fi
 
+  # Start the server in its own systemd scope rather than letting it inherit
+  # the terminal's
+  if ! command tmux has-session 2>/dev/null; then
+    systemd-run --user --scope --quiet --collect -p OOMPolicy=continue \
+      --unit=tmux-server "${commands[tmux]}" new-session -d -s "term-$$" \
+      2>/dev/null
+  fi
+
   if [ -z "$(command tmux list-clients 2>/dev/null)" ]; then
     local last
     last=$(command tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null | sort -rn | head -n1 | cut -d' ' -f2-)
