@@ -35,7 +35,7 @@ tmux() {
   fi
 }
 
-if [ "$TMUX" = "" ]; then
+if [ "$TMUX" = "" ] && [ -z "$SSH_CONNECTION" ]; then
   tmux
 fi
 typeset -U PATH path FPATH fpath # deduplicate path values after launching tmux
